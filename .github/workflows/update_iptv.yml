@@ -1,0 +1,81 @@
+name: "IPTV 源智能更新与整理"
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  iptv-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: 缓存 Python 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: 缓存 IPTV 数据库
+        id: cache-db
+        uses: actions/cache@v4
+        with:
+          path: iptv_cache.db
+          key: ${{ runner.os }}-iptv-cache-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-iptv-cache-
+
+      - name: 安装 ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffprobe -version
+
+      - name: 安装 Python 依赖
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 缓存 IP 数据库
+        id: cache-ipdb
+        uses: actions/cache@v4
+        with:
+          path: qqwry.dat
+          key: ${{ runner.os }}-qqwry-dat
+          restore-keys: |
+            ${{ runner.os }}-qqwry-dat
+
+      - name: 更新 IP 数据库
+        run: python -m src.update_ipdb
+        continue-on-error: true
+
+      - name: 执行 IPTV 更新脚本
+        run: python -m src.run
+        env:
+          MAX_WORKERS: 10
+          TIMEOUT: 10
+          FFMPEG_ENABLE: true
+          ENABLE_RETRY: true
+          ENABLE_IP_RESOLVE: true
+          ENABLE_REGION_FILTER: false
+          PREFERRED_LOCATION: ""
+          PREFERRED_ISP: ""
+
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          publish_branch: gh-pages
