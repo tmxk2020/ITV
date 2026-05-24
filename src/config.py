@@ -70,6 +70,7 @@ PREFERRED_ISP = os.getenv("PREFERRED_ISP", "")
 # ==================== 数据库配置 ====================
 DATABASE_ENABLE = os.getenv("DATABASE_ENABLE", "true").lower() == "true"
 DATABASE_TABLE = "channel_cache"
+CACHE_EXPIRY_SECONDS = 3 * 24 * 3600   # 缓存有效期3天
 
 # ==================== 频道合并配置 ====================
 MAX_SOURCES_PER_CHANNEL = 5
@@ -80,3 +81,6 @@ PREFER_LOCAL_ISP = True
 ENABLE_DEMO_FILTER = os.getenv("ENABLE_DEMO_FILTER", "true").lower() == "true"
 ENABLE_ALIAS = os.getenv("ENABLE_ALIAS", "true").lower() == "true"
 ENABLE_BLACKLIST = os.getenv("ENABLE_BLACKLIST", "true").lower() == "true"
+
+# ==================== Demo 匹配模式 ====================
+DEMO_MATCH_MODE = "contains"   # 可选 "exact" 或 "contains"
