@@ -1,5 +1,5 @@
 # src/alias_matcher.py
-# 别名匹配模块，增加自动规范化常见变体
+# 别名匹配模块：仅支持精确匹配和正则匹配，避免错误泛化
 
 import re
 from pathlib import Path
@@ -10,7 +10,7 @@ from src.config import ALIAS_FILE, ENABLE_ALIAS
 class AliasMatcher:
     def __init__(self, alias_file: Path = ALIAS_FILE):
         self.alias_file = alias_file
-        self.exact_mappings: Dict[str, str] = {}
+        self.exact_mappings: Dict[str, str] = {}      # 全等（忽略大小写）
         self.regex_mappings: Dict[re.Pattern, str] = {}
         self._load()
 
@@ -41,46 +41,28 @@ class AliasMatcher:
                         except re.error as e:
                             print(f"⚠️ 别名文件第 {line_num} 行正则错误: {e}")
                     else:
+                        # 所有非正则别名都视为精确匹配（必须整个字符串相等，忽略大小写）
                         self.exact_mappings[alias.lower()] = standard
         print(f"✅ 已加载别名规则：精确 {len(self.exact_mappings)}，正则 {len(self.regex_mappings)}")
 
     def match(self, channel_name: str) -> Optional[str]:
+        """返回标准化名称，若无匹配则返回 None。无子串匹配！"""
         if not channel_name:
             return None
         name_lower = channel_name.lower()
+        # 1. 精确匹配（最高优先级）
         if name_lower in self.exact_mappings:
             return self.exact_mappings[name_lower]
+        # 2. 正则匹配
         for pattern, standard in self.regex_mappings.items():
             if pattern.search(channel_name):
                 return standard
         return None
 
     def normalize(self, channel_name: str) -> str:
-        """标准化频道名：先尝试别名匹配，再进行自动规范化"""
+        """标准化频道名，若无匹配则返回原名称"""
         mapped = self.match(channel_name)
-        if mapped is not None:
-            return mapped
-        # 自动规范化常见变体
-        name = channel_name
-        # CCTV+1 -> CCTV-1
-        name = re.sub(r'(?i)CCTV\+(\d+)', r'CCTV-\1', name)
-        # CCTV1 -> CCTV-1
-        name = re.sub(r'(?i)^CCTV(\d+)$', r'CCTV-\1', name)
-        # CCTV1综合 -> CCTV-1
-        name = re.sub(r'(?i)^CCTV(\d+)\s*综合', r'CCTV-\1', name)
-        # CCTV-1 高清 -> CCTV-1
-        name = re.sub(r'(?i)^(CCTV-\d+)\s*高清', r'\1', name)
-        # CETV1 -> CETV-1
-        name = re.sub(r'(?i)^CETV(\d+)$', r'CETV-\1', name)
-        # CETV-1 高清 -> CETV-1
-        name = re.sub(r'(?i)^(CETV-\d+)\s*高清', r'\1', name)
-        # 去除常见后缀（高清、频道、HD、标清、付费、备数字）
-        name = re.sub(r'\s*(高清|频道|HD|标清|付费|备\d+)$', '', name, flags=re.IGNORECASE)
-        # 去除括号内容
-        name = re.sub(r'[（(][^）)]*[）)]', '', name)
-        # 去除多余空格
-        name = re.sub(r'\s+', ' ', name).strip()
-        return name
+        return mapped if mapped is not None else channel_name
 
 _matcher = None
 
