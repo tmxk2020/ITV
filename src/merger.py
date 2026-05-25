@@ -1,5 +1,5 @@
 # src/merger.py
-# 频道合并模块：按标准化名称合并，保留数字差异
+# 频道合并模块：按标准化名称合并，严格保留数字和连字符
 
 import re
 from collections import defaultdict
@@ -7,18 +7,17 @@ from src.config import MAX_SOURCES_PER_CHANNEL
 
 def normalize_channel_name(name: str) -> str:
     """
-    标准化频道名，仅用于合并分组。
-    去除清晰度标签，但绝对保留数字和连字符，避免 CCTV-1 与 CCTV-17 混淆。
+    标准化频道名用于合并分组。
+    只去除清晰度标签和括号内容，不做任何数字、字母、连字符的转换。
+    确保 CCTV-1 和 CCTV-17 保持为不同的键。
     """
-    # 去除清晰度标签（不包含数字）
+    # 去除清晰度标签
     name = re.sub(r'\s*(?:1080[pi]|720[pi]|4K|8K|HD|高清|超清|标清|流畅|付费|备\d*)\s*', '', name, flags=re.IGNORECASE)
     # 去除括号内容
     name = re.sub(r'[（(][^）)]*[）)]', '', name)
     # 去除多余空格
     name = re.sub(r'\s+', ' ', name).strip()
-    # 统一 CCTV 写法：CCTV1 -> CCTV-1，CCTV5+ -> CCTV-5+ （但保留完整数字）
-    name = re.sub(r'(?i)^CCTV\s*(\d+)$', r'CCTV-\1', name)
-    name = re.sub(r'(?i)^CCTV\s*(\d+)\+$', r'CCTV-\1+', name)
+    # 注意：不要做任何 "CCTV1" -> "CCTV-1" 的转换，保持原样
     return name
 
 def merge_channels_by_name(valid_channels: list) -> list:
@@ -40,7 +39,7 @@ def merge_channels_by_name(valid_channels: list) -> list:
         top = ch_list[:MAX_SOURCES_PER_CHANNEL]
         primary = top[0]
         merged_ch = {
-            "name": primary["name"],        # 原始名称（可能含清晰度，但输出时会清理）
+            "name": primary["name"],
             "urls": [c["url"] for c in top],
             "url": primary["url"],
             "latency": primary["latency"],
