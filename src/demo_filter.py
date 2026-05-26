@@ -1,12 +1,12 @@
 # src/demo_filter.py
-# Demo 频道筛选与排序模块，使用包含匹配，输出未匹配频道到 shai.txt
+# Demo 频道筛选与排序模块（包含匹配，保留港澳台）
 
 from pathlib import Path
 from typing import List, Tuple
 from src.config import DEMO_FILE, OUTPUT_DIR
 from src.alias_matcher import get_alias_matcher
 
-# 强制使用包含匹配
+# 使用包含匹配，确保港澳台频道能匹配 demo 中相应条目
 DEMO_MATCH_MODE = "contains"
 
 def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[str, str]]:
@@ -38,31 +38,32 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
     return order
 
 def match_channel_name(channel_name: str, demo_name: str) -> bool:
-    """包含匹配：忽略大小写，demo_name 是 channel_name 的子串或反之"""
-    cn_lower = channel_name.lower()
-    dn_lower = demo_name.lower()
-    return dn_lower in cn_lower or cn_lower in dn_lower
+    """包含匹配（忽略大小写）"""
+    if DEMO_MATCH_MODE == "exact":
+        return channel_name == demo_name
+    else:
+        cn_lower = channel_name.lower()
+        dn_lower = demo_name.lower()
+        return dn_lower in cn_lower or cn_lower in dn_lower
 
 def filter_and_order_by_demo(channels: list) -> tuple:
     """
     返回 (matched_channels, unmatched_channels)
     matched_channels: 按 demo 顺序排列，每个频道增加 'demo_category' 字段
-    unmatched_channels: 未匹配的频道列表（用于生成 shai.txt）
     """
     demo_order = parse_demo_order_with_categories()
     if not demo_order:
         print("⚠️ demo.txt 为空，跳过筛选")
         return channels, []
 
-    # 建立频道名到频道的映射
     name_to_channel = {ch["name"]: ch for ch in channels}
     matched = []
-    unmatched = list(channels)  # 先复制全部，然后移除匹配的
+    unmatched = list(channels)
     matched_names = set()
     matched_demo_items = set()
 
     for category, demo_name in demo_order:
-        # 精确匹配优先
+        # 精确匹配
         if demo_name in name_to_channel:
             ch = name_to_channel[demo_name].copy()
             ch["demo_category"] = category
@@ -70,10 +71,9 @@ def filter_and_order_by_demo(channels: list) -> tuple:
                 matched.append(ch)
                 matched_names.add(ch["name"])
                 matched_demo_items.add(demo_name)
-                # 从未匹配列表中移除
                 unmatched = [c for c in unmatched if c["name"] != ch["name"]]
                 continue
-        # 包含匹配（遍历未匹配的频道）
+        # 包含匹配
         found = False
         for i, ch in enumerate(unmatched[:]):
             if ch["name"] in matched_names:
@@ -84,23 +84,33 @@ def filter_and_order_by_demo(channels: list) -> tuple:
                 matched.append(ch_copy)
                 matched_names.add(ch["name"])
                 matched_demo_items.add(demo_name)
-                # 从未匹配列表中移除
                 unmatched.pop(i)
                 found = True
                 break
         if not found:
-            # 可选：记录未匹配的 demo 项
+            # 可选记录未匹配的 demo
             pass
 
+    # 重要：将未匹配但属于港澳台的频道追加到末尾，避免完全丢失
+    # 检查 unmatched 中是否有港澳台频道（通过分类器判断）
+    from src.classifier import classify_channel
+    hk_tw_unmatched = []
+    other_unmatched = []
+    for ch in unmatched:
+        cat = classify_channel(ch)
+        if cat == "港澳台":
+            ch_copy = ch.copy()
+            ch_copy["demo_category"] = "🌊港·澳·台"   # 或直接使用 "港澳台"
+            hk_tw_unmatched.append(ch_copy)
+        else:
+            other_unmatched.append(ch)
+    
+    if hk_tw_unmatched:
+        print(f"📌 发现 {len(hk_tw_unmatched)} 个港澳台频道未在 demo 中定义，已自动追加到输出")
+        matched.extend(hk_tw_unmatched)
+        unmatched = other_unmatched
+
     print(f"🎯 Demo 筛选：原始 {len(channels)} 个频道 -> 匹配 {len(matched)} 个频道，未匹配 {len(unmatched)} 个（匹配模式: {DEMO_MATCH_MODE}）")
-    
-    # 输出未匹配的 demo 项（帮助调试）
-    demo_names_set = set(demo_name for _, demo_name in demo_order)
-    matched_demo_set = matched_demo_items
-    unmatched_demo = demo_names_set - matched_demo_set
-    if unmatched_demo:
-        print(f"⚠️ 以下 demo 频道未匹配到任何采集频道（前30个）: {list(unmatched_demo)[:30]}")
-    
     return matched, unmatched
 
 def write_shai_file(unmatched_channels: list, matched_count: int, total_raw: int):
