@@ -5,6 +5,10 @@ bxtv.3a.ink
 freetv.fun
 freetv.top
 epg.pw
+/blackout/
+/blank/
+/static/
+noise
 test
 example
 demo
