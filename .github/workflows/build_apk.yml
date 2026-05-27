@@ -28,9 +28,7 @@ jobs:
 
       - name: Install Gradle
         run: |
-          # 安装 Gradle 8.3（如果系统中没有）
           if ! command -v gradle &> /dev/null; then
-            echo "安装 Gradle..."
             wget -q https://services.gradle.org/distributions/gradle-8.3-bin.zip
             unzip -q gradle-8.3-bin.zip
             echo "$(pwd)/gradle-8.3/bin" >> $GITHUB_PATH
@@ -58,12 +56,15 @@ jobs:
           name: iptv-player-apk
           path: app/build/outputs/apk/release/*.apk
 
-      - name: Create Release and Upload APK
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_OUTPUT
+
+      - name: Create Release (always)
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "latest-apk"
-          name: "IPTV Player APK (自动构建)"
+          tag_name: "apk-${{ steps.date.outputs.date }}"
+          name: "IPTV Player APK (${{ steps.date.outputs.date }})"
           files: app/build/outputs/apk/release/*.apk
           prerelease: false
           generate_release_notes: false
