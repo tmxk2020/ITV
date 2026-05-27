@@ -7,7 +7,6 @@ on:
     paths:
       - 'app/**'
       - '.github/workflows/build-apk.yml'
-  # 也可以在上游更新成功后触发，但这里简单处理
 
 jobs:
   build:
@@ -27,23 +26,31 @@ jobs:
         with:
           cmdline-tools-version: 11076708
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Install Gradle
+        run: |
+          # 安装 Gradle 8.3（如果系统中没有）
+          if ! command -v gradle &> /dev/null; then
+            echo "安装 Gradle..."
+            wget -q https://services.gradle.org/distributions/gradle-8.3-bin.zip
+            unzip -q gradle-8.3-bin.zip
+            echo "$(pwd)/gradle-8.3/bin" >> $GITHUB_PATH
+          fi
+          gradle --version
+
+      - name: Create local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
       - name: Get GitHub Pages URL
         id: pages-url
         run: |
           REPO_NAME=${GITHUB_REPOSITORY#*/}
           OWNER=${GITHUB_REPOSITORY_OWNER}
-          # 如果仓库启用了 Pages，默认域名是 https://$OWNER.github.io/$REPO_NAME/
-          # 这里我们使用 gh-pages 分支部署的原始地址
           BASE_URL="https://$OWNER.github.io/$REPO_NAME/"
           echo "base_url=$BASE_URL" >> $GITHUB_OUTPUT
 
       - name: Build APK with gradle
         run: |
-          ./gradlew assembleRelease \
-            -PbaseUrl=${{ steps.pages-url.outputs.base_url }}
+          gradle assembleRelease -PbaseUrl=${{ steps.pages-url.outputs.base_url }}
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
