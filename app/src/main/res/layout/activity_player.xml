@@ -12,7 +12,6 @@
         app:use_controller="false"
         app:resize_mode="fit" />
     
-    <!-- 顶部控制栏（半透明黑色） -->
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -63,7 +62,6 @@
             
     </LinearLayout>
     
-    <!-- 频道列表容器（左侧滑动） -->
     <FrameLayout
         android:id="@+id/channel_list_container"
         android:layout_width="280dp"
