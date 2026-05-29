@@ -22,21 +22,12 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Create gradle wrapper directory
-        run: mkdir -p gradle/wrapper
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.2
 
-      - name: Download gradle-wrapper.jar (if missing)
-        run: |
-          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            echo "Downloading gradle-wrapper.jar..."
-            curl -L -o gradle/wrapper/gradle-wrapper.jar \
-              https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar
-          fi
-
-      - name: Ensure gradlew is executable
-        run: chmod +x gradlew
-
-      - name: Cache Gradle
+      - name: Cache Gradle dependencies
         uses: actions/cache@v4
         with:
           path: |
@@ -47,7 +38,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build APK
-        run: ./gradlew assembleRelease
+        run: gradle assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
@@ -55,7 +46,7 @@ jobs:
           name: IPTV-Player
           path: app/build/outputs/apk/release/*.apk
 
-      - name: Upload to Release (manual trigger)
+      - name: Upload to Release (manual trigger only)
         if: github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v1
         with:
