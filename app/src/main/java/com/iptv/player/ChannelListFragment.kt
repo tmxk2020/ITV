@@ -13,31 +13,33 @@ import com.iptv.player.model.ChannelGroup
 
 class ChannelListFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
+    private var _binding: View? = null
+    private val binding get() = _binding!!
+    private var recyclerView: RecyclerView? = null
     private lateinit var groupContainer: LinearLayout
     private var onChannelSelectedListener: ((Channel, Int) -> Unit)? = null
     private var currentGroupAdapter: ChannelAdapter? = null
     private var currentGroupChannels: List<Channel> = emptyList()
     private var selectedPosition = -1
     private var groupButtons = mutableListOf<View>()
+    private var isViewCreated = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_channel_list, container, false)
+    ): View {
+        _binding = inflater.inflate(R.layout.fragment_channel_list, container, false)
+        return binding
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         recyclerView = view.findViewById(R.id.channel_recycler_view)
         groupContainer = view.findViewById(R.id.group_container)
-
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
+        recyclerView?.layoutManager = LinearLayoutManager(context)
         setupGroupButtons()
+        isViewCreated = true
     }
 
     private fun setupGroupButtons() {
@@ -70,13 +72,14 @@ class ChannelListFragment : Fragment() {
     }
 
     private fun selectGroup(index: Int) {
+        if (recyclerView == null) return
         currentGroupChannels = DataManager.channelGroups[index].channels
         currentGroupAdapter = ChannelAdapter(currentGroupChannels) { channel, position ->
             selectedPosition = position
             onChannelSelectedListener?.invoke(channel, position)
             hide()
         }
-        recyclerView.adapter = currentGroupAdapter
+        recyclerView?.adapter = currentGroupAdapter
         currentGroupAdapter?.setSelectedPosition(selectedPosition)
 
         groupButtons.forEachIndexed { i, button ->
@@ -92,7 +95,7 @@ class ChannelListFragment : Fragment() {
         selectedPosition = position
         currentGroupAdapter?.setSelectedPosition(position)
         if (position >= 0) {
-            recyclerView.scrollToPosition(position)
+            recyclerView?.scrollToPosition(position)
         }
     }
 
@@ -104,7 +107,14 @@ class ChannelListFragment : Fragment() {
         view?.visibility = View.GONE
     }
 
-    fun isListVisible(): Boolean {   // 改名以避免与 Fragment 的 isVisible 冲突
-        return view?.visibility == View.VISIBLE
+    fun isListVisible(): Boolean {
+        return isViewCreated && view?.visibility == View.VISIBLE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        recyclerView = null
+        isViewCreated = false
     }
 }
