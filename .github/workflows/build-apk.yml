@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write    # 关键：赋予写入权限，用于创建 Release
+  contents: write
 
 jobs:
   build:
@@ -40,25 +40,38 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build APK
-        run: gradle assembleRelease
+      - name: Create debug keystore
+        run: |
+          mkdir -p ~/.android
+          if [ ! -f ~/.android/debug.keystore ]; then
+            keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug, O=Android, C=US" -storepass android -keypass android
+          fi
+          cp ~/.android/debug.keystore ./debug.keystore
+
+      - name: Build Debug APK
+        run: gradle assembleDebug
+
+      - name: Rename APK
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/IPTV-Player.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: IPTV-Player
-          path: app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/debug/IPTV-Player.apk
 
-      - name: Create Release and Upload APK (manual trigger only)
+      - name: Create Release and Upload APK
         if: github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: latest
-          name: Latest Release
+          name: IPTV Player (Debug)
           body: |
             ## IPTV Player APK
-            - 自动构建时间: ${{ github.event.repository.updated_at }}
+            - 构建时间: ${{ github.event.repository.updated_at }}
             - 频道源: https://itv.19860519.xyz/output/tv.txt
-          files: app/build/outputs/apk/release/*.apk
-          overwrite: true     # 允许覆盖已存在的 latest release
-          token: ${{ secrets.GITHUB_TOKEN }}   # 显式传入 token（可选）
+            - 支持上下滑屏换台、点击显示频道列表
+          files: app/build/outputs/apk/debug/IPTV-Player.apk
+          overwrite: true
+          token: ${{ secrets.GITHUB_TOKEN }}
