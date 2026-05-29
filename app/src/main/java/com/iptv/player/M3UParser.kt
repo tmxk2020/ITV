@@ -42,22 +42,19 @@ object M3UParser {
     }
 
     private fun parseExtinf(extinfLine: String, url: String): Channel {
-        // Example: #EXTINF:-1 tvg-id="CCTV1" tvg-logo="https://..." group-title="央视",CCTV-1
         var name = ""
         var group = ""
         var tvgId = ""
         var tvgLogo = ""
 
-        // Extract name after last comma
         val commaIndex = extinfLine.lastIndexOf(',')
         if (commaIndex != -1 && commaIndex + 1 < extinfLine.length) {
             name = extinfLine.substring(commaIndex + 1).trim()
         }
 
-        // Extract attributes
-        val tvgIdPattern = Regex("""tvg-id="([^"]*)"""")
-        val tvgLogoPattern = Regex("""tvg-logo="([^"]*)"""")
-        val groupPattern = Regex("""group-title="([^"]*)"""")
+        val tvgIdPattern = Regex("""tvg-id="([^"]*)""")
+        val tvgLogoPattern = Regex("""tvg-logo="([^"]*)""")
+        val groupPattern = Regex("""group-title="([^"]*)""")
 
         tvgIdPattern.find(extinfLine)?.let { tvgId = it.groupValues[1] }
         tvgLogoPattern.find(extinfLine)?.let { tvgLogo = it.groupValues[1] }
