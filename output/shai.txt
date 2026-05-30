@@ -1,7 +1,7 @@
 # Demo筛选丢弃的频道
-# 原始频道总数: 628
+# 原始频道总数: 629
 # Demo匹配成功: 435
-# 丢弃数量: 193
+# 丢弃数量: 194
 # 格式: 频道名,URL
 
 2003年春晚,https://alimov2.a.kwimgs.com/upic/2023/01/14/23/BMjAyMzAxMTQyMzQxNDdfNDAzMDAxOTlfOTM2MTU0MTk1NDFfMF8z_b_B182749d2cd2ea9323639254af385f24b.mp4
@@ -197,3 +197,4 @@ BRTV 北京卫视 (1080p),http://go.bkpcp.top/mg/bjws
 上虞經濟文化 (720p) [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
 萧山综合,http://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
 上虞3新商都 (720p) [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXshangyu3/720p.m3u8
+CCTV4K真4K,http://vip1.xinketongxun.fun:8082/tsfile/live/1026_1.m3u8
