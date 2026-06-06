@@ -21,6 +21,9 @@ IPTV_SOURCES = [
     "https://raw.githubusercontent.com/dogwalkerg/IPTV-collect-tv-txt/main/others_output.txt",
     "https://raw.githubusercontent.com/zzgpy1/Collect-IPTV/main/best_sorted.m3u",
     "https://raw.githubusercontent.com/zzgpy1/UniIPTV/gh-pages/tv.m3u",
+    "https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u",
+    "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
+    "https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
     "https://tv.19860519.xyz/abc123",
 ]
 
