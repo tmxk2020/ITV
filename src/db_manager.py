@@ -3,12 +3,12 @@
 import sqlite3
 import json
 import time
+import os
 from typing import List, Dict, Optional, Any
 
 DB_PATH = "iptv_cache.db"
-DATA_VALID_SECONDS = 7 * 24 * 3600
-DATA_EXPIRY_SECONDS = 30 * 24 * 3600
-FAILURE_THRESHOLD = 3
+DATA_EXPIRY_SECONDS = 7 * 24 * 3600  # 7天有效期
+CONSECUTIVE_FAILURE_THRESHOLD = 3
 
 class IPTVDatabase:
     def __init__(self, db_path: str = DB_PATH):
@@ -29,17 +29,11 @@ class IPTVDatabase:
                     latency INTEGER DEFAULT 9999,
                     video_codec TEXT,
                     ip_info TEXT,
-                    first_seen INTEGER DEFAULT 0,
                     last_verified INTEGER DEFAULT 0,
-                    last_attempt INTEGER DEFAULT 0,
                     failure_count INTEGER DEFAULT 0,
-                    status TEXT DEFAULT 'active',
                     UNIQUE(name, url)
                 )
             ''')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_status ON channels(status)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_last_verified ON channels(last_verified)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_name ON channels(name)')
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS metadata (
                     key TEXT PRIMARY KEY,
@@ -67,72 +61,62 @@ class IPTVDatabase:
                            ("last_update", str(timestamp)))
             conn.commit()
 
-    def upsert_channel(self, channel: Dict[str, Any], verified: bool = True):
-        now = int(time.time())
-        name = channel.get("name", "")
-        url = channel.get("url", "")
-        if not url:
-            return
-        group_title = channel.get("group_title", "")
-        tvg_id = channel.get("id", "")
-        tvg_logo = channel.get("logo", "")
-        latency = channel.get("latency", 9999)
-        video_codec = channel.get("video_codec", "")
-        ip_info = json.dumps(channel.get("ip_info")) if channel.get("ip_info") else None
-
+    def get_last_full_update_time(self) -> Optional[int]:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT id, failure_count, status FROM channels WHERE name = ? AND url = ?", (name, url))
-            existing = cursor.fetchone()
-            if existing:
-                if verified:
-                    cursor.execute('''
-                        UPDATE channels SET
-                            group_title = ?, tvg_id = ?, tvg_logo = ?,
-                            latency = ?, video_codec = ?, ip_info = ?,
-                            last_verified = ?, last_attempt = ?,
-                            failure_count = 0, status = 'active'
-                        WHERE name = ? AND url = ?
-                    ''', (group_title, tvg_id, tvg_logo, latency, video_codec, ip_info,
-                          now, now, name, url))
-                else:
-                    cursor.execute('''
-                        UPDATE channels SET
-                            last_attempt = ?,
-                            failure_count = failure_count + 1,
-                            status = CASE 
-                                WHEN failure_count + 1 >= ? THEN 'inactive'
-                                ELSE status
-                            END
-                        WHERE name = ? AND url = ?
-                    ''', (now, FAILURE_THRESHOLD, name, url))
-            else:
-                if verified:
-                    cursor.execute('''
-                        INSERT INTO channels
-                        (name, url, group_title, tvg_id, tvg_logo, latency, video_codec, ip_info,
-                         first_seen, last_verified, last_attempt, failure_count, status)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 'active')
-                    ''', (name, url, group_title, tvg_id, tvg_logo, latency, video_codec, ip_info,
-                          now, now, now))
+            cursor.execute("SELECT value FROM metadata WHERE key = 'last_full_update'")
+            row = cursor.fetchone()
+            if row:
+                return int(row[0])
+        return None
+
+    def set_last_full_update_time(self, timestamp: int = None):
+        if timestamp is None:
+            timestamp = int(time.time())
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)",
+                           ("last_full_update", str(timestamp)))
             conn.commit()
 
-    def batch_upsert(self, channels: List[Dict[str, Any]], verified: bool = True):
-        for ch in channels:
-            self.upsert_channel(ch, verified)
-
-    def load_active_channels(self, max_age: int = DATA_VALID_SECONDS) -> List[Dict[str, Any]]:
+    def save_channels(self, channels: List[Dict[str, Any]]):
         now = int(time.time())
-        threshold = now - max_age
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            for ch in channels:
+                name = ch.get("name", "")
+                url = ch.get("url", "")
+                if not url:
+                    continue
+                group_title = ch.get("group_title", "")
+                tvg_id = ch.get("id", "")
+                tvg_logo = ch.get("logo", "")
+                latency = ch.get("latency", 9999)
+                video_codec = ch.get("video_codec", "")
+                ip_info = json.dumps(ch.get("ip_info")) if ch.get("ip_info") else None
+                cursor.execute('''
+                    INSERT OR REPLACE INTO channels
+                    (name, url, group_title, tvg_id, tvg_logo, latency, video_codec, ip_info, last_verified, failure_count)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+                ''', (name, url, group_title, tvg_id, tvg_logo, latency, video_codec, ip_info, now))
+            conn.commit()
+            print(f"💾 数据库已保存 {len(channels)} 条记录")
+
+    def load_valid_channels(self, skip_old: bool = True) -> List[Dict[str, Any]]:
+        now = int(time.time())
+        expiry_threshold = now - DATA_EXPIRY_SECONDS
+        channels = []
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('''
-                SELECT * FROM channels
-                WHERE status = 'active' AND last_verified >= ?
-                ORDER BY name, latency
-            ''', (threshold,))
-            channels = []
+            if skip_old:
+                cursor.execute('''
+                    SELECT * FROM channels
+                    WHERE last_verified >= ?
+                    ORDER BY name, latency
+                ''', (expiry_threshold,))
+            else:
+                cursor.execute('SELECT * FROM channels ORDER BY name, latency')
             for row in cursor.fetchall():
                 ch = dict(row)
                 if ch.get("ip_info"):
@@ -142,54 +126,39 @@ class IPTVDatabase:
                 channels.append(ch)
         return channels
 
+    def mark_failed(self, url: str) -> int:
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("UPDATE channels SET failure_count = failure_count + 1 WHERE url = ?", (url,))
+            conn.commit()
+            cursor.execute("SELECT failure_count FROM channels WHERE url = ?", (url,))
+            row = cursor.fetchone()
+            return row[0] if row else 0
+
+    def is_stale(self) -> bool:
+        last_update = self.get_last_update_time()
+        if last_update is None:
+            return True
+        return (int(time.time()) - last_update) > DATA_EXPIRY_SECONDS
+
     def get_stats(self) -> Dict[str, Any]:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(*) FROM channels")
             total = cursor.fetchone()[0]
-            cursor.execute("SELECT COUNT(*) FROM channels WHERE status = 'active'")
-            active = cursor.fetchone()[0]
-            cursor.execute("SELECT COUNT(*) FROM channels WHERE status = 'inactive'")
-            inactive = cursor.fetchone()[0]
+
             now = int(time.time())
-            threshold = now - DATA_VALID_SECONDS
-            cursor.execute("SELECT COUNT(*) FROM channels WHERE status = 'active' AND last_verified >= ?", (threshold,))
-            recent = cursor.fetchone()[0]
-        return {
-            "total": total,
-            "active": active,
-            "inactive": inactive,
-            "recent": recent,
-            "valid_days": DATA_VALID_SECONDS // 86400,
-            "expiry_days": DATA_EXPIRY_SECONDS // 86400
-        }
+            expiry = now - DATA_EXPIRY_SECONDS
+            cursor.execute("SELECT COUNT(*) FROM channels WHERE last_verified >= ?", (expiry,))
+            recent_valid = cursor.fetchone()[0]
 
-    def is_expired(self) -> bool:
-        threshold = int(time.time()) - DATA_EXPIRY_SECONDS
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT COUNT(*) FROM channels WHERE status = 'active' AND last_verified >= ?", (threshold,))
-            recent = cursor.fetchone()[0]
-            cursor.execute("SELECT COUNT(*) FROM channels WHERE status = 'active'")
-            active = cursor.fetchone()[0]
-        return active == 0 or recent == 0
+            cursor.execute("SELECT COUNT(*) FROM channels WHERE failure_count >= ?", (CONSECUTIVE_FAILURE_THRESHOLD,))
+            failed = cursor.fetchone()[0]
 
-def get_last_full_update_time(self) -> Optional[int]:
-    """获取上次全量采集的时间戳"""
-    with sqlite3.connect(self.db_path) as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT value FROM metadata WHERE key = 'last_full_update'")
-        row = cursor.fetchone()
-        if row:
-            return int(row[0])
-    return None
-
-def set_last_full_update_time(self, timestamp: int = None):
-    """设置全量采集时间戳"""
-    if timestamp is None:
-        timestamp = int(time.time())
-    with sqlite3.connect(self.db_path) as conn:
-        cursor = conn.cursor()
-        cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)",
-                       ("last_full_update", str(timestamp)))
-        conn.commit()
+            active = total - failed
+            return {
+                "total_channels": total,
+                "active": active,
+                "failed": failed,
+                "recent_valid": recent_valid
+            }
