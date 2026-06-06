@@ -11,11 +11,11 @@ CCTV-7 (720p),http://74.91.26.218:82/live/cctv7hd.m3u8
 CCTV-8,http://74.91.26.218:82/live/cctv8hd.m3u8
 CCTV-9,http://112.27.235.94:8000/hls/10/index.m3u8
 CCTV-10 (720p),http://74.91.26.218:82/live/cctv10hd.m3u8
-CCTV-11 (720p),http://74.91.26.218:82/live/cctv11hd.m3u8
+CCTV-11,https://xykt-fix.github.io/play/a02b/index.m3u8
 CCTV-12 (720p),http://74.91.26.218:82/live/cctv12hd.m3u8
 CCTV-13,http://112.27.235.94:8000/hls/14/index.m3u8
 CCTV-14 (1080p),http://74.91.26.218:82/live/cctv14hd.m3u8
-CCTV-15 (720p),http://74.91.26.218:82/live/cctv15hd.m3u8
+CCTV-15 (1080p),https://xykt-fix.github.io/play/a02e/index.m3u8
 CCTV-16 (1080p),http://74.91.26.218:82/live/cctv16hd.m3u8
 CCTV-17,http://74.91.26.218:82/live/cctv17hd.m3u8
 老故事,http://112.27.235.94:8000/hls/50/index.m3u8
@@ -93,6 +93,7 @@ Viu TV,http://php.jdshipin.com/TVOD/iptv.php?id=viutv
 福州广播电视台新闻综合频道 (FZTV-1) (1080p),http://live.zohi.tv/video/s10001-fztv-1/index.m3u8
 白山新闻综合 [Geo-blocked],https://stream2.jlntv.cn/baishan1/sd/live.m3u8
 延边新闻综合 [Geo-blocked],https://stream2.jlntv.cn/jlyb/sd/live.m3u8
+萧山新闻综合 (720p) [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
 上虞1新闻综合 (720p) [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
 
 ☘️天津频道,#genre#
@@ -140,7 +141,7 @@ Viu TV,http://php.jdshipin.com/TVOD/iptv.php?id=viutv
 湖州文化娱乐,http://hzcm-live.media.hugd.com/613c47f0ab0d4eaa98b21378d0db6ded/0051d31c9dd543a7825eea4e49675b2a.m3u8?auth_key=2277598059-0a5ebfa1c0dc4671b42a60810fc37039-0-fa625b7d1feab612062453c12e3c8887
 绍兴电视台公共,http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]
 萧山生活,http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8
-萧山新闻综合 (720p) [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
+萧山新闻综合,https://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
 苍南新闻综合,https://l.cztvcloud.com/channels/lantian/SXcangnan1/720p.m3u8
 诸暨新闻综合,https://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8
 龙游生活娱乐,https://l.cztvcloud.com/channels/lantian/SXlongyou2/720p.m3u8
@@ -176,6 +177,7 @@ Viu TV,http://php.jdshipin.com/TVOD/iptv.php?id=viutv
 余姚综合,https://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
 余姚姚江文化 (576p),https://l.cztvcloud.com/channels/lantian/SXyuyao3/720p.m3u8
 云和新闻综合,http://l.cztvcloud.com/channels/lantian/SXyunhe1/720p.m3u8
+义乌新闻综合,https://44911.hlsplay.aodianyun.com/tv_radio_44911/tv_channel_1796.m3u8?auth_key=4830573978-0-0-92824c2c03f95906a3c49a4aa28f1709&extra_key=Yc1XsmxOKy2UBoPM4Wy5vCPsEYqnj06taCR2SRB2Xrg2w28NPilH03KdIbbM5wgSql-VBohSnoO9AOKl94q2t2DWMftz-XB-2qUX-UjXcS80StcSZahBFjrKLivXaRjiY5r2NOMKWMKFbv-S0Bz2G6iEXgCK8yGjtrFHDcPfAQEE0pvXq0Bwy34b7We8zARN&ali_ffmpeg_version=mpengine
 中国蓝新闻,http://ali-m-l.cztv.com/channels/lantian/channel009/1080p.m3u8
 东阳影视生活,http://l.cztvcloud.com/channels/lantian/SXdongyang1/720p.m3u8
 上虞新闻综合,http://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8?zzhed
@@ -203,6 +205,7 @@ Viu TV,http://php.jdshipin.com/TVOD/iptv.php?id=viutv
 新沂生活,http://live.xysrmt.cn/shpd/sd/live.m3u8?zjiangsd
 武进新闻,https://live.wjyanghu.com/live/CH1.m3u8
 武进生活,http://live.wjyanghu.com/live/CH2.m3u8
+泗阳综合,http://3739115337.cloudvdn.com/a.m3u8?domain=siyang-tv-hls.cm.jstv.com&player=nwEAAKHdjSKP_58X&secondToken=secondToken%3A5FUijZmDyNMxtCDdne0YzSAwjuw&streamid=siyang-tv%3Asiyang-tv%2Fsiyangzh&v3=1
 淮阴综合,https://huaiyin-tv-replay.cm.jstv.com/huaiyin-tv/huaiyinf.m3u8
 苏州,https://live-auth.51kandianshi.com/szgd/csztv4k_hd.m3u8
 苏州文化生活,https://live-auth.51kandianshi.com/szgd/csztv3.m3u8
@@ -289,8 +292,10 @@ FZTV3,http://live.zohi.tv:80/video/s10001-fztv-3/index.m3u8
 名山综合,https://m3u8channel-bx.yunxya.com/nmip-media/channellive/channel104666/playlist.m3u8
 四川四姑娘山隆珠措,https://gcalic.v.myalicdn.com/gc/sgns02_1/index.m3u8
 四川峨眉山云海日出,https://gcalic.v.myalicdn.com/gc/emsarm_1/index.m3u8
+广元综合,https://m3u8.channel.dzsm.com/nmip-media/channellive/channel100999/playlist.m3u8
 广安公共,http://live1.gatv.com.cn:85/live/GGPD_ggpdzm.m3u8?zsicd
 旺苍新闻综合,http://channel.wcrmt.cn:80/nmip-media/channellive/channel105268/playlist.m3u8
+朝天综合,https://m3u8.channel.dzsm.com/nmip-media/channellive/channel104601/playlist.m3u8
 松潘新闻综合,http://live.spccmc.com:90/live/spxwzh.m3u8
 汶川新闻综合,http://live.iwcmt.cn:90/live/zhxw.m3u8
 荥经综合,https://file.ysxtv.cn/nmip-media/channellive/channel101492/playlist.m3u8
