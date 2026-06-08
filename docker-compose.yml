@@ -4,7 +4,7 @@ services:
     container_name: iptv-collector
     restart: unless-stopped
     ports:
-      - "8080:8080"   # 映射主机 8080 端口到容器 8080
+      - "8080:8080"   # 主机端口:容器端口
     volumes:
       - ./data:/app/data
       - ./output:/app/output
@@ -12,20 +12,6 @@ services:
       - ./blacklist.txt:/app/blacklist.txt:ro
       - ./demo.txt:/app/demo.txt:ro
     environment:
-      - MAX_WORKERS=10
-      - TIMEOUT=10
-      - FFMPEG_ENABLE=true
-      - ENABLE_RETRY=true
-      - ENABLE_IP_RESOLVE=true
-      - ENABLE_REGION_FILTER=false
-      - CACHE_SPEED_HOURS=24
-      - CACHE_RAW_HOURS=24
-      - MAX_SOURCES_PER_CHANNEL=5
-      - DEMO_MATCH_MODE=contains
+      # ... 你的环境变量
       - RUN_MODE=schedule
       - SCHEDULE_INTERVAL=21600
-    # 如果需要限制内存可取消注释
-    # deploy:
-    #   resources:
-    #     limits:
-    #       memory: 2G
