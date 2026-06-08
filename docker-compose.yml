@@ -1,0 +1,24 @@
+services:
+  iptv-collector:
+    build: .
+    container_name: iptv-collector
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+      - ./alias.txt:/app/alias.txt:ro
+      - ./blacklist.txt:/app/blacklist.txt:ro
+      - ./demo.txt:/app/demo.txt:ro
+    environment:
+      - MAX_WORKERS=10
+      - TIMEOUT=10
+      - FFMPEG_ENABLE=true
+      - ENABLE_RETRY=true
+      - ENABLE_IP_RESOLVE=true
+      - ENABLE_REGION_FILTER=false
+      - CACHE_SPEED_HOURS=24
+      - CACHE_RAW_HOURS=24
+      - MAX_SOURCES_PER_CHANNEL=5
+      - DEMO_MATCH_MODE=contains
+      - RUN_MODE=schedule
+      - SCHEDULE_INTERVAL=21600
