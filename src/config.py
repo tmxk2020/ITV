@@ -81,15 +81,9 @@ WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST", "0.0.0.0")
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT", 8000))
 OUTPUT_DIR = ROOT_DIR / "output"   # 容器内为 /app/output
 
-# ==================== GitHub 加速代理配置 ====================
-# 可用的 Raw 文件代理镜像地址（按优先级排序，优先使用第一个可用的）
-GITHUB_RAW_PROXIES = [
-    "https://raw.staticdn.net",           # Stable CDN，2026 年实测可用[reference:1]
-    "https://ghproxy.net/https://raw.githubusercontent.com",
-    "https://gh.api.99988866.xyz/https://raw.githubusercontent.com",
-    "https://raw.githubusercontents.com", # 备用镜像
-]
-
-# 启用 Raw 代理加速
-ENABLE_GITHUB_PROXY = os.getenv("ENABLE_GITHUB_PROXY", "true").lower() == "true"
-GITHUB_PROXY_TIMEOUT = int(os.getenv("GITHUB_PROXY_TIMEOUT", 15))  # 代理源超时稍长
+# ==================== CDN 加速配置 ====================
+CDN_PROXY_ENABLE = os.getenv("CDN_PROXY_ENABLE", "true").lower() == "true"
+CDN_PROXY_URL = os.getenv("CDN_PROXY_URL", "https://gh-proxy.19860519.xyz/")
+# 需要加速的域名列表，支持逗号分隔
+CDN_PROXY_DOMAINS_RAW = os.getenv("CDN_PROXY_DOMAINS", "raw.githubusercontent.com,github.com")
+CDN_PROXY_DOMAINS = [d.strip() for d in CDN_PROXY_DOMAINS_RAW.split(",") if d.strip()]
