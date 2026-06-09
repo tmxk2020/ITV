@@ -4,18 +4,16 @@ services:
     container_name: iptv-collector
     restart: unless-stopped
     ports:
-      - "8080:8000"          # 主机端口:容器内HTTP端口
+      - "8080:8000"
     volumes:
-      - ./data:/app/data               # 数据库缓存持久化
-      - ./output:/app/output           # 生成的 tv.m3u / tv.txt 存储位置
+      - ./data:/app/data
+      - ./output:/app/output
       - ./alias.txt:/app/alias.txt:ro
       - ./blacklist.txt:/app/blacklist.txt:ro
       - ./demo.txt:/app/demo.txt:ro
-    env_file:
-      - .env                           # 可选，从 .env 加载环境变量
     environment:
-      - RUN_MODE=schedule              # once / schedule
-      - SCHEDULE_INTERVAL=21600        # 定时任务间隔（秒）
+      - RUN_MODE=schedule
+      - SCHEDULE_INTERVAL=21600
       - MAX_WORKERS=10
       - TIMEOUT=10
       - FFMPEG_ENABLE=true
@@ -32,10 +30,7 @@ services:
       - DATABASE_ENABLE=true
       - WEB_SERVER_HOST=0.0.0.0
       - WEB_SERVER_PORT=8000
-    # 资源限制（可选）
     deploy:
       resources:
         limits:
           memory: 2G
-        reservations:
-          memory: 512M
