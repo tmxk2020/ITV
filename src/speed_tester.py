@@ -1,12 +1,10 @@
 # src/speed_tester.py
 # 轻量级 HTTP 头探测，要求 Content-Type 包含 video
-# 增加 tqdm 进度条
 
 import asyncio
 import aiohttp
 import time
-from tqdm.asyncio import tqdm
-from src.config import HEADERS, TIMEOUT, MAX_WORKERS, ENABLE_IP_RESOLVE
+from src.config import HEADERS, TIMEOUT, MAX_WORKERS, ENABLE_IP_RESOLVE, MIN_LATENCY_THRESHOLD
 from src.ip_resolver import get_resolver
 from src.database import get_db_cache, channel_key
 from src.logger import logger
@@ -18,8 +16,15 @@ async def probe_channel(session: aiohttp.ClientSession, channel: dict) -> tuple:
         start = time.time()
         async with session.head(url, timeout=TIMEOUT, allow_redirects=True, headers=HEADERS) as resp:
             latency = int((time.time() - start) * 1000)
+            
+            # 检查延迟是否超过阈值
+            if MIN_LATENCY_THRESHOLD > 0 and latency > MIN_LATENCY_THRESHOLD:
+                logger.debug(f"⏱️ 延迟过高 {latency}ms > {MIN_LATENCY_THRESHOLD}ms，跳过: {url[:80]}")
+                return channel, latency, False, None
+            
             if resp.status == 200:
                 content_type = resp.headers.get("content-type", "").lower()
+                # 必须包含 video 或 mpegurl 才认为是有效视频流
                 if "video" not in content_type and "mpegurl" not in content_type:
                     return channel, latency, False, None
                 ip_info = None
@@ -30,11 +35,15 @@ async def probe_channel(session: aiohttp.ClientSession, channel: dict) -> tuple:
                 return channel, latency, True, ip_info
             else:
                 return channel, latency, False, None
-    except Exception:
+    except asyncio.TimeoutError:
+        logger.debug(f"⏱️ 超时 {TIMEOUT}s: {url[:80]}")
+        return channel, TIMEOUT * 1000, False, None
+    except Exception as e:
+        logger.debug(f"❌ 探测失败: {e}")
         return channel, 0, False, None
 
 async def test_channels_concurrent(channels_dict: dict) -> list:
-    """并发测速，返回有效的频道列表（按延迟排序），使用数据库缓存，带进度条"""
+    """并发测速，返回有效的频道列表（按延迟排序），使用数据库缓存"""
     channels = list(channels_dict.values())
     db = await get_db_cache()
     
@@ -44,11 +53,16 @@ async def test_channels_concurrent(channels_dict: dict) -> list:
     for ch in channels:
         key = channel_key(ch["name"], ch["url"])
         cached = await db.get_speed_result(key)
-        if cached and cached["latency"] < 9999:
-            ch["latency"] = cached["latency"]
-            ch["video_codec"] = cached.get("video_codec", "")
-            ch["ip_info"] = cached.get("ip_info")
-            cached_results.append(ch)
+        if cached and cached.get("latency", 9999) < 9999:
+            # 检查缓存的延迟是否超过阈值
+            if MIN_LATENCY_THRESHOLD == 0 or cached["latency"] <= MIN_LATENCY_THRESHOLD:
+                ch["latency"] = cached["latency"]
+                ch["video_codec"] = cached.get("video_codec", "")
+                ch["ip_info"] = cached.get("ip_info")
+                cached_results.append(ch)
+            else:
+                # 缓存延迟过高，重新探测
+                to_probe.append(ch)
         else:
             to_probe.append(ch)
     
@@ -65,14 +79,11 @@ async def test_channels_concurrent(channels_dict: dict) -> list:
         timeout_config = aiohttp.ClientTimeout(total=TIMEOUT + 5)
         async with aiohttp.ClientSession(connector=connector, timeout=timeout_config) as session:
             tasks = [bounded_probe(session, ch) for ch in to_probe]
-            # 使用 tqdm 进度条包装
-            results = []
-            for coro in tqdm.as_completed(tasks, desc="🚀 测速进度", unit="频道", total=len(tasks), leave=True):
-                res = await coro
-                results.append(res)
+            results = await asyncio.gather(*tasks, return_exceptions=True)
         
         for res in results:
             if isinstance(res, Exception):
+                logger.warning(f"测速异常: {res}")
                 continue
             ch, latency, ok, ip_info = res
             if ok:
@@ -82,9 +93,18 @@ async def test_channels_concurrent(channels_dict: dict) -> list:
                 else:
                     ch["ip_info"] = None
                 valid.append(ch)
+                # 保存到缓存
                 key = channel_key(ch["name"], ch["url"])
                 await db.set_speed_result(key, ch)
     
+    # 按延迟排序（低延迟优先）
     valid.sort(key=lambda x: x.get("latency", 9999))
     logger.info(f"✅ 测速完成，有效频道 {len(valid)}/{len(channels)}")
+    
+    # 打印延迟分布
+    if valid:
+        latencies = [ch.get("latency", 9999) for ch in valid]
+        avg_latency = sum(latencies) / len(latencies)
+        logger.info(f"📊 延迟统计: 平均={avg_latency:.0f}ms, 最低={min(latencies)}ms, 最高={max(latencies)}ms")
+    
     return valid
