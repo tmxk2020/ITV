@@ -94,6 +94,7 @@ Bread TV面包台 (720p),https://video.bread-tv.com:8091/hls-live24/online/index
 重庆卫视,http://112.27.235.94:8000/hls/36/index.m3u8
 铜梁综合,http://183.64.174.171:40123/ch1.m3u8?zzhongqd
 荣昌综合 (404p) [Not 24/7],http://183.64.181.25:40023/rongchang01.m3u8
+江津新闻综合 (480p),http://222.179.155.21:1935/ch1.m3u8
 
 ☘️广东频道,#genre#,#genre#
 东莞新闻综合,https://stream.sun0769.com/dgrtv1/mp4tv1_800/index.m3u8
@@ -202,6 +203,7 @@ Bread TV面包台 (720p),https://video.bread-tv.com:8091/hls-live24/online/index
 ☘️安徽频道,#genre#,#genre#
 安徽综艺体育,http://112.27.235.94:8000/hls/25/index.m3u8
 安徽导视,http://dspdhls.appcoo.com:8888/live/dspd/index.m3u8
+合肥新闻,http://112.27.235.94:8000/hls/18/index.m3u8
 固镇新闻,http://www.guzhenm.com:7001/hls/hd-live.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]
 黄山新闻综合,http://hslive.hsnewsnet.com/lsdream/hve9Wjs/1000/live.m3u8
 黄山,https://gcalic.v.myalicdn.com/gc/ahhs01_1/index.m3u8

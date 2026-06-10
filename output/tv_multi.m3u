@@ -2,7 +2,7 @@
 #EXTINF:-1 group-title="📺央视频道,#genre#",CCTV-1
 http://69.30.245.50/live/cctv1.m3u8 # http://198.204.240.250:82/live/cctv1.m3u8 # http://74.91.26.218:82/live/cctv1hd.m3u8 # http://112.27.235.94:8000/hls/1/index.m3u8
 #EXTINF:-1 group-title="📺央视频道,#genre#",CCTV-2
-http://74.91.26.218:82/live/cctv2hd.m3u8
+http://74.91.26.218:82/live/cctv2hd.m3u8 # http://112.27.235.94:8000/hls/2/index.m3u8
 #EXTINF:-1 group-title="📺央视频道,#genre#",CCTV-3
 http://74.91.26.218:82/live/cctv3hd.m3u8 # http://112.27.235.94:8000/hls/3/index.m3u8
 #EXTINF:-1 group-title="📺央视频道,#genre#",CCTV-4
@@ -167,6 +167,8 @@ http://112.27.235.94:8000/hls/36/index.m3u8
 http://183.64.174.171:40123/ch1.m3u8?zzhongqd
 #EXTINF:-1 group-title="☘️重庆频道,#genre#",荣昌综合 (404p) [Not 24/7]
 http://183.64.181.25:40023/rongchang01.m3u8
+#EXTINF:-1 group-title="☘️重庆频道,#genre#",江津新闻综合 (480p)
+http://222.179.155.21:1935/ch1.m3u8
 #EXTINF:-1 group-title="☘️广东频道,#genre#",东莞新闻综合
 https://stream.sun0769.com/dgrtv1/mp4tv1_800/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道,#genre#",东莞生活资讯
@@ -367,6 +369,8 @@ http://zjtv-wshls.homecdn.com/live/2aa50.m3u8
 http://112.27.235.94:8000/hls/25/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道,#genre#",安徽导视
 http://dspdhls.appcoo.com:8888/live/dspd/index.m3u8
+#EXTINF:-1 group-title="☘️安徽频道,#genre#",合肥新闻
+http://112.27.235.94:8000/hls/18/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道,#genre#",固镇新闻
 http://www.guzhenm.com:7001/hls/hd-live.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]
 #EXTINF:-1 group-title="☘️安徽频道,#genre#",黄山新闻综合
