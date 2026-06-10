@@ -7,7 +7,9 @@ from src.config import DEMO_FILE, OUTPUT_DIR, DEMO_MATCH_MODE
 from src.alias_matcher import get_alias_matcher
 from src.classifier import PROVINCES, classify_channel
 
+
 def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[str, str]]:
+    """解析 demo.txt，返回 [(分类, 频道名), ...] 保持原始顺序"""
     if not demo_file.exists():
         print(f"⚠️ Demo 文件不存在: {demo_file}")
         return []
@@ -20,8 +22,7 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
             if not line:
                 continue
             if line.endswith(",#genre#") or line.endswith(", #genre#"):
-                # 去除可能的逗号和 #genre#
-                current_category = line.replace(", #genre#", "").replace(",#genre#", "").strip()
+                current_category = line.replace(", #genre#", "").replace(", #genre#", "").strip()
                 continue
             if line.startswith('#'):
                 continue
@@ -32,16 +33,19 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
                 order.append((current_category, demo_name))
             else:
                 order.append(("其他", line))
-    print(f"📋 从 demo.txt 解析到 {len(order)} 个有序频道，共 {len(set(c for c,_ in order))} 个分类")
+    print(f"📋 从 demo.txt 解析到 {len(order)} 个有序频道，共 {len(set(c for c, _ in order))} 个分类")
     return order
 
+
 def match_channel_name(channel_name: str, demo_name: str) -> bool:
+    """根据配置的模式匹配频道名"""
     if DEMO_MATCH_MODE == "exact":
         return channel_name == demo_name
     else:
         cn_lower = channel_name.lower()
         dn_lower = demo_name.lower()
         return dn_lower in cn_lower or cn_lower in dn_lower
+
 
 def find_matching_demo_category(channel_name: str, demo_order: List[Tuple[str, str]]) -> str:
     """
@@ -178,7 +182,7 @@ def find_matching_demo_category(channel_name: str, demo_order: List[Tuple[str, s
             if any(kw in channel_name.lower() for kw in ["新闻", "综合", "生活", "影视", "少儿", "公共", "经济", "文艺", "教育"]):
                 return category
 
-    # 5. 港澳台关键词匹配（如果没有被前序规则捕获）
+    # 5. 港澳台关键词匹配
     hk_tw_keywords = ["港", "澳", "台", "香港", "澳门", "台湾", "翡翠", "明珠", "凤凰", "tvb", "无线", "rthk", "hoy", "viu", "tvbs", "东森", "民视", "台视", "华视", "中视", "三立", "纬来", "靖天", "星空", "澳视"]
     for kw in hk_tw_keywords:
         if kw.lower() in channel_name.lower():
@@ -188,7 +192,13 @@ def find_matching_demo_category(channel_name: str, demo_order: List[Tuple[str, s
 
     return None
 
+
 def filter_and_order_by_demo(channels: list) -> tuple:
+    """
+    根据 demo.txt 筛选和排序频道。
+    返回 (匹配的频道列表, 未匹配的频道列表)
+    每个匹配的频道会添加字段：demo_category 和 demo_name（匹配到的 demo.txt 中的标准名称）
+    """
     demo_order = parse_demo_order_with_categories()
     if not demo_order:
         print("⚠️ demo.txt 为空，跳过筛选")
@@ -205,6 +215,7 @@ def filter_and_order_by_demo(channels: list) -> tuple:
         if demo_name in name_to_channel:
             ch = name_to_channel[demo_name].copy()
             ch["demo_category"] = category
+            ch["demo_name"] = demo_name          # 记录标准名称
             if ch["name"] not in matched_names:
                 matched.append(ch)
                 matched_names.add(ch["name"])
@@ -218,6 +229,7 @@ def filter_and_order_by_demo(channels: list) -> tuple:
             if match_channel_name(ch["name"], demo_name):
                 ch_copy = ch.copy()
                 ch_copy["demo_category"] = category
+                ch_copy["demo_name"] = demo_name  # 记录标准名称
                 matched.append(ch_copy)
                 matched_names.add(ch["name"])
                 matched_demo_items.add(demo_name)
@@ -236,6 +248,8 @@ def filter_and_order_by_demo(channels: list) -> tuple:
             if demo_cat:
                 ch_copy = ch.copy()
                 ch_copy["demo_category"] = demo_cat
+                # 自动归类的频道，demo_name 使用原始频道名（因为 demo 中没有精确匹配）
+                ch_copy["demo_name"] = ch["name"]
                 matched.append(ch_copy)
                 matched_names.add(ch["name"])
                 continue
@@ -244,7 +258,9 @@ def filter_and_order_by_demo(channels: list) -> tuple:
     print(f"🎯 Demo 筛选：原始 {len(channels)} 个频道 -> 匹配 {len(matched)} 个频道，未匹配 {len(remaining)} 个")
     return matched, remaining
 
+
 def write_shai_file(unmatched_channels: list, matched_count: int, total_raw: int):
+    """保存未匹配的频道列表到 shai.txt"""
     shai_path = OUTPUT_DIR / "shai.txt"
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     with open(shai_path, "w", encoding="utf-8") as f:
