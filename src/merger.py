@@ -122,6 +122,35 @@ def merge_channels_by_name(valid_channels: list) -> list:
             "id": primary.get("tvg_id", ""),
             "logo": logo_url,
         })
+
+    def ensure_cctv5plus(merged_channels: list) -> list:
+    """如果没有 CCTV-5+，从 CCTV-5 复制一个"""
+    has_cctv5 = False
+    has_cctv5plus = False
+    cctv5_ch = None
+    
+    for ch in merged_channels:
+        if ch["name"] == "CCTV-5":
+            has_cctv5 = True
+            cctv5_ch = ch
+        if ch["name"] == "CCTV-5+":
+            has_cctv5plus = True
+    
+    if has_cctv5 and not has_cctv5plus:
+        logger.warning("⚠️ 未找到 CCTV-5+ 源，从 CCTV-5 复制")
+        import copy
+        cctv5plus = copy.deepcopy(cctv5_ch)
+        cctv5plus["name"] = "CCTV-5+"
+        merged_channels.append(cctv5plus)
+        logger.info("✅ 已添加 CCTV-5+（从 CCTV-5 复制）")
+    
+    return merged_channels
+
+# 修改 merge_channels_by_name 函数，在返回前调用
+def merge_channels_by_name(valid_channels: list) -> list:
+    # ... 原有代码 ...
+    
+    merged = ensure_cctv5plus(merged)
     
     cctv5_count = sum(1 for ch in merged if ch["name"] == "CCTV-5")
     cctv5plus_count = sum(1 for ch in merged if ch["name"] == "CCTV-5+")
