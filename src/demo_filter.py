@@ -10,12 +10,14 @@ from src.logger import logger
 
 
 def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[str, str]]:
-    """解析 demo.txt，返回 [(分类, 频道名), ...] 保持原始顺序"""
+    """
+    解析 demo.txt，返回 [(分类, 频道名), ...] 保持原始顺序
+    分类名已清理，不包含 ,#genre# 后缀
+    """
     if not demo_file.exists():
         logger.warning(f"⚠️ Demo 文件不存在: {demo_file}")
         return []
     
-    # 重要：不对 demo 名称应用别名，保持原始名称
     order = []
     current_category = None
     
@@ -27,7 +29,7 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
             
             # 检测分类行（格式：分类名,#genre# 或 分类名, #genre#）
             if line.endswith(",#genre#") or line.endswith(", #genre#"):
-                # 去除分类标记
+                # 提取纯分类名（去掉 ,#genre#）
                 current_category = line.replace(", #genre#", "").replace(", #genre#", "").strip()
                 continue
             
@@ -35,9 +37,9 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
             if line.startswith('#'):
                 continue
             
-            # 处理频道行 - 保持原始名称，不应用别名标准化
+            # 处理频道行
             if current_category is not None:
-                demo_name = line  # 保持原样
+                demo_name = line
                 order.append((current_category, demo_name))
             else:
                 order.append(("其他", line))
