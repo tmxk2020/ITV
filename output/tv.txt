@@ -19,10 +19,9 @@ CCTV-15,https://xykt-fix.github.io/play/a02e/index.m3u8
 CCTV-16,http://74.91.26.218:82/live/cctv16hd.m3u8
 CCTV-17,http://74.91.26.218:82/live/cctv17hd.m3u8
 老故事,http://112.27.235.94:8000/hls/50/index.m3u8
-CGTN,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
+CGTN,https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8
 CGTN纪录,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 CGTN阿语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
-直播中国,https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001
 中央电视塔东,https://gcalic.v.myalicdn.com/gc/ztd_1/index.m3u8
 中央电视塔南,https://gcalic.v.myalicdn.com/gc/ztn_1/index.m3u8
 
@@ -108,8 +107,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 广东少儿,http://gmxw.7766.org:808/hls/175/index.m3u8
 广州新闻,http://tencentplay.gztv.com/live/xinwen.m3u8?txSecret=d2c2db0b598c02ec1b5623728434d367&txTime=18d57929bd3
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
-河源公共,http://tmpstream.hyrtv.cn/hygg/sd/live.m3u8
-河源综合,https://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8
 泰山白云亭悬崖,https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
 广州综合,http://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=c8dbe86d6f86eb1a21999ab479fd5667&txTime=18d3c4690e8
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
@@ -284,6 +281,7 @@ FZTV3,http://live.zohi.tv:80/video/s10001-fztv-3/index.m3u8
 雅安新闻综合,https://play.yunxya.com/channellive/xinwen.m3u8
 青川综合,http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 龙泉新闻综合,http://l.cztvcloud.com/channels/lantian/SXlongquan1/720p.m3u8
+河综合,https://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8
 
 ☘️贵州频道,#genre#,#genre#
 安顺新闻,https://ls.qingting.fm/live/5022203/64k.m3u8
@@ -380,7 +378,6 @@ FZTV3,http://live.zohi.tv:80/video/s10001-fztv-3/index.m3u8
 靖宇,http://stream8.jlntv.cn/jytv/sd/live.m3u8?zjild
 龙井,http://stream8.jlntv.cn/ljtv/sd/live.m3u8?zjild
 四平新闻综合 [Geo-blocked],https://stream2.jlntv.cn/sptv/sd/live.m3u8
-辽源新闻综合 [Geo-blocked],https://stream2.jlntv.cn/liaoyuan1/sd/live.m3u8
 通化新闻 [Geo-blocked],https://stream2.jlntv.cn/tonghua1/sd/live.m3u8
 长春综合 [Geo-blocked],https://stream2.jlntv.cn/jlcc/sd/live.m3u8
 农安新闻综合 [Geo-blocked],https://stream2.jlntv.cn/naxw/sd/live.m3u8
@@ -400,6 +397,7 @@ FZTV3,http://live.zohi.tv:80/video/s10001-fztv-3/index.m3u8
 黑龙江卫视,http://112.27.235.94:8000/hls/48/index.m3u8
 黑龙江少儿,https://ls.qingting.fm/live/4972/64k.m3u8
 黑龙江新闻,https://ls.qingting.fm/live/4974/64k.m3u8
+河公共,http://tmpstream.hyrtv.cn/hygg/sd/live.m3u8
 
 ☘️河北频道,#genre#,#genre#
 任丘综合,https://jwcdnqx.hebyun.com.cn/live/rqtv1/1500k/tzwj_video.m3u8
