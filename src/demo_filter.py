@@ -4,7 +4,6 @@
 from pathlib import Path
 from typing import List, Tuple
 from src.config import DEMO_FILE, OUTPUT_DIR, DEMO_MATCH_MODE
-from src.alias_matcher import get_alias_matcher
 from src.classifier import PROVINCES, classify_channel
 from src.logger import logger
 
@@ -46,7 +45,7 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
     
     logger.info(f"📋 从 demo.txt 解析到 {len(order)} 个有序频道，共 {len(set(c for c, _ in order))} 个分类")
     
-    # 调试：打印前30个 demo 项，确认 CCTV-5+ 是否存在
+    # 调试：打印前30个 demo 项
     logger.info("📋 Demo 顺序预览（前30项）：")
     for i, (cat, name) in enumerate(order[:30]):
         marker = " ← CCTV-5+" if name == "CCTV-5+" else ""
@@ -58,6 +57,7 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
 def match_channel_name(channel_name: str, demo_name: str) -> bool:
     """
     匹配频道名，正确处理 CCTV-5 和 CCTV-5+ 的区别
+    CCTV-5+ 必须包含 + 符号，CCTV-5 不能包含 + 符号
     """
     if DEMO_MATCH_MODE == "exact":
         return channel_name == demo_name
@@ -66,14 +66,16 @@ def match_channel_name(channel_name: str, demo_name: str) -> bool:
     cn_lower = channel_name.lower()
     dn_lower = demo_name.lower()
     
-    # ========== CCTV-5+ 精确匹配（必须包含加号）==========
+    # ========== CCTV-5+ 匹配（必须包含加号）==========
     if dn_lower == "cctv-5+":
-        # 匹配任何包含 CCTV-5+ 或 CCTV5+ 的频道名
+        # 严格要求：频道名中必须包含 + 或 ＋ 符号
+        if '+' not in channel_name and '＋' not in channel_name:
+            return False
+        # 匹配 CCTV-5+ 的各种写法
         result = ('cctv-5+' in cn_lower or 
                   'cctv5+' in cn_lower or 
                   'cctv-5＋' in cn_lower or
-                  'cctv5＋' in cn_lower or
-                  ('cctv-5' in cn_lower and ('+' in channel_name or '＋' in channel_name)))
+                  'cctv5＋' in cn_lower)
         if result:
             logger.debug(f"✅ CCTV-5+ 匹配: '{channel_name}' -> '{demo_name}'")
         return result
