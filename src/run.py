@@ -202,6 +202,17 @@ async def main():
     with open(stats_path, "w", encoding="utf-8") as f:
         json.dump(stats, f, indent=2, ensure_ascii=False)
 
+        # ========== 采集特色分类内容并追加到输出文件 ==========
+    from src.special_categories import collect_and_append_special_categories
+    
+    try:
+        special_stats = await collect_and_append_special_categories(OUTPUT_DIR, db)
+        if special_stats:
+            stats["special_categories"] = special_stats
+            logger.info("🎉 特色分类内容已追加到输出文件")
+    except Exception as e:
+        logger.warning(f"⚠️ 特色分类采集失败: {e}")
+        
     # 清理资源
     ffmpeg_cleanup()
     await db.close()
