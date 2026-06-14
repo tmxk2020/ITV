@@ -48,6 +48,8 @@ from src.iptv_org_adapter import get_iptv_org_adapter
 from src.global_channels import get_global_selector
 from src.generator_enhanced import EnhancedOutputGenerator
 from src.overseas_filter import process_overseas_channels
+from src.special_categories import collect_and_append_special_categories
+from tqdm.asyncio import tqdm
 
 
 async def main():
@@ -105,13 +107,21 @@ async def main():
 
     logger.info(f"📊 原始频道数（去重后）: {len(channels_dict)}")
 
-    # HTTP 测速（过滤无效/广告源）
-    valid_channels = await test_channels_concurrent(channels_dict)
+    # ========== 统一进度条 - 测速 ==========
+    total_channels = len(channels_dict)
+    logger.info(f"📊 总共需要处理 {total_channels} 个频道")
+    
+    # 创建统一进度条
+    with tqdm(total=total_channels, desc="🔍 HTTP测速", unit="频道", position=0, leave=True) as pbar:
+        # HTTP 测速（过滤无效/广告源）
+        valid_channels = await test_channels_concurrent(channels_dict, pbar=pbar)
+    
     logger.info(f"📊 通过HTTP测速的频道数: {len(valid_channels)}")
 
-    # ffmpeg 深度验证
-    if FFMPEG_ENABLE:
-        valid_channels = await validate_batch(valid_channels)
+    # ========== 统一进度条 - ffmpeg验证 ==========
+    if FFMPEG_ENABLE and valid_channels:
+        with tqdm(total=len(valid_channels), desc="🎬 ffmpeg深度验证", unit="频道", position=0, leave=True) as pbar:
+            valid_channels = await validate_batch(valid_channels, pbar=pbar)
         logger.info(f"📊 通过ffmpeg验证的频道数: {len(valid_channels)}")
 
     # 保存测速结果到数据库
@@ -182,6 +192,14 @@ async def main():
     else:
         logger.info("⏭️ 未启用 demo 筛选或无未匹配频道，跳过国外频道处理")
 
+    # ========== 采集特色分类内容并追加到输出文件 ==========
+    try:
+        special_stats = await collect_and_append_special_categories(OUTPUT_DIR, db)
+        if special_stats:
+            logger.info("🎉 特色分类内容已追加到输出文件")
+    except Exception as e:
+        logger.warning(f"⚠️ 特色分类采集失败: {e}")
+
     total = len(ordered_channels)
     logger.info(f"🎉 完成！有效频道总数: {total}")
 
@@ -198,21 +216,15 @@ async def main():
             "incremental_mode": is_fresh and ENABLE_INCREMENTAL_FETCH
         }
     }
+    
+    # 添加特色分类统计
+    if special_stats:
+        stats["special_categories"] = special_stats
+    
     stats_path = OUTPUT_DIR / "stats.json"
     with open(stats_path, "w", encoding="utf-8") as f:
         json.dump(stats, f, indent=2, ensure_ascii=False)
 
-        # ========== 采集特色分类内容并追加到输出文件 ==========
-    from src.special_categories import collect_and_append_special_categories
-    
-    try:
-        special_stats = await collect_and_append_special_categories(OUTPUT_DIR, db)
-        if special_stats:
-            stats["special_categories"] = special_stats
-            logger.info("🎉 特色分类内容已追加到输出文件")
-    except Exception as e:
-        logger.warning(f"⚠️ 特色分类采集失败: {e}")
-        
     # 清理资源
     ffmpeg_cleanup()
     await db.close()
