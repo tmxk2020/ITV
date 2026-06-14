@@ -1,5 +1,4 @@
-# src/ffmpeg_validator.py
-# ffmpeg/ffprobe 深度验证模块
+# src/ffmpeg_validator.py - 批量进度输出版本
 
 import asyncio
 import subprocess
@@ -12,11 +11,16 @@ from src.logger import logger
 
 _thread_pool = None
 
+# 进度输出间隔（每处理多少个频道输出一次）
+PROGRESS_INTERVAL = 50
+
+
 def get_thread_pool():
     global _thread_pool
     if _thread_pool is None:
         _thread_pool = ThreadPoolExecutor(max_workers=FFMPEG_WORKERS)
     return _thread_pool
+
 
 def check_ffprobe_sync():
     try:
@@ -25,9 +29,11 @@ def check_ffprobe_sync():
     except Exception:
         return False
 
+
 async def check_ffprobe():
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(get_thread_pool(), check_ffprobe_sync)
+
 
 def validate_with_ffprobe_sync(url: str, timeout: int) -> dict:
     cmd = [
@@ -50,6 +56,7 @@ def validate_with_ffprobe_sync(url: str, timeout: int) -> dict:
         return {"valid": has_video, "has_video": has_video, "video_codec": video_codec}
     except Exception:
         return {"valid": False, "has_video": False, "video_codec": ""}
+
 
 async def validate_batch(channels: list) -> list:
     if not FFMPEG_ENABLE:
@@ -92,31 +99,33 @@ async def validate_batch(channels: list) -> list:
         
         tasks = [validate_one(ch) for ch in need_validate]
         
-        # 简单的进度输出，不刷新行
         total = len(tasks)
         completed = 0
-        last_log = 0
+        last_progress = 0
         start_time = time.time()
         valid_need = []
         
+        # 批量收集结果
         for coro in asyncio.as_completed(tasks):
             res = await coro
             completed += 1
             
-            # 每完成 20 个或每 5 秒输出一次进度
-            now = time.time()
-            if completed - last_log >= 20 or (now - start_time) >= 5:
-                percent = completed * 100 // total
-                logger.info(f"  🎬 验证进度: {completed}/{total} ({percent}%) - 通过: {len(valid_need)}")
-                last_log = completed
-            
             if res is not None:
                 valid_need.append(res)
+            
+            # 每 PROGRESS_INTERVAL 个或全部完成时输出进度
+            if completed - last_progress >= PROGRESS_INTERVAL or completed == total:
+                percent = completed * 100 // total
+                elapsed = time.time() - start_time
+                speed = completed / elapsed if elapsed > 0 else 0
+                logger.info(f"  🎬 验证进度: {completed}/{total} ({percent}%) - 通过: {len(valid_need)} - 速度: {speed:.1f}频道/秒")
+                last_progress = completed
         
         valid_channels.extend(valid_need)
     
     logger.info(f"✅ ffmpeg 验证完成: 通过 {len(valid_channels)}/{len(channels)} 个频道")
     return valid_channels
+
 
 def cleanup():
     global _thread_pool
