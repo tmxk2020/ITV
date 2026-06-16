@@ -26,20 +26,17 @@ from src.generator import generate_outputs_from_demo
 
 class IPTVOrchestrator:
     """
-    IPTV 自治系统协调器
+    IPTV 自治系统协调器 - 优化版
     
     工作流程:
-    1. 发现新源 -> 源池
-    2. 新源进入候选版观察（分批处理）
+    1. 发现新源 -> 源池（限制数量）
+    2. 从缓存快速观察候选源
     3. 候选源稳定后提升到稳定版
-    4. 持续监控稳定版质量
-    5. 质量下降时自动从候选池找替代
+    4. 从稳定版生成输出
     """
     
-    # 每次运行的处理限制
     MAX_NEW_SOURCES_PER_RUN = 500      # 每次最多处理500个新源
-    MAX_OBSERVE_PER_RUN = 100          # 每次最多观察100个候选源
-    MAX_PROMOTE_PER_RUN = 50           # 每次最多提升50个稳定源
+    MAX_OBSERVE_PER_RUN = 300          # 每次最多观察300个候选源
     
     def __init__(self, data_dir: Path = None):
         self.data_dir = data_dir or Path("data")
@@ -55,15 +52,12 @@ class IPTVOrchestrator:
         self.stats = {
             "last_discover": None,
             "last_observe": None,
-            "last_quality_check": None,
             "total_promoted": 0,
-            "total_replaced": 0,
             "new_sources_count": 0,
             "observed_count": 0
         }
         
         # 更新候选观察器配置
-        CandidateObserver.OBSERVATION_HOURS = CANDIDATE_OBSERVATION_HOURS
         CandidateObserver.MIN_SUCCESS_COUNT = CANDIDATE_MIN_SUCCESS
         CandidateObserver.MIN_SUCCESS_RATE = CANDIDATE_MIN_SUCCESS_RATE
         CandidateObserver.MAX_AVG_LATENCY = CANDIDATE_MAX_LATENCY
@@ -77,7 +71,6 @@ class IPTVOrchestrator:
         db = await get_db_cache()
         new_sources = await self.discoverer.discover(db)
         
-        # 统计新源数量
         total_new = sum(len(s) for s in new_sources.values())
         self.stats["new_sources_count"] = total_new
         self.stats["last_discover"] = datetime.now()
@@ -86,7 +79,7 @@ class IPTVOrchestrator:
             logger.info("✅ 没有发现新源")
             return {}
         
-        # 限制新源数量，避免候选池爆炸
+        # 限制新源数量
         if total_new > self.MAX_NEW_SOURCES_PER_RUN:
             logger.warning(f"⚠️ 新源数量 {total_new} 超过限制 {self.MAX_NEW_SOURCES_PER_RUN}，只取前 {self.MAX_NEW_SOURCES_PER_RUN} 个")
         
@@ -108,9 +101,9 @@ class IPTVOrchestrator:
         return new_sources
     
     async def observe_phase(self) -> List:
-        """阶段2: 分批观察候选源"""
+        """阶段2: 从缓存快速观察候选源"""
         logger.info("=" * 50)
-        logger.info("阶段2: 分批观察候选源")
+        logger.info("阶段2: 从缓存观察候选源")
         logger.info("=" * 50)
         
         observing_count = self.candidate_observer.get_observing_count()
@@ -120,10 +113,9 @@ class IPTVOrchestrator:
         
         logger.info(f"📊 候选池状态: {observing_count} 个正在观察，{len(self.candidate_observer.get_stable_candidates())} 个已稳定")
         
-        # 分批观察
-        stable_candidates = await self.candidate_observer.observe_batch(
-            batch_size=self.MAX_OBSERVE_PER_RUN,
-            concurrency=10
+        # 从缓存观察（快速）
+        stable_candidates = await self.candidate_observer.observe_batch_from_cache(
+            batch_size=self.MAX_OBSERVE_PER_RUN
         )
         
         self.stats["last_observe"] = datetime.now()
@@ -145,20 +137,15 @@ class IPTVOrchestrator:
             logger.info("📭 没有稳定的候选源需要提升")
             return 0
         
-        # 只提升前 MAX_PROMOTE_PER_RUN 个
-        to_promote = stable_candidates[:self.MAX_PROMOTE_PER_RUN]
-        
         promoted_count = 0
-        for obs in to_promote:
+        for obs in stable_candidates:
             # 检查稳定版是否已有该频道
             existing = self.stable_manager.stable_sources.get(obs.channel_name)
             
-            # 如果已有且是固定源，跳过
             if existing and existing.is_fixed:
                 logger.debug(f"⏭️ {obs.channel_name} 是固定源，跳过自动提升")
                 continue
             
-            # 如果现有源质量更好，跳过
             if existing and existing.latency < obs.avg_latency:
                 logger.debug(f"⏭️ {obs.channel_name} 现有源延迟更低 ({existing.latency} < {obs.avg_latency})")
                 continue
@@ -169,58 +156,32 @@ class IPTVOrchestrator:
             ):
                 promoted_count += 1
                 self.candidate_observer.mark_promoted(obs.source_key)
+                logger.info(f"📌 已提升: {obs.channel_name}")
         
         self.stats["total_promoted"] += promoted_count
         logger.info(f"✅ 提升阶段完成: {promoted_count} 个源被提升到稳定版")
         return promoted_count
     
-    async def quality_phase(self) -> List:
-        """阶段4: 质量监控（只检查活跃源）"""
-        logger.info("=" * 50)
-        logger.info("阶段4: 质量监控")
-        logger.info("=" * 50)
-        
-        active_sources = self.stable_manager.get_active_sources()
-        if not active_sources:
-            logger.info("📭 没有活跃的稳定源需要检查")
-            return []
-        
-        logger.info(f"📊 检查 {len(active_sources)} 个活跃源的质量...")
-        
-        reports = await self.quality_monitor.check_all_active_sources(concurrency=10)
-        
-        self.stats["last_quality_check"] = datetime.now()
-        
-        # 处理需要替换的源
-        replaced = []
-        for report in reports:
-            if report.status == "critical":
-                logger.warning(f"⚠️ {report.channel_name} 质量严重下降，寻找替代源...")
-                
-                # 从候选池找替代
-                for obs in self.candidate_observer.get_stable_candidates():
-                    if obs.channel_name == report.channel_name:
-                        if self.stable_manager.replace_source(
-                            report.channel_name, obs.url, obs.avg_latency, ""
-                        ):
-                            replaced.append(report.channel_name)
-                            self.stats["total_replaced"] += 1
-                            break
-        
-        logger.info(f"✅ 质量检查完成: 替换了 {len(replaced)} 个失效源")
-        return replaced
-    
     async def generate_output_phase(self):
-        """阶段5: 生成输出"""
+        """阶段4: 生成输出"""
         logger.info("=" * 50)
-        logger.info("阶段5: 生成输出")
+        logger.info("阶段4: 生成输出")
         logger.info("=" * 50)
         
         channels = self.stable_manager.get_output_channels()
         
         if not channels:
-            logger.warning("⚠️ 没有可输出的稳定源")
-            return
+            # 如果没有稳定源，尝试从固定源加载
+            logger.warning("⚠️ 没有可输出的稳定源，尝试加载固定源...")
+            from src.fixed_sources import CCTV_FIXED_SOURCES
+            for name, url in CCTV_FIXED_SOURCES.items():
+                if url:
+                    self.stable_manager.set_fixed_source(name, url)
+            channels = self.stable_manager.get_output_channels()
+            
+            if not channels:
+                logger.warning("⚠️ 仍然没有可输出的源")
+                return
         
         # 获取 demo 顺序
         demo_order = parse_demo_order_with_categories() if ENABLE_DEMO_FILTER else []
@@ -229,8 +190,6 @@ class IPTVOrchestrator:
         if demo_order:
             generate_outputs_from_demo(channels, demo_order)
         else:
-            # 简单输出
-            from src.generator import M3U_FILE, TXT_FILE
             from src.generator_enhanced import EnhancedOutputGenerator
             output_gen = EnhancedOutputGenerator()
             output_gen.generate_all_outputs(channels, [], enable_json=True, enable_lite=True, enable_epg=True)
@@ -240,22 +199,19 @@ class IPTVOrchestrator:
     async def run_once(self) -> Dict:
         """完整执行一次自治流程"""
         logger.info("🚀 IPTV 自治系统启动")
-        logger.info(f"📊 配置: 每批观察 {self.MAX_OBSERVE_PER_RUN} 个，最多提升 {self.MAX_PROMOTE_PER_RUN} 个")
+        logger.info(f"📊 配置: 每批观察 {self.MAX_OBSERVE_PER_RUN} 个")
         
         try:
             # 1. 发现新源
             await self.discover_phase()
             
-            # 2. 观察候选源（分批）
+            # 2. 从缓存观察候选源
             stable_candidates = await self.observe_phase()
             
             # 3. 提升稳定源
             await self.promote_phase(stable_candidates)
             
-            # 4. 质量监控（只检查活跃源）
-            await self.quality_phase()
-            
-            # 5. 生成输出
+            # 4. 生成输出（即使没有稳定源，也会尝试加载固定源）
             await self.generate_output_phase()
             
             # 打印统计
@@ -268,7 +224,6 @@ class IPTVOrchestrator:
             logger.info(f"  稳定源数量: {len(self.stable_manager.get_active_sources())}")
             logger.info(f"  固定源数量: {sum(1 for s in self.stable_manager.stable_sources.values() if s.is_fixed)}")
             logger.info(f"  累计提升: {self.stats['total_promoted']}")
-            logger.info(f"  累计替换: {self.stats['total_replaced']}")
             
         except Exception as e:
             logger.exception(f"❌ 自治流程执行失败: {e}")
