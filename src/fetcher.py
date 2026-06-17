@@ -1,6 +1,5 @@
 # src/fetcher.py
 # 支持 HEAD 请求检测更新，无变化则跳过拉取，直接使用数据库缓存
-# 支持港澳台日源专用请求头，绕过 403 限制，并禁用 Brotli 压缩
 
 import asyncio
 import aiohttp
@@ -13,34 +12,6 @@ class FetchError(Exception):
     pass
 
 
-# ========== 港澳台日源专用请求头（模拟浏览器，禁用 Brotli） ==========
-HMTJ_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-    "Accept-Encoding": "gzip, deflate",  # 移除 br，避免 Brotli 解码依赖
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Cache-Control": "max-age=0",
-    "Referer": "https://live.hacks.tools/",
-}
-
-
-def is_hmtj_url(url: str) -> bool:
-    """判断是否为港澳台日源"""
-    return any(domain in url for domain in [
-        "live.hacks.tools",
-        "tv/ipv4/categories/hong_kong",
-        "tv/ipv4/categories/macau",
-        "tv/ipv4/categories/taiwan",
-        "iptv/languages/jpn"
-    ])
-
-
 async def fetch_url_with_metadata(session: aiohttp.ClientSession, url: str, db):
     """
     拉取单个 URL 的内容，支持缓存和重试
@@ -50,9 +21,6 @@ async def fetch_url_with_metadata(session: aiohttp.ClientSession, url: str, db):
         url: 要拉取的 URL
         db: 数据库连接（为 None 时禁用缓存）
     """
-    # 为港澳台日源使用专用请求头（已移除 br）
-    headers = HMTJ_HEADERS if is_hmtj_url(url) else HEADERS
-
     # 尝试从缓存获取（仅当 db 不为 None 时）
     if db:
         cached_content = await db.get_raw_source(url)
@@ -65,7 +33,7 @@ async def fetch_url_with_metadata(session: aiohttp.ClientSession, url: str, db):
     while True:
         attempt += 1
         try:
-            async with session.get(url, timeout=TIMEOUT, headers=headers) as resp:
+            async with session.get(url, timeout=TIMEOUT, headers=HEADERS) as resp:
                 if resp.status != 200:
                     raise FetchError(f"HTTP {resp.status}")
                 content = await resp.text()
