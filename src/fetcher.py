@@ -1,13 +1,19 @@
 # src/fetcher.py
-# 在文件顶部添加一个针对特定源的请求头映射
+# 支持 HEAD 请求检测更新，无变化则跳过拉取，直接使用数据库缓存
+# 支持港澳台日源专用请求头，绕过 403 限制
 
-import aiohttp
 import asyncio
+import aiohttp
 from src.config import HEADERS, TIMEOUT, RETRY_MAX_ATTEMPTS, RETRY_BACKOFF_FACTOR, RETRY_MAX_WAIT, ENABLE_RETRY
 from src.database import get_db_cache
 from src.logger import logger
 
-# 针对港澳台日源的专用请求头（模拟浏览器）
+
+class FetchError(Exception):
+    pass
+
+
+# ========== 港澳台日源专用请求头（模拟浏览器） ==========
 HMTJ_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -20,10 +26,12 @@ HMTJ_HEADERS = {
     "Sec-Fetch-Site": "none",
     "Sec-Fetch-User": "?1",
     "Cache-Control": "max-age=0",
+    "Referer": "https://live.hacks.tools/",
 }
 
-# 判断是否为港澳台日源
+
 def is_hmtj_url(url: str) -> bool:
+    """判断是否为港澳台日源"""
     return any(domain in url for domain in [
         "live.hacks.tools",
         "tv/ipv4/categories/hong_kong",
@@ -32,15 +40,25 @@ def is_hmtj_url(url: str) -> bool:
         "iptv/languages/jpn"
     ])
 
+
 async def fetch_url_with_metadata(session: aiohttp.ClientSession, url: str, db):
+    """
+    拉取单个 URL 的内容，支持缓存和重试
+    
+    Args:
+        session: aiohttp 会话
+        url: 要拉取的 URL
+        db: 数据库连接（为 None 时禁用缓存）
+    """
     # 为港澳台日源使用专用请求头
     headers = HMTJ_HEADERS if is_hmtj_url(url) else HEADERS
 
-    # 尝试从缓存获取
-    cached_content = await db.get_raw_source(url) if db else None
-    if cached_content:
-        logger.debug(f"✅ 使用缓存: {url}")
-        return cached_content
+    # 尝试从缓存获取（仅当 db 不为 None 时）
+    if db:
+        cached_content = await db.get_raw_source(url)
+        if cached_content:
+            logger.debug(f"✅ 使用缓存: {url}")
+            return cached_content
 
     logger.info(f"🔄 拉取: {url}")
     attempt = 0
@@ -61,4 +79,43 @@ async def fetch_url_with_metadata(session: aiohttp.ClientSession, url: str, db):
             logger.warning(f"  重试 {url} ({attempt}/{RETRY_MAX_ATTEMPTS})，等待 {wait_time}s")
             await asyncio.sleep(wait_time)
 
-# 其他函数（fetch_all_sources_incremental 等）保持不变
+
+async def fetch_all_sources_incremental(sources: list, db, force_refresh: bool = False) -> dict:
+    """
+    并发拉取所有源，支持强制刷新
+    
+    Args:
+        sources: 源 URL 列表
+        db: 数据库连接
+        force_refresh: 是否强制重新拉取（忽略缓存）
+    
+    Returns:
+        {url: content} 字典
+    """
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        for url in sources:
+            if force_refresh:
+                # 强制刷新：传入 db=None 禁用缓存
+                tasks.append(fetch_url_with_metadata(session, url, None))
+            else:
+                tasks.append(fetch_url_with_metadata(session, url, db))
+        
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        output = {}
+        for url, res in zip(sources, results):
+            if isinstance(res, Exception):
+                logger.warning(f"⚠️ 拉取失败 {url}: {res}")
+                # 如果不是强制刷新，尝试从缓存读取旧内容
+                if not force_refresh and db:
+                    cached = await db.get_raw_source(url)
+                    if cached:
+                        output[url] = cached
+                        logger.info(f"📦 使用旧缓存: {url}")
+                    else:
+                        output[url] = None
+                else:
+                    output[url] = None
+            else:
+                output[url] = res
+        return output
