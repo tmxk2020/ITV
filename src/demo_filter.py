@@ -1,5 +1,5 @@
 # src/demo_filter.py
-# Demo 频道筛选与排序模块，支持港澳台日频道自动追加
+# Demo 频道筛选与排序模块，支持港澳台日频道自动归类
 
 from pathlib import Path
 from typing import List, Tuple
@@ -36,15 +36,6 @@ def parse_demo_order_with_categories(demo_file: Path = DEMO_FILE) -> List[Tuple[
                 order.append(("其他", line))
     
     logger.info(f"📋 从 demo.txt 解析到 {len(order)} 个有序频道")
-    
-    # 打印前30项
-    logger.info("📋 Demo 顺序预览（前30项）：")
-    for i, (cat, name) in enumerate(order[:30]):
-        marker = " ← CCTV-5+" if name == "CCTV-5+" else ""
-        if name == "CCTV-5":
-            marker = " ← CCTV-5"
-        logger.info(f"   {i+1}. [{cat}] {name}{marker}")
-    
     return order
 
 
@@ -69,21 +60,30 @@ def match_channel_name(channel_name: str, demo_name: str) -> bool:
 
 
 def detect_hmtj_category(name: str) -> str:
-    """检测频道属于哪个港澳台日分类"""
+    """
+    检测频道属于哪个港澳台日分类
+    返回: "🌊港·澳·台" 或 "日本频道" 或 None
+    """
     name_lower = name.lower()
-    if any(kw in name_lower for kw in ["tvb", "翡翠", "明珠", "无线", "rthk", "hoy", "viu", "香港"]):
-        return "香港频道"
-    if any(kw in name_lower for kw in ["澳视", "澳门", "macau", "tdm"]):
-        return "澳门频道"
-    if any(kw in name_lower for kw in ["东森", "民视", "台视", "华视", "中视", "三立", "纬来", "tvbs", "年代", "壹电视", "台湾"]):
-        return "台湾频道"
+    # 香港、澳门、台湾 -> 合并到 "🌊港·澳·台"
+    if any(kw in name_lower for kw in [
+        "tvb", "翡翠", "明珠", "无线", "rthk", "hoy", "viu", "香港",
+        "澳视", "澳门", "macau", "tdm",
+        "东森", "民视", "台视", "华视", "中视", "三立", "纬来", "tvbs",
+        "年代", "壹电视", "台湾", "凤凰", "星空", "寰宇"
+    ]):
+        return "🌊港·澳·台"
+    # 日本 -> 单独分类
     if any(kw in name_lower for kw in ["nhk", "japan", "tokyo", "fuji", "tbs", "tv asahi", "ntv", "japanese", "日本"]):
         return "日本频道"
     return None
 
 
 def filter_and_order_by_demo(channels: list) -> tuple:
-    """根据 demo.txt 筛选和排序频道，并自动追加未匹配的港澳台日频道"""
+    """
+    根据 demo.txt 筛选和排序频道。
+    港澳台日频道如果未匹配 demo，自动追加到对应分类。
+    """
     demo_order = parse_demo_order_with_categories()
     if not demo_order:
         logger.warning("⚠️ demo.txt 为空，跳过筛选")
@@ -94,9 +94,6 @@ def filter_and_order_by_demo(channels: list) -> tuple:
     unmatched = list(channels)
     matched_names = set()
     
-    cctv5_matched = False
-    cctv5plus_matched = False
-
     # 第一遍：匹配 demo 中的频道名
     for category, demo_name in demo_order:
         # 精确匹配
@@ -108,10 +105,6 @@ def filter_and_order_by_demo(channels: list) -> tuple:
                 matched.append(ch)
                 matched_names.add(ch["name"])
                 unmatched = [c for c in unmatched if c["name"] != ch["name"]]
-                if demo_name == "CCTV-5":
-                    cctv5_matched = True
-                if demo_name == "CCTV-5+":
-                    cctv5plus_matched = True
                 continue
         
         # 模糊匹配
@@ -127,22 +120,12 @@ def filter_and_order_by_demo(channels: list) -> tuple:
                 matched_names.add(ch["name"])
                 unmatched.pop(i)
                 found = True
-                if demo_name == "CCTV-5":
-                    cctv5_matched = True
-                    logger.info(f"🎯 匹配到 CCTV-5: {ch['name']}")
-                if demo_name == "CCTV-5+":
-                    cctv5plus_matched = True
-                    logger.info(f"🎯 匹配到 CCTV-5+: {ch['name']}")
                 break
 
-    logger.info(f"📊 CCTV-5 匹配: {'成功' if cctv5_matched else '失败'}")
-    logger.info(f"📊 CCTV-5+ 匹配: {'成功' if cctv5plus_matched else '失败'}")
-
-    # 第二遍：处理未匹配的港澳台日频道，自动追加
+    # 第二遍：处理未匹配的港澳台日频道
     remaining = []
     hmtj_appended = []
     for ch in unmatched:
-        # 判断是否为港澳台日频道
         hmtj_cat = detect_hmtj_category(ch["name"])
         if hmtj_cat:
             ch_copy = ch.copy()
@@ -154,10 +137,9 @@ def filter_and_order_by_demo(channels: list) -> tuple:
         else:
             remaining.append(ch)
     
-    # 将港澳台日频道追加到 matched 后面
+    # 将港澳台日频道追加到 matched 末尾（它们会按分类在最后输出）
     matched.extend(hmtj_appended)
     
-    # 剩余未匹配的频道（非港澳台日）
     logger.info(f"🎯 Demo 筛选：原始 {len(channels)} -> 匹配 {len(matched)}，未匹配 {len(remaining)}（其中港澳台日 {len(hmtj_appended)}）")
     
     return matched, remaining
