@@ -1,5 +1,5 @@
 # src/source_pool/discoverer.py
-"""源发现器 - 多源抓取、去重、入库，支持国内频道过滤"""
+"""源发现器 - 多源抓取、去重、入库，支持国内频道过滤和强制刷新"""
 
 import asyncio
 import json
@@ -16,9 +16,7 @@ from src.source_pool.models import RawSource, SourceStatus
 
 # ========== 国内频道关键词（用于过滤） ==========
 DOMESTIC_KEYWORDS = [
-    # 央视系列
     "CCTV", "央视", "中央", "CGTN",
-    # 卫视系列
     "卫视", "东方卫视", "北京卫视", "湖南卫视", "浙江卫视", "江苏卫视",
     "广东卫视", "深圳卫视", "天津卫视", "山东卫视", "安徽卫视",
     "湖北卫视", "黑龙江卫视", "江西卫视", "河南卫视", "河北卫视",
@@ -26,16 +24,13 @@ DOMESTIC_KEYWORDS = [
     "云南卫视", "贵州卫视", "广西卫视", "内蒙古卫视", "新疆卫视",
     "西藏卫视", "海南卫视", "东南卫视", "重庆卫视", "四川卫视",
     "辽宁卫视", "吉林卫视", "厦门卫视", "大湾区卫视", "海峡卫视",
-    # 地方台
     "电视台", "综合频道", "新闻频道", "都市频道", "生活频道",
     "影视", "少儿", "公共", "经济", "科教", "文艺", "体育",
-    # 省份/城市
     "北京", "上海", "广东", "浙江", "江苏", "湖南", "湖北",
     "山东", "河南", "四川", "福建", "安徽", "辽宁", "陕西",
     "河北", "江西", "黑龙江", "吉林", "山西", "云南", "贵州",
     "甘肃", "海南", "青海", "宁夏", "新疆", "西藏", "广西",
     "内蒙古", "香港", "澳门", "台湾",
-    # 港澳台特色
     "凤凰", "翡翠", "明珠", "TVB", "无线", "RTHK", "HOY",
     "东森", "民视", "台视", "华视", "中视", "三立", "纬来"
 ]
@@ -60,7 +55,6 @@ class SourceDiscoverer:
         self._load_pool()
     
     def _load_pool(self):
-        """加载源池数据库"""
         if self.pool_db_path.exists():
             try:
                 with open(self.pool_db_path, 'r', encoding='utf-8') as f:
@@ -76,7 +70,6 @@ class SourceDiscoverer:
                 self.pool = {}
     
     def _save_pool(self):
-        """保存源池数据库"""
         try:
             data = {key: value.to_dict() for key, value in self.pool.items()}
             for key, value in data.items():
@@ -88,29 +81,33 @@ class SourceDiscoverer:
         except Exception as e:
             logger.error(f"保存源池失败: {e}")
     
-    async def discover(self, db=None, filter_domestic: bool = True) -> Dict[str, List[RawSource]]:
+    async def discover(self, db=None, filter_domestic: bool = True, force_refresh: bool = False) -> Dict[str, List[RawSource]]:
         """
         发现新源，按频道名分组
         
         Args:
             db: 数据库连接
-            filter_domestic: 是否只保留国内频道（默认True）
+            filter_domestic: 是否只保留国内频道
+            force_refresh: 是否强制重新拉取（忽略缓存）
         """
         logger.info("🔍 开始发现新源..." + (" (仅国内频道)" if filter_domestic else ""))
         
-        # 拉取所有源
-        raw_contents = await fetch_all_sources_incremental(IPTV_SOURCES, db)
+        # 如果强制刷新，则绕过缓存，直接拉取所有源
+        if force_refresh:
+            logger.info("⚡ 强制刷新模式：重新拉取所有源")
+            raw_contents = await fetch_all_sources_incremental(IPTV_SOURCES, db, force_refresh=True)
+        else:
+            raw_contents = await fetch_all_sources_incremental(IPTV_SOURCES, db)
+        
         channels_dict = parse_and_dedupe(raw_contents)
         
         new_sources = []
         existing_keys = set(self.pool.keys())
         
-        # 统计过滤
         total_count = len(channels_dict)
         filtered_count = 0
         
         for ch in channels_dict.values():
-            # 国内频道过滤
             if filter_domestic and not is_domestic_channel(ch["name"]):
                 filtered_count += 1
                 continue
@@ -128,12 +125,10 @@ class SourceDiscoverer:
                 self.pool[key] = raw_source
                 new_sources.append(raw_source)
             else:
-                # 更新已有源的最后检查时间
                 self.pool[key].last_check = datetime.now()
         
         self._save_pool()
         
-        # 按频道名分组
         grouped = {}
         for src in new_sources:
             if src.channel_name not in grouped:
