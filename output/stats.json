@@ -1,16 +1,16 @@
 {
   "total_channels": 320,
-  "timestamp": "2026-06-17T13:49:10.447757",
+  "timestamp": "2026-06-17T15:56:32.613546",
   "category_stats": {
     "📺央视频道,#genre#": 27,
-    "📡卫视频道,#genre#": 34,
+    "📡卫视频道,#genre#": 35,
     "☘️北京频道,#genre#": 1,
     "☘️上海频道,#genre#": 3,
     "☘️天津频道,#genre#": 2,
     "☘️重庆频道,#genre#": 4,
     "☘️广东频道,#genre#": 6,
-    "☘️浙江频道,#genre#": 57,
-    "☘️江苏频道,#genre#": 25,
+    "☘️浙江频道,#genre#": 56,
+    "☘️江苏频道,#genre#": 26,
     "☘️安徽频道,#genre#": 14,
     "☘️福建频道,#genre#": 3,
     "☘️河南频道,#genre#": 8,
@@ -21,7 +21,7 @@
     "☘️四川频道,#genre#": 13,
     "☘️贵州频道,#genre#": 2,
     "☘️云南频道,#genre#": 12,
-    "☘️陕西频道,#genre#": 9,
+    "☘️陕西频道,#genre#": 8,
     "☘️甘肃频道,#genre#": 1,
     "☘️青海频道,#genre#": 1,
     "☘️宁夏频道,#genre#": 2,
@@ -34,16 +34,9 @@
     "🌊港·澳·台,#genre#": 14,
     "🌊港·澳·台": 9
   },
-  "unmatched_count": 110,
+  "unmatched_count": 109,
   "features": {
     "epg_injection_enabled": false,
     "incremental_mode": true
-  },
-  "special_categories": {
-    "韩国女团": 115,
-    "戏曲频道": 27,
-    "每日电影/经典电影": 227,
-    "热门歌曲/动感舞曲": 65,
-    "网络电台": 232
   }
 }
