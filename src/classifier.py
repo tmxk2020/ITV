@@ -1,6 +1,8 @@
 # src/classifier.py
 # 智能分类模块：央视、卫视、地方、港澳台，并提取地方子分类
+# 使用预编译正则表达式优化性能
 
+import re
 from src.config import CCTV_ORDER
 
 PROVINCES = [
@@ -22,28 +24,34 @@ HK_MACAU_TAIWAN_KEYWORDS = [
     "中天新闻", "三立新闻", "非凡新闻", "寰宇新闻", "华视综合", "中视综合", "台视综合"
 ]
 
+# ========== 预编译正则表达式 ==========
+_CCTV_PATTERN = re.compile(r'(?:cctv|央视|中央电视|中央-|中央台|cntv)', re.IGNORECASE)
+_HK_MACAU_PATTERN = re.compile(r'|'.join(re.escape(kw) for kw in HK_MACAU_TAIWAN_KEYWORDS), re.IGNORECASE)
+_PROVINCE_PATTERN = re.compile(r'|'.join(re.escape(prov) for prov in PROVINCES))
+
+
 def classify_channel(channel: dict) -> str:
     name = channel.get("name", "")
     name_lower = name.lower()
     group = channel.get("group_title", "").lower()
     
-    if any(kw in name_lower for kw in ["cctv", "央视", "中央电视", "中央-", "中央台", "cntv"]):
+    if _CCTV_PATTERN.search(name_lower):
         return "央视"
     
-    for kw in HK_MACAU_TAIWAN_KEYWORDS:
-        if kw.lower() in name_lower or kw.lower() in group:
-            return "港澳台"
+    if _HK_MACAU_PATTERN.search(name_lower) or _HK_MACAU_PATTERN.search(group):
+        return "港澳台"
     
     if "卫视" in name:
         return "卫视"
     
-    for prov in PROVINCES:
-        if prov in name:
-            return "地方"
+    if _PROVINCE_PATTERN.search(name):
+        return "地方"
+    
     if any(kw in name for kw in ["电视台", "综合频道", "公共频道", "生活频道", "新闻综合"]):
         return "地方"
     
     return "其他"
+
 
 def extract_subcategory(channel: dict) -> str:
     name = channel.get("name", "")
@@ -56,6 +64,7 @@ def extract_subcategory(channel: dict) -> str:
         if prov in group:
             return f"{prov}频道"
     return "地方频道"
+
 
 def classify_and_filter(channels: list) -> dict:
     result = {"央视": [], "卫视": [], "地方": [], "港澳台": []}
