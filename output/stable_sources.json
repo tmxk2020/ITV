@@ -856,5 +856,16 @@
     "last_verified": null,
     "fail_count": 0,
     "status": "active"
+  },
+  "农安新闻综合 [Geo-blocked]": {
+    "channel_name": "农安新闻综合 [Geo-blocked]",
+    "url": "https://stream2.jlntv.cn/naxw/sd/live.m3u8",
+    "latency": 1969,
+    "video_codec": "",
+    "promoted_at": "2026-06-19T02:17:32.414531",
+    "is_fixed": false,
+    "last_verified": null,
+    "fail_count": 0,
+    "status": "active"
   }
 }
