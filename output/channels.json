@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "total": 330,
-  "generated": "2026-06-19T03:42:01.689810",
+  "generated": "2026-06-19T04:49:13.136583",
   "channels": [
     {
       "name": "CCTV-1",
@@ -623,7 +623,7 @@
       "urls": [
         "http://183.64.181.25:40023/rongchang01.m3u8"
       ],
-      "latency": 1420,
+      "latency": 1380,
       "codec": "h264",
       "category": "☘️重庆频道,#genre#"
     },
@@ -1329,7 +1329,7 @@
       "urls": [
         "http://visit.jjbctv.com:1935/live/xwzhmb/playlist.m3u8"
       ],
-      "latency": 1415,
+      "latency": 1261,
       "codec": "h264",
       "category": "☘️江苏频道,#genre#"
     },
@@ -2140,7 +2140,7 @@
       "urls": [
         "https://stream2.jlntv.cn/tonghua1/sd/live.m3u8"
       ],
-      "latency": 637,
+      "latency": 1691,
       "codec": "h264",
       "category": "☘️吉林频道,#genre#"
     },
@@ -2176,7 +2176,7 @@
       "urls": [
         "https://stream2.jlntv.cn/ja/sd/live.m3u8"
       ],
-      "latency": 3294,
+      "latency": 1345,
       "codec": "h264",
       "category": "☘️吉林频道,#genre#"
     },
@@ -2923,6 +2923,15 @@
       "category": "☘️浙江频道,#genre#"
     },
     {
+      "name": "白城新闻综合 [Geo-blocked]",
+      "urls": [
+        "https://stream2.jlntv.cn/baicheng1/sd/live.m3u8"
+      ],
+      "latency": 1367,
+      "codec": "h264",
+      "category": "☘️吉林频道,#genre#"
+    },
+    {
       "name": "赣州新闻",
       "urls": [
         "https://pili-live-hls-sjxgz2024.sobeylive.com/jxgz2024/396_q_live172526329228525.m3u8"
@@ -2930,15 +2939,6 @@
       "latency": 1368,
       "codec": "h264",
       "category": "☘️江西频道,#genre#"
-    },
-    {
-      "name": "白城新闻综合 [Geo-blocked]",
-      "urls": [
-        "https://stream2.jlntv.cn/baicheng1/sd/live.m3u8"
-      ],
-      "latency": 1372,
-      "codec": "h264",
-      "category": "☘️吉林频道,#genre#"
     },
     {
       "name": "福州广电视台都市生活频道",
