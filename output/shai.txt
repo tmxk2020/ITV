@@ -1,7 +1,7 @@
 # Demo筛选丢弃的频道
-# 原始频道总数: 596
-# Demo匹配成功: 442
-# 丢弃数量: 154
+# 原始频道总数: 605
+# Demo匹配成功: 447
+# 丢弃数量: 158
 
 新加坡国际,https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_4.m3u8
 1989年春晚,https://txmov2.a.kwimgs.com/bs3/video-hls/5194620763762726260_hlsb.m3u8
@@ -21,6 +21,7 @@ NOW NEWS,http://cdn.163189.xyz/163189/now
 CGNT 记录频道,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 Astro AOD,http://php.jdshipin.com/TVOD/iptv.php?id=aod
 新动漫,https://iptv.catvod.com/live.php?id=%E6%96%B0%E5%8A%A8%E6%BC%AB&line=1
+TVB Plus,http://r.jdshipin.com/ndGgS
 公视,http://74.91.26.218:82/live/pts.m3u8
 春晚2025,https://res.cctvnews.cctv.com/video/3005/record/cctv/merge1/133396667284143308839013005/8fbd6180bdef4da19f6155cf6b4652e1-4.m3u8
 中视新闻,http://74.91.26.218:82/live/ctvnews.m3u8
@@ -56,8 +57,8 @@ DW News,https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream
 鸣沙山,https://gcalic.v.myalicdn.com/gc/dhyyqst_1/index.m3u8
 黄花城水长城03,https://gcalic.v.myalicdn.com/gc/wgw03_1/index.m3u8
 直中国精编直,https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8
-八里沟风景区桃花湾瀑布,https://gcalic.v.myalicdn.com/gc/blg05_1/index.m3u8
 泰山南天门,https://gcalic.v.myalicdn.com/gc/hkts07_1/index.m3u8
+八里沟风景区桃花湾瀑布,https://gcalic.v.myalicdn.com/gc/blg05_1/index.m3u8
 乌镇全景,https://gcalic.v.myalicdn.com/gc/zjwzblt_1/index.m3u8
 音乐欣赏,http://61.221.215.25:8800/hls/49/index.m3u8
 象山新闻综合,http://l.cztvcloud.com/channels/lantian/SXxiangshan1/720p.m3u8
@@ -66,12 +67,15 @@ DW News,https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream
 八里沟风景区天界山玻璃栈道,https://gcalic.v.myalicdn.com/gc/blg03_1/index.m3u8
 航拍中国第一季,http://newcntv.qcloudcdn.com/asp/hls/4000/0303000a/3/default/8edf3fb6a69148ea9a7dc0b5a9d99fdb/4000.m3u8
 衢江新闻综合,http://l.cztvcloud.com/channels/lantian/SXqujiang1/720p.m3u8?zzhed
+人与自然,http://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/1425e1d505654cb48ba82b807b221193/1200.m3u8
 AlabbassiaTV,https://stream.alabbassia.com/live/alabbassia/index.m3u8
 Trace Sports,https://lightning-tracesport-samsungau.amagi.tv/playlist1080p.m3u8
 倩女幽魂妖魔道,http://jsmov2.a.yximgs.com/bs3/video-hls/5232901391302199073_hlsb.m3u8
 倩女幽魂人间道,http://jsmov2.a.yximgs.com/bs3/video-hls/5250634317044855747_hlsb.m3u8
 中视,http://74.91.26.218:82/live/ctv.m3u8
+新昌新聞綜合 [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8
 余杭未来E频道,http://l.cztvcloud.com/channels/lantian/SXyuhang3/720p.m3u8?zzhed
+自然传奇,http://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/81a1ad3a661748bfb8560c92d38204ca/1200.m3u8
 Arirang TV,https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/chunklist_b3256000_sleng.m3u8
 Zhejiang TV International,https://ali-m-l.cztv.com/channels/lantian/channel10/1080p.m3u8
 玛纳斯,http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
@@ -81,6 +85,7 @@ Xinjiang TV 2,http://110.153.180.106:55555/out_3/index.m3u8
 泰山主峰,https://gctxyc.liveplay.myqcloud.com/gc/taishan01_1/index.m3u8?contentid=2820180516001
 CGTN Español,https://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd/playlist.m3u8
 乌镇蓝印花布,https://gcalic.v.myalicdn.com/gc/zjwzlyhb_1/index.m3u8
+靖江新闻綜合 [Not 24/7],http://visit.jjbctv.com:1935/live/xwzhmb/playlist.m3u8
 Beautiful Life TV,https://5ddce30eb4b55.streamlock.net/bltvhd/bltv1/playlist.m3u8
 五彩池,https://gcalic.v.myalicdn.com/gc/hlwcc_1/index.m3u8
 Discovery,http://ott.watch/stream/E9LDH2ZCN7/177.m3u8
@@ -88,12 +93,11 @@ Tonghua TV,https://lsfb.avap.jilintv.cn/zqvk7vpj/channel/43ea5771aa44421591f9dfd
 RT Arabic,https://rt-arb.rttv.com/dvr/rtarab/playlist_4500Kb.m3u8
 龙井,http://stream8.jlntv.cn/ljtv/sd/live.m3u8?zjild
 Arirang,https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/chunklist_b3256000_sleng.m3u8
-靖江新闻綜合 [Not 24/7],http://visit.jjbctv.com:1935/live/xwzhmb/playlist.m3u8
 Pet Club TV,https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-petclub-samsungnz/playlist.m3u8
 泰山望人松,https://gcalic.v.myalicdn.com/gc/taishan02_1/index.m3u8
+倩女幽魂道道道,http://jsmov2.a.yximgs.com/bs3/video-hls/5216294367991385255_hlsb.m3u8
 泰山十八盘,https://gcalic.v.myalicdn.com/gc/taishan05_1/index.m3u8
 Harbin Movie Channel,https://stream.hrbtv.net/yspd/playlist.m3u8
-荣昌综合 [Not 24/7],http://183.64.181.25:40023/rongchang01.m3u8
 磐石,http://stream5.jlntv.cn/ps/sd/live.m3u8?zjild
 Siping TV,http://stream2.jlntv.cn/sptv/sd/live.m3u8?_upt=f27750421743154598
 Dali TV,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
@@ -103,6 +107,7 @@ Dali TV,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 NewTV武搏世界,http://1.94.31.214/php/hntv.php?id=wspd
 武进新闻频道,https://live.wjyanghu.com/live/CH1.m3u8?zjiangsd
 月牙泉,https://gcalic.v.myalicdn.com/gc/dhyyqsm_1/index.m3u8
+上虞1新闻综合 [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
 DJ没理由,https://bj.bcebos.com/v1/baidu-little-video/vod-gechgi84v43uhfhp/mda-kmbyf4x2aeqt8cds.mp4
 RT Español,https://rt-esp.rttv.com/dvr/rtesp/playlist_4500Kb.m3u8
 凤凰古城南华山,https://gcalic.v.myalicdn.com/gc/fhgcdnhs_1/index.m3u8
@@ -115,6 +120,7 @@ RT Balkan,https://rt-srb.rttv.com/dvr/rtbalkan/playlist_4500Kb.m3u8
 RT DE,https://rt-ger.rttv.com/dvr/rtdeutsch/playlist_4500Kb.m3u8
 飞碟之谜01,https://hls.cntv.lxdns.com/asp/hls/2000/0303000a/3/default/f0a47e155d32450daa1d36a04fd7d262/2000.m3u8
 韩国EBS少儿,http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8
+RT Doc-Русский,https://rt-doc.rttv.com/dvr/rtdru/rtdru1080.m3u8
 凤凰古城东关门,https://gcalic.v.myalicdn.com/gc/fhgcdgm_1/index.m3u8
 辉南新闻,http://stream5.jlntv.cn/hn/sd/live.m3u8?zjild
 RT Documentary,https://rt-rtd.rttv.com/dvr/rtdoc/playlist_4500Kb.m3u8
@@ -133,27 +139,25 @@ Harbin Comprehensive News Channel,https://stream.hrbtv.net/xwzh/playlist.m3u8?_u
 春晚2024,https://p2.bdstatic.com/rtmp.liveshow.lss-user.baidubce.com/live/stream_bduid_6488563992_8982723413/merged_1707497046297_88536_25144_41936.m3u8
 东丰,http://stream5.jlntv.cn/df/sd/live.m3u8?zjild
 2024年春晚,https://p2.bdstatic.com/rtmp.liveshow.lss-user.baidubce.com/live/stream_bduid_6488563992_8982723413/merged_1707497046297_88536_25144_41936.m3u8
+电影_搞笑喜剧,https://lbds.us.ci/11342423
+电影_战争片,https://lbds.us.ci/21059574
 象视界,http://1.94.31.214/php/hntv.php?id=xsj
 文物宝库,http://1.94.31.214/php/hntv.php?id=wwbk
+电影_推荐,https://lbds.us.ci/11602041
 解说_电影狂人,https://lbds.us.ci/18715610
 电影_许氏三杰,https://lbds.us.ci/11602033
+电影_黄渤,https://lbds.us.ci/11352876
 神雕侠侣,https://isus.cc/php/huya.php?id=11352964
 电影_热血,https://lbds.us.ci/11352934
+电影_黑帮片,https://lbds.us.ci/11336719
 解说_越哥说电影,https://lbds.us.ci/15894162
+电影_强森,https://lbds.us.ci/21059581
 电影_成龙,https://lbds.us.ci/11342386
+电影_玄幻,https://lbds.us.ci/11342414
 解说_亮哥讲电影,https://lbds.us.ci/16144175
 电影_洪金宝,https://lbds.us.ci/11279251
 解说_阿良说剧,https://lbds.us.ci/20488841
-人与自然,http://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/1425e1d505654cb48ba82b807b221193/1200.m3u8
-RT Doc-Русский,https://rt-doc.rttv.com/dvr/rtdru/rtdru1080.m3u8
-倩女幽魂道道道,http://jsmov2.a.yximgs.com/bs3/video-hls/5216294367991385255_hlsb.m3u8
-新昌新聞綜合 [Not 24/7],https://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8
-自然传奇,http://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/81a1ad3a661748bfb8560c92d38204ca/1200.m3u8
-电影_强森,https://lbds.us.ci/21059581
 电影_星爷,https://lbds.us.ci/11342412
-电影_黄渤,https://lbds.us.ci/11352876
 电影_喜剧专场,https://lbds.us.ci/11602044
-电影_玄幻,https://lbds.us.ci/11342414
-电影_战争片,https://lbds.us.ci/21059574
 电影_罪犯,https://lbds.us.ci/11352962
-TVB Plus,http://r.jdshipin.com/ndGgS
+荣昌综合 [Not 24/7],http://183.64.181.25:40023/rongchang01.m3u8

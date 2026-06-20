@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "total": 442,
-  "generated": "2026-06-20T04:09:07.863618",
+  "total": 447,
+  "generated": "2026-06-20T09:29:23.445550",
   "channels": [
     {
       "name": "CCTV-1",
@@ -1545,6 +1545,15 @@
       "category": "☘️浙江频道,#genre#"
     },
     {
+      "name": "义乌新闻综合",
+      "urls": [
+        "https://44911.hlsplay.aodianyun.com/tv_radio_44911/tv_channel_1796.m3u8?auth_key=4830573978-0-0-92824c2c03f95906a3c49a4aa28f1709&extra_key=Yc1XsmxOKy2UBoPM4Wy5vCPsEYqnj06taCR2SRB2Xrg2w28NPilH03KdIbbM5wgSql-VBohSnoO9AOKl94q2t2DWMftz-XB-2qUX-UjXcS80StcSZahBFjrKLivXaRjiY5r2NOMKWMKFbv-S0Bz2G6iEXgCK8yGjtrFHDcPfAQEE0pvXq0Bwy34b7We8zARN&ali_ffmpeg_version=mpengine"
+      ],
+      "latency": 2659,
+      "codec": "h264",
+      "category": "☘️浙江频道,#genre#"
+    },
+    {
       "name": "中国蓝新闻",
       "urls": [
         "http://ali-m-l.cztv.com/channels/lantian/channel009/1080p.m3u8"
@@ -1631,6 +1640,24 @@
         "http://yixing-tv-ori-hls.jstv.com/yixing-tv-ori/yixing_xw.m3u8"
       ],
       "latency": 668,
+      "codec": "h264",
+      "category": "☘️江苏频道,#genre#"
+    },
+    {
+      "name": "新沂新闻",
+      "urls": [
+        "http://live.xysrmt.cn/xwzh/sd/live.m3u8?zjiangsd\""
+      ],
+      "latency": 1850,
+      "codec": "h264",
+      "category": "☘️江苏频道,#genre#"
+    },
+    {
+      "name": "新沂生活",
+      "urls": [
+        "http://live.xysrmt.cn/shpd/sd/live.m3u8?zjiangsd"
+      ],
+      "latency": 1012,
       "codec": "h264",
       "category": "☘️江苏频道,#genre#"
     },
@@ -2532,6 +2559,24 @@
       "category": "☘️云南频道,#genre#"
     },
     {
+      "name": "云南娱乐",
+      "urls": [
+        "https://hwapi.yntv.net/62hdvf/q9vs1b.m3u8"
+      ],
+      "latency": 1615,
+      "codec": "h264",
+      "category": "☘️云南频道,#genre#"
+    },
+    {
+      "name": "云南都市",
+      "urls": [
+        "https://hwapi.yntv.net/62hdvf/rjwt14.m3u8"
+      ],
+      "latency": 1588,
+      "codec": "h264",
+      "category": "☘️云南频道,#genre#"
+    },
+    {
       "name": "陕西新闻资讯",
       "urls": [
         "https://iptv.catvod.com/live.php?id=%E9%99%95%E8%A5%BF%E6%96%B0%E9%97%BB%E8%B5%84%E8%AE%AF%E9%A2%91%E9%81%93&line=1"
@@ -2592,7 +2637,7 @@
       "urls": [
         "https://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8"
       ],
-      "latency": 6222,
+      "latency": 424,
       "codec": "h264",
       "category": "☘️陕西频道,#genre#"
     },
@@ -3069,7 +3114,7 @@
       "urls": [
         "https://stream2.jlntv.cn/tonghua1/sd/live.m3u8"
       ],
-      "latency": 1691,
+      "latency": 1014,
       "codec": "h264",
       "category": "☘️吉林频道,#genre#"
     },
@@ -3105,7 +3150,7 @@
       "urls": [
         "https://stream2.jlntv.cn/ja/sd/live.m3u8"
       ],
-      "latency": 1345,
+      "latency": 622,
       "codec": "h264",
       "category": "☘️吉林频道,#genre#"
     },
@@ -4025,15 +4070,6 @@
       "category": "☘️云南频道,#genre#"
     },
     {
-      "name": "白城新闻综合 [Geo-blocked]",
-      "urls": [
-        "https://stream2.jlntv.cn/baicheng1/sd/live.m3u8"
-      ],
-      "latency": 1367,
-      "codec": "h264",
-      "category": "☘️吉林频道,#genre#"
-    },
-    {
       "name": "黄山飞来石",
       "urls": [
         "https://gcalic.v.myalicdn.com/gc/hsptgy_1/index.m3u8"
@@ -4122,6 +4158,15 @@
       "latency": 1986,
       "codec": "h264",
       "category": "☘️云南频道,#genre#"
+    },
+    {
+      "name": "白城新闻综合 [Geo-blocked]",
+      "urls": [
+        "https://stream2.jlntv.cn/baicheng1/sd/live.m3u8"
+      ],
+      "latency": 2253,
+      "codec": "h264",
+      "category": "☘️吉林频道,#genre#"
     },
     {
       "name": "河南新闻",
