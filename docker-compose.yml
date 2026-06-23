@@ -18,6 +18,9 @@ services:
       - FFMPEG_ENABLE=true
       # 缓存配置
       - CACHE_HOURS=24
+      - CACHE_RAW_HOURS=48
+      - CACHE_SPEED_HOURS=24
+      - ENABLE_INCREMENTAL_FETCH=true
       # 功能开关
       - ENABLE_DEMO_FILTER=true
       - ENABLE_ALIAS=true
@@ -26,9 +29,22 @@ services:
       # 运行模式
       - RUN_MODE=schedule
       - SCHEDULE_INTERVAL=21600
+      # 输出格式
+      - ENABLE_JSON_OUTPUT=true
+      - ENABLE_LITE_VERSION=false
+      - ENABLE_EPG_OUTPUT=false
       # Web 服务
       - WEB_SERVER_PORT=8080
       - WEB_SERVER_HOST=0.0.0.0
+      # ===== 自治模式（必须设置为 true）=====
+      - AUTONOMOUS_MODE=true
+      - AUTO_UPDATE_STABLE=true
+      - AUTO_REPLACE_FAILED=true
+      - QUALITY_CHECK_INTERVAL=24
+      - CANDIDATE_OBSERVATION_HOURS=24
+      - CANDIDATE_MIN_SUCCESS=3
+      - CANDIDATE_MIN_SUCCESS_RATE=0.5
+      - CANDIDATE_MAX_LATENCY=3000
     # 资源限制
     deploy:
       resources:
