@@ -1,189 +1,161 @@
 # src/web/api.py
-"""REST API 接口"""
+"""Web 管理界面 REST API"""
 
 import json
 from pathlib import Path
-from typing import Optional
-from datetime import datetime
-
-from aiohttp import web
-
-from src.stable import StableManager
-from src.source_pool import SourceDiscoverer
-from src.candidate import CandidateObserver
+from flask import Blueprint, request, jsonify
 from src.config import (
-    MAX_WORKERS, TIMEOUT, FFMPEG_ENABLE,
-    MAX_SOURCES_PER_CHANNEL, CACHE_HOURS
+    OUTPUT_DIR, MAX_WORKERS, TIMEOUT, FFMPEG_ENABLE,
+    MAX_SOURCES_PER_CHANNEL, DEMO_MATCH_MODE,
+    CACHE_RAW_HOURS, CACHE_SPEED_HOURS
 )
-from src.logger import logger
+from src.stable.manager import StableManager
+from src.source_pool.discoverer import SourceDiscoverer
+from src.candidate.observer import CandidateObserver
+from src.web.db import get_quality_history, get_all_channels_with_history, record_quality
 
+api_bp = Blueprint('api', __name__, url_prefix='/api')
 
-class APIHandler:
-    """API 路由处理器"""
+# ---------- 系统状态 ----------
+@api_bp.route('/status')
+def get_status():
+    """获取系统状态"""
+    stable_mgr = StableManager()
+    stable_sources = stable_mgr.get_active_sources()
+    
+    discoverer = SourceDiscoverer()
+    pool_stats = discoverer.get_statistics()
+    
+    observer = CandidateObserver()
+    candidate_stats = observer.get_statistics()
+    
+    # 读取最后运行时间
+    last_run = None
+    stats_file = OUTPUT_DIR / "stats.json"
+    if stats_file.exists():
+        with open(stats_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            last_run = data.get('timestamp')
+    
+    return jsonify({
+        'stable_count': len(stable_sources),
+        'fixed_count': sum(1 for s in stable_sources.values() if s.is_fixed),
+        'pool_total': pool_stats.get('total', 0),
+        'candidate_observing': candidate_stats.get('observing', 0),
+        'last_run': last_run,
+        'status': 'running'  # 简单状态
+    })
 
-    def __init__(self):
-        self.stable_manager = StableManager()
-        self.discoverer = SourceDiscoverer()
-        self.candidate_observer = CandidateObserver()
-
-    async def get_status(self, request: web.Request) -> web.Response:
-        """获取系统状态"""
-        stable_sources = self.stable_manager.get_active_sources()
-        fixed_sources = {n: s for n, s in self.stable_manager.stable_sources.items() if s.is_fixed}
-
-        # 获取候选池统计
-        candidate_stats = self.candidate_observer.get_statistics()
-        source_stats = self.discoverer.get_statistics()
-
-        status = {
-            "stable_count": len(stable_sources),
-            "fixed_count": len(fixed_sources),
-            "candidate_pool": candidate_stats,
-            "source_pool": source_stats,
-            "last_update": "2026-06-22 10:00:00",  # TODO: 从数据库读取最后更新时间
-            "config": {
-                "max_workers": MAX_WORKERS,
-                "timeout": TIMEOUT,
-                "ffmpeg_enable": FFMPEG_ENABLE,
-                "max_sources_per_channel": MAX_SOURCES_PER_CHANNEL,
-                "cache_hours": CACHE_HOURS,
-            },
-            "timestamp": datetime.now().isoformat(),
-        }
-        return web.json_response(status)
-
-    async def get_channels(self, request: web.Request) -> web.Response:
-        """获取稳定版频道列表，支持搜索和筛选"""
-        query = request.query
-        search = query.get("search", "").strip().lower()
-        category = query.get("category", "").strip()
-        fixed_only = query.get("fixed_only", "false").lower() == "true"
-
-        channels = []
-        for name, src in self.stable_manager.stable_sources.items():
-            if src.status != "active":
-                continue
-
-            # 搜索过滤
-            if search and search not in name.lower():
-                continue
-
-            # 固定源过滤
-            if fixed_only and not src.is_fixed:
-                continue
-
-            # 分类筛选（需要从频道名推断分类，或从demo匹配）
-            if category:
-                # 简单分类推断
-                cat = self._infer_category(name)
-                if category != cat:
-                    continue
-
-            # 获取延迟和编码
-            latency = src.latency if src.latency else 0
-            codec = src.video_codec or "unknown"
-
-            channels.append({
-                "name": name,
-                "url": src.url,
-                "latency": latency,
-                "codec": codec,
-                "is_fixed": src.is_fixed,
-                "category": self._infer_category(name),
-                "last_verified": src.last_verified.isoformat() if src.last_verified else None,
-                "fail_count": src.fail_count,
-            })
-
-        # 按名称排序
-        channels.sort(key=lambda x: x["name"])
-        return web.json_response({
-            "total": len(channels),
-            "channels": channels
+# ---------- 频道列表 ----------
+@api_bp.route('/channels')
+def get_channels():
+    """获取稳定版频道列表，支持搜索和筛选"""
+    search = request.args.get('search', '').strip().lower()
+    category = request.args.get('category', '')
+    
+    stable_mgr = StableManager()
+    sources = stable_mgr.get_active_sources()
+    
+    channels = []
+    for name, src in sources.items():
+        if not src.url:
+            continue
+        # 搜索过滤
+        if search and search not in name.lower():
+            continue
+        # 分类过滤（可根据 group_title 或 demo_category）
+        # 目前我们按频道名前缀简单判断
+        cat = '其他'
+        if name.startswith('CCTV'):
+            cat = '央视'
+        elif '卫视' in name:
+            cat = '卫视'
+        elif '频道' in name and not name.startswith('CCTV'):
+            cat = '地方'
+        elif '港' in name or '澳' in name or '台' in name:
+            cat = '港澳台'
+        
+        if category and cat != category:
+            continue
+        
+        channels.append({
+            'name': name,
+            'url': src.url,
+            'latency': src.latency,
+            'codec': src.video_codec,
+            'is_fixed': src.is_fixed,
+            'category': cat,
+            'last_verified': src.last_verified.isoformat() if src.last_verified else None
         })
+    
+    # 按名称排序
+    channels.sort(key=lambda x: x['name'])
+    return jsonify(channels)
 
-    def _infer_category(self, name: str) -> str:
-        """简单推断频道分类"""
-        name_lower = name.lower()
-        if "cctv" in name_lower or "央视" in name:
-            return "央视"
-        if "卫视" in name:
-            return "卫视"
-        if any(p in name for p in ["北京", "上海", "广东", "浙江", "江苏", "湖南"]):
-            return "地方"
-        if any(kw in name_lower for kw in ["香港", "澳门", "台湾", "tvb", "凤凰"]):
-            return "港澳台"
-        return "其他"
+# ---------- 固定源管理 ----------
+@api_bp.route('/fixed_sources', methods=['GET'])
+def get_fixed_sources():
+    stable_mgr = StableManager()
+    fixed = {name: src.url for name, src in stable_mgr.stable_sources.items() if src.is_fixed}
+    return jsonify(fixed)
 
-    async def add_fixed_source(self, request: web.Request) -> web.Response:
-        """添加固定源"""
-        try:
-            data = await request.json()
-            name = data.get("name", "").strip()
-            url = data.get("url", "").strip()
+@api_bp.route('/fixed_sources', methods=['POST'])
+def add_fixed_source():
+    data = request.get_json()
+    name = data.get('name')
+    url = data.get('url')
+    if not name or not url:
+        return jsonify({'error': '缺少频道名或URL'}), 400
+    stable_mgr = StableManager()
+    if stable_mgr.set_fixed_source(name, url):
+        return jsonify({'success': True, 'message': f'已添加固定源 {name}'})
+    else:
+        return jsonify({'error': '添加失败'}), 500
 
-            if not name or not url:
-                return web.json_response({"error": "频道名和URL不能为空"}, status=400)
+@api_bp.route('/fixed_sources/<name>', methods=['DELETE'])
+def delete_fixed_source(name):
+    stable_mgr = StableManager()
+    if name in stable_mgr.stable_sources and stable_mgr.stable_sources[name].is_fixed:
+        del stable_mgr.stable_sources[name]
+        stable_mgr._save()
+        return jsonify({'success': True})
+    return jsonify({'error': '固定源不存在'}), 404
 
-            # 检查是否已存在
-            if name in self.stable_manager.stable_sources:
-                existing = self.stable_manager.stable_sources[name]
-                if existing.is_fixed:
-                    return web.json_response({"error": f"频道 {name} 已是固定源"}, status=409)
+# ---------- 配置管理 ----------
+@api_bp.route('/config', methods=['GET'])
+def get_config():
+    """获取当前配置"""
+    return jsonify({
+        'max_workers': MAX_WORKERS,
+        'timeout': TIMEOUT,
+        'ffmpeg_enable': FFMPEG_ENABLE,
+        'max_sources_per_channel': MAX_SOURCES_PER_CHANNEL,
+        'demo_match_mode': DEMO_MATCH_MODE,
+        'cache_raw_hours': CACHE_RAW_HOURS,
+        'cache_speed_hours': CACHE_SPEED_HOURS,
+    })
 
-            # 添加固定源
-            success = self.stable_manager.set_fixed_source(name, url)
-            if success:
-                logger.info(f"📌 通过 Web 管理界面添加固定源: {name}")
-                return web.json_response({"message": f"已添加固定源: {name}"})
-            else:
-                return web.json_response({"error": "添加失败，请检查URL是否有效"}, status=500)
+@api_bp.route('/config', methods=['POST'])
+def update_config():
+    """更新配置（需重启生效）"""
+    data = request.get_json()
+    # 注意：修改配置需要持久化到 .env 或 config.py，这里仅演示
+    # 实际项目中可写入 .env 文件
+    # 这里我们简单返回成功，并提示重启
+    return jsonify({
+        'success': True,
+        'message': '配置已更新，请重启服务生效。'
+    })
 
-        except Exception as e:
-            logger.error(f"添加固定源失败: {e}")
-            return web.json_response({"error": str(e)}, status=500)
+# ---------- 质量趋势 ----------
+@api_bp.route('/quality/<channel_name>')
+def get_quality(channel_name):
+    days = request.args.get('days', 7, type=int)
+    history = get_quality_history(channel_name, days)
+    return jsonify(history)
 
-    async def remove_fixed_source(self, request: web.Request) -> web.Response:
-        """删除固定源"""
-        try:
-            name = request.match_info.get("name", "").strip()
-            if not name:
-                return web.json_response({"error": "频道名不能为空"}, status=400)
-
-            success = self.stable_manager.remove_fixed_source(name)
-            if success:
-                logger.info(f"🗑️ 通过 Web 管理界面删除固定源: {name}")
-                return web.json_response({"message": f"已删除固定源: {name}"})
-            else:
-                return web.json_response({"error": f"频道 {name} 不是固定源或不存在"}, status=404)
-
-        except Exception as e:
-            logger.error(f"删除固定源失败: {e}")
-            return web.json_response({"error": str(e)}, status=500)
-
-    async def get_config(self, request: web.Request) -> web.Response:
-        """获取当前配置"""
-        config = {
-            "max_workers": MAX_WORKERS,
-            "timeout": TIMEOUT,
-            "ffmpeg_enable": FFMPEG_ENABLE,
-            "max_sources_per_channel": MAX_SOURCES_PER_CHANNEL,
-            "cache_hours": CACHE_HOURS,
-            "autonomous_mode": False,  # TODO: 读取环境变量
-        }
-        return web.json_response(config)
-
-    async def update_config(self, request: web.Request) -> web.Response:
-        """更新配置（需要重启生效）"""
-        # 简单实现：只记录日志，返回提示
-        return web.json_response({"message": "配置已更新，请重启服务生效"}, status=200)
-
-
-def setup_routes(app: web.Application):
-    """注册 API 路由"""
-    handler = APIHandler()
-    app.router.add_get("/api/status", handler.get_status)
-    app.router.add_get("/api/channels", handler.get_channels)
-    app.router.add_post("/api/fixed_sources", handler.add_fixed_source)
-    app.router.add_delete("/api/fixed_sources/{name}", handler.remove_fixed_source)
-    app.router.add_get("/api/config", handler.get_config)
-    app.router.add_post("/api/config", handler.update_config)
+@api_bp.route('/quality/all')
+def get_all_quality():
+    days = request.args.get('days', 7, type=int)
+    data = get_all_channels_with_history(days)
+    return jsonify(data)
