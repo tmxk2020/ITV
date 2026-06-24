@@ -136,7 +136,6 @@ python -m src.run
 python -m src.server
 
 ⚙️ 环境变量配置
-
 分类	变量	默认值	说明
 运行模式	RUN_MODE	schedule	once 或 schedule
 SCHEDULE_INTERVAL	21600	定时任务间隔（秒）
