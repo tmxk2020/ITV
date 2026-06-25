@@ -2,6 +2,11 @@
 """Web 管理界面 REST API"""
 
 import json
+import logging
+import queue
+import threading
+import time
+import asyncio
 from pathlib import Path
 from flask import Blueprint, request, jsonify
 from src.config import (
@@ -17,8 +22,90 @@ from src.web.db import get_quality_history, get_all_channels_with_history, recor
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 
+# ========== 采集任务管理 ==========
+collector_status = {
+    "running": False,
+    "log": [],
+    "start_time": None,
+    "end_time": None,
+    "result": None
+}
+log_queue = queue.Queue()
+
+
+class QueueHandler(logging.Handler):
+    """将日志消息放入队列"""
+    def emit(self, record):
+        log_queue.put(self.format(record))
+
+
+def collector_worker():
+    """在后台线程中运行采集任务"""
+    global collector_status
+    collector_status["running"] = True
+    collector_status["start_time"] = time.time()
+    collector_status["log"] = []
+    collector_status["result"] = None
+
+    # 配置日志重定向
+    root_logger = logging.getLogger()
+    queue_handler = QueueHandler()
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    queue_handler.setFormatter(formatter)
+    root_logger.addHandler(queue_handler)
+
+    try:
+        # 导入并运行采集主函数
+        from src.run import main as run_collector
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        result = loop.run_until_complete(run_collector())
+        collector_status["result"] = "success" if result == 0 else "failed"
+    except Exception as e:
+        collector_status["result"] = f"error: {str(e)}"
+        # 将异常信息也写入日志
+        log_queue.put(f"❌ 采集异常: {e}")
+    finally:
+        collector_status["running"] = False
+        collector_status["end_time"] = time.time()
+        root_logger.removeHandler(queue_handler)
+
+
+@api_bp.route('/collect/start', methods=['POST'])
+def start_collection():
+    """启动采集任务"""
+    if collector_status["running"]:
+        return jsonify({"success": False, "message": "采集任务正在运行中，请稍候"})
+
+    thread = threading.Thread(target=collector_worker, daemon=True)
+    thread.start()
+    return jsonify({"success": True, "message": "采集任务已启动，请查看日志"})
+
+
+@api_bp.route('/collect/status', methods=['GET'])
+def get_collector_status():
+    """获取采集任务状态和最新日志"""
+    # 从队列中取出所有日志
+    logs = []
+    while not log_queue.empty():
+        try:
+            logs.append(log_queue.get_nowait())
+        except queue.Empty:
+            break
+    # 保留最近200条
+    collector_status["log"] = (collector_status["log"] + logs)[-200:]
+
+    return jsonify({
+        "running": collector_status["running"],
+        "log": collector_status["log"],
+        "start_time": collector_status["start_time"],
+        "end_time": collector_status["end_time"],
+        "result": collector_status["result"]
+    })
+
+
+# ========== 原有 API ==========
 def get_channel_category(name: str) -> str:
-    """根据频道名判断分类"""
     if name.startswith('CCTV') or '央视' in name:
         return '央视'
     if '卫视' in name:
@@ -107,9 +194,8 @@ def add_fixed_source():
 def delete_fixed_source(name):
     stable_mgr = StableManager()
     if name in stable_mgr.stable_sources and stable_mgr.stable_sources[name].is_fixed:
-        # 删除固定源（将其标记为非固定，但不删除条目）
         stable_mgr.stable_sources[name].is_fixed = False
-        stable_mgr.stable_sources[name].status = 'active'  # 确保状态正常
+        stable_mgr.stable_sources[name].status = 'active'
         stable_mgr._save()
         return jsonify({'success': True, 'message': f'已移除固定源 {name}'})
     return jsonify({'error': '固定源不存在'}), 404
@@ -131,15 +217,12 @@ def get_config():
 @api_bp.route('/config', methods=['POST'])
 def update_config():
     data = request.get_json()
-    # 写入 .env 文件（仅演示，实际可写入配置数据库）
     env_path = Path('.env')
-    # 读取现有内容，更新或追加
     if env_path.exists():
         with open(env_path, 'r') as f:
             lines = f.readlines()
     else:
         lines = []
-    # 转换键名
     key_map = {
         'max_workers': 'MAX_WORKERS',
         'timeout': 'TIMEOUT',
@@ -160,7 +243,6 @@ def update_config():
                     new_lines.append(f"{key}={new_value}\n")
                     continue
         new_lines.append(line)
-    # 添加未更新的键
     for k, env_key in key_map.items():
         if env_key not in updated_keys and data.get(k) is not None:
             new_lines.append(f"{env_key}={data[k]}\n")
