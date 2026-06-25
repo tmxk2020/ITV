@@ -1,31 +1,25 @@
 # build.spec
-# PyInstaller 打包配置文件
-
 import sys
 from pathlib import Path
 
-# 确保 resources 目录存在
+# 创建 resources 目录（如果不存在）
 Path('resources').mkdir(exist_ok=True)
 
 block_cipher = None
 
-# 检查图标文件是否存在
 icon_path = Path('resources/icon.ico')
-if icon_path.exists():
-    icon_file = str(icon_path)
-else:
-    icon_file = None
+icon_file = str(icon_path) if icon_path.exists() else None
 
 a = Analysis(
     ['src/main.py'],
-    pathex=['.'],  # 添加当前目录到搜索路径
+    pathex=['.'],  # 将当前目录添加到 Python 搜索路径
     binaries=[],
     datas=[
         ('alias.txt', '.'),
         ('blacklist.txt', '.'),
         ('demo.txt', '.'),
         ('resources', 'resources'),
-        ('src', 'src'),  # 关键：将整个 src 目录复制到打包目录
+        ('src', 'src'),  # 关键：复制整个 src 目录
     ],
     hiddenimports=[
         # 核心模块
@@ -44,7 +38,7 @@ a = Analysis(
         'src.logger',
         'src.alias_matcher',
         'src.fixed_sources',
-        # 自治模式模块
+        # 自治模式
         'src.stable',
         'src.stable.manager',
         'src.source_pool',
