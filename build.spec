@@ -18,13 +18,14 @@ else:
 
 a = Analysis(
     ['src/main.py'],
-    pathex=['.'],  # 添加当前目录到搜索路径，确保能找到 src 包
+    pathex=['.'],  # 添加当前目录到搜索路径
     binaries=[],
     datas=[
         ('alias.txt', '.'),
         ('blacklist.txt', '.'),
         ('demo.txt', '.'),
         ('resources', 'resources'),
+        ('src', 'src'),  # 关键：将整个 src 目录复制到打包目录
     ],
     hiddenimports=[
         # 核心模块
