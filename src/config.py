@@ -34,7 +34,16 @@ def is_docker() -> bool:
     """检测是否在 Docker 容器中运行"""
     return os.path.exists("/.dockerenv") or os.path.exists("/run/.containerenv")
 
-
+def get_base_dir():
+    """获取应用根目录（支持 PyInstaller 打包）"""
+    if getattr(sys, 'frozen', False):
+        # PyInstaller 打包后，数据文件在 sys._MEIPASS 目录下
+        if hasattr(sys, '_MEIPASS'):
+            return Path(sys._MEIPASS)
+        return Path(sys.executable).parent
+    else:
+        return Path(__file__).parent.parent
+        
 def get_cdn_proxy() -> str:
     if is_github_actions():
         return ""
