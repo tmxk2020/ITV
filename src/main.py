@@ -1,16 +1,12 @@
 # src/main.py
-"""IPTV 智能管理 GUI 工具 - 程序入口"""
-
 import sys
 import os
 import traceback
 from pathlib import Path
 
-# 确保当前目录在 sys.path 中（打包后会被解压到临时目录，但我们需要当前 exe 所在目录）
-# 如果运行的是打包后的 exe，sys.executable 是 exe 路径，其父目录是程序所在目录
+# 获取程序所在目录，确保能导入 src 模块
 base_dir = Path(sys.executable).parent if getattr(sys, 'frozen', False) else Path(__file__).parent.parent
 sys.path.insert(0, str(base_dir))
-sys.path.insert(0, str(base_dir / 'src'))  # 确保 src 可导入
 
 def main():
     try:
@@ -27,10 +23,8 @@ def main():
         app.setOrganizationName("IPTVCollector")
         
         setup_gui_logging()
-        
         window = IPTVMainWindow()
         window.show()
-        
         sys.exit(app.exec())
     
     except Exception as e:
@@ -41,8 +35,7 @@ def main():
         except:
             pass
         print("=" * 60)
-        print("程序启动失败！")
-        print("错误信息已写入 error.log")
+        print("程序启动失败！错误信息已写入 error.log")
         print("=" * 60)
         print(error_msg)
         input("按 Enter 键退出...")
