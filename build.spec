@@ -9,7 +9,6 @@ Path('resources').mkdir(exist_ok=True)
 
 block_cipher = None
 
-# 检查图标文件是否存在
 icon_path = Path('resources/icon.ico')
 if icon_path.exists():
     icon_file = str(icon_path)
@@ -18,16 +17,18 @@ else:
 
 a = Analysis(
     ['src/main.py'],
-    pathex=[],
+    pathex=[str(Path('.')), str(Path('src'))],   # 添加 src 到搜索路径
     binaries=[],
     datas=[
         ('alias.txt', '.'),
         ('blacklist.txt', '.'),
         ('demo.txt', '.'),
         ('resources', 'resources'),
+        ('src', 'src'),                          # 关键：将整个 src 目录复制到打包目录
     ],
     hiddenimports=[
-        # 核心模块
+        # 所有需要用到的模块
+        'src',
         'src.config',
         'src.run',
         'src.fetcher',
@@ -43,7 +44,6 @@ a = Analysis(
         'src.logger',
         'src.alias_matcher',
         'src.fixed_sources',
-        # 自治模式模块
         'src.stable',
         'src.stable.manager',
         'src.source_pool',
@@ -53,27 +53,25 @@ a = Analysis(
         'src.quality',
         'src.quality.monitor',
         'src.orchestrator',
-        # 扩展功能
         'src.iptv_org_adapter',
         'src.global_channels',
         'src.generator_enhanced',
         'src.overseas_filter',
         'src.special_categories',
-        # GUI 模块
         'src.gui',
         'src.gui.main_window',
         'src.gui.widgets',
         'src.gui.styles',
-        # 工具模块
         'src.utils',
         'src.utils.logger_handler',
-        # 第三方库
         'pypinyin',
         'pypinyin.core',
         'pypinyin.style',
         'aiohttp',
         'aiosqlite',
         'tqdm',
+        'PySide6',
+        'shiboken6',
     ],
     hookspath=[],
     hooksconfig={},
