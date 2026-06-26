@@ -34,12 +34,15 @@ jobs:
 
       - name: Verify PyQt5 installed
         run: |
-          python -c "import PyQt5; print(PyQt5.__path__)"
+          python -c "import PyQt5; print('PyQt5 installed')"
 
-      - name: Prepare GUI directories (Windows)
+      - name: Prepare GUI directories and ensure __init__.py exists
         run: |
           New-Item -ItemType Directory -Force -Path gui/resources
           New-Item -ItemType Directory -Force -Path gui/styles
+          if (-not (Test-Path gui/__init__.py)) {
+            "# gui package" | Out-File -FilePath gui/__init__.py -Encoding utf8
+          }
           if (-not (Test-Path gui/resources/__init__.py)) {
             "# placeholder" | Out-File -FilePath gui/resources/__init__.py -Encoding utf8
           }
@@ -52,12 +55,15 @@ jobs:
           pyinstaller --clean --onedir --windowed `
             --add-data "gui/styles;styles" `
             --add-data "gui/resources;resources" `
+            --add-data "gui;gui" `
             --collect-all PyQt5 `
+            --collect-all src `
+            --collect-all gui `
             --hidden-import PyQt5 `
             --hidden-import PyQt5.QtCore `
             --hidden-import PyQt5.QtGui `
             --hidden-import PyQt5.QtWidgets `
-            --collect-all src `
+            --hidden-import src `
             --name "IPTV_Collector" `
             gui/main.py
 
