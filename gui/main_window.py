@@ -76,7 +76,7 @@ class MainWindow(QMainWindow):
         self.progress_bar.setRange(0, 0)
         self.status_label.setText("采集中...")
 
-        # 设置环境变量，启用自治模式和 ffmpeg
+        # 设置环境变量（由 worker 也会设置，但这里确保）
         os.environ["AUTONOMOUS_MODE"] = "true"
         os.environ["FFMPEG_ENABLE"] = "true"
         os.environ["ENABLE_DEMO_FILTER"] = "true"
