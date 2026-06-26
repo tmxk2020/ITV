@@ -1,10 +1,13 @@
-# .github/workflows/build_gui.yml
 name: Build GUI Exe and Release
 
 on:
   release:
     types: [published]
   workflow_dispatch:
+
+permissions:
+  contents: write    # 关键权限
+  actions: read
 
 jobs:
   build:
@@ -27,7 +30,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --clean --onefile --windowed --add-data "gui/styles;styles" --add-data "gui/resources;resources" --hidden-import "src" --name "IPTV_Collector" gui/main.py
+          pyinstaller --clean --onefile --windowed --add-data "gui/styles;styles" --hidden-import "src" --name "IPTV_Collector" gui/main.py
 
       - name: Upload exe to Release
         uses: svenstaro/upload-release-action@v2
@@ -35,5 +38,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/IPTV_Collector.exe
           asset_name: IPTV_Collector_Windows_x64.exe
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref_name }}
           overwrite: true
