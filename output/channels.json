@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "total": 329,
-  "generated": "2026-06-27T13:29:54.343106",
+  "generated": "2026-06-27T19:19:58.116760",
   "channels": [
     {
       "name": "CCTV-1",
@@ -460,7 +460,7 @@
       "urls": [
         "https://video.bread-tv.com:8091/hls-live24/online/index.m3u8"
       ],
-      "latency": 1048,
+      "latency": 1192,
       "codec": "h264",
       "category": "📡卫视频道"
     },
@@ -605,7 +605,7 @@
       "urls": [
         "https://stream.sun0769.com/dgrtv1/mp4tv2_800/index.m3u8"
       ],
-      "latency": 5766,
+      "latency": 2365,
       "codec": "h264",
       "category": "☘️广东频道"
     },
@@ -745,7 +745,7 @@
       "urls": [
         "https://ali-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8"
       ],
-      "latency": 415,
+      "latency": 939,
       "codec": "h264",
       "category": "☘️浙江频道"
     },
@@ -1891,7 +1891,7 @@
       "urls": [
         "http://liveout.btzx.com.cn/62ds9e/4nxdih.m3u8?fbl="
       ],
-      "latency": 1751,
+      "latency": 1874,
       "codec": "h264",
       "category": "☘️新疆频道"
     },
