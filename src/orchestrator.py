@@ -180,7 +180,42 @@ class IPTVOrchestrator:
             logger.info(f"✅ 提升阶段完成: {promoted_count} 个源被提升到稳定版")
             logger.info(f"📊 稳定源变化: {before_count} -> {after_count}")
             return promoted_count
-            
+
+        async def predict_failure_probability(self, channel_key: str) -> float:
+    """基于历史速度数据预测未来7天失效概率"""
+    history = await self.db.get_speed_history(channel_key, days=HEALTH_HISTORY_DAYS)
+    if len(history) < 5:
+        return 0.0
+    # 简单时序模型：计算最近10次成功率与平均延迟趋势
+    recent = history[-10:]
+    success_rate = sum(1 for h in recent if h['success']) / len(recent)
+    latencies = [h['latency'] for h in recent if h['success']]
+    if latencies:
+        avg_lat = sum(latencies) / len(latencies)
+        # 如果最近延迟持续上升，预测失效概率增加
+        trend = (latencies[-1] - latencies[0]) / (latencies[0] + 1)
+        prob = (1 - success_rate) * 0.6 + min(1, max(0, trend)) * 0.4
+        return min(1, prob)
+    return 0.0
+
+async def auto_replace_if_risky(self):
+    """检查所有稳定源，如果预测失效概率高于阈值，则从候选池提拔替补"""
+    stable = self.stable_manager.get_active_sources()
+    for name, src in stable.items():
+        if src.is_fixed:
+            continue
+        key = channel_key(name, src.url)
+        prob = await self.predict_failure_probability(key)
+        if prob > PREDICT_THRESHOLD:
+            logger.warning(f"⚠️ {name} 预测失效概率 {prob:.2%}，尝试从候选池替换")
+            # 从候选池找最佳替补
+            candidates = await self.db.get_candidates_for_promotion()
+            for cand in candidates:
+                if cand['name'] == name and cand['url'] != src.url:
+                    self.stable_manager.replace_source(name, cand['url'], cand['latency'], "")
+                    logger.info(f"✅ {name} 已预替换为 {cand['url']}")
+                    break
+                    
         except Exception as e:
             logger.error(f"❌ 提升稳定源阶段失败: {e}")
             return 0
