@@ -195,6 +195,24 @@ GITHUB_RAW_PROXIES = [
     "https://ghproxy.19860519.xyz/",
 ]
 
+# ========== 增强优化配置 ==========
+# 测速与验证
+HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", 8))          # HTTP 请求超时
+DOWNLOAD_CHUNK_SIZE = 262144                              # 分段下载大小 256KB
+MAX_RETRY_BEFORE_BLACKLIST = 2                           # 连续失败次数后入黑名单
+SLOW_SPEED_THRESHOLD = 3000                              # 慢速阈值(ms)，超过则踢回候选池
+
+# 候选池管理
+CANDIDATE_MAX_AGE_HOURS = 72                             # 候选源最大保留时间
+AUTO_PROMOTE_THRESHOLD = 3                               # 稳定所需最少成功次数
+
+# 健康度预测
+HEALTH_HISTORY_DAYS = 30                                 # 用于预测的历史数据天数
+PREDICT_THRESHOLD = 0.6                                  # 失效概率阈值，超过则预替换
+
+# 进度显示
+PROGRESS_UPDATE_INTERVAL = 1.0                           # 进度推送间隔(秒)
+
 # 打印自治模式状态
 if AUTONOMOUS_MODE:
     print("🤖 自治模式已启用")
