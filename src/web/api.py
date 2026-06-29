@@ -263,3 +263,21 @@ def get_all_quality():
     days = request.args.get('days', 7, type=int)
     data = get_all_channels_with_history(days)
     return jsonify(data)
+
+@api_bp.route('/collection/progress')
+def get_progress():
+    """返回当前采集进度（需在 run.py 中实时更新）"""
+    from src.run import progress
+    return jsonify(progress)
+
+@api_bp.route('/health/predict/<channel_name>')
+async def predict(channel_name):
+    # 获取该频道最新源的 channel_key
+    stable = StableManager()
+    if channel_name in stable.stable_sources:
+        src = stable.stable_sources[channel_name]
+        key = channel_key(channel_name, src.url)
+        db = await get_db_cache()
+        prob = await orchestrator.predict_failure_probability(key)
+        return jsonify({'channel': channel_name, 'probability': prob})
+    return jsonify({'error': '频道不存在'}), 404
