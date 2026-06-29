@@ -121,8 +121,8 @@ http://live.zohi.tv/video/s10001-fztv-4/index.m3u8
 http://218.13.170.98:9901/tsfile/live/1021_1.m3u8
 #EXTINF:-1 group-title="☘️北京频道",耀才财经
 https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
-#EXTINF:-1 group-title="☘️上海频道",苏州新闻综合
-https://live-auth.51kandianshi.com/szgd/csztv1.m3u8
+#EXTINF:-1 group-title="☘️上海频道",余姚新闻综合
+https://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
 #EXTINF:-1 group-title="☘️上海频道",新纪实
 http://bp-resource-dfl.bestv.cn/155/3/video.m3u8
 #EXTINF:-1 group-title="☘️上海频道",普陀山
@@ -287,8 +287,8 @@ http://3739115337.cloudvdn.com/a.m3u8?domain=siyang-tv-hls.cm.jstv.com&player=nw
 https://live-auth.51kandianshi.com/szgd/csztv4k_hd.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",苏州文化生活
 https://live-auth.51kandianshi.com/szgd/csztv3.m3u8
-#EXTINF:-1 group-title="☘️江苏频道",宿州新闻综合 [Not 24/7]
-http://live.ahsz.tv/video/s10001-szzh/index.m3u8
+#EXTINF:-1 group-title="☘️江苏频道",苏州新闻综合
+https://live-auth.51kandianshi.com/szgd/csztv1.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",苏州生活资讯
 https://live-auth.51kandianshi.com/szgd/csztv5.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",苏州社会经济
@@ -301,6 +301,8 @@ http://zjtv-wshls.homecdn.com/live/2aa50.m3u8
 http://visit.jjbctv.com:1935/live/xwzhmb/playlist.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",安徽导视
 http://dspdhls.appcoo.com:8888/live/dspd/index.m3u8
+#EXTINF:-1 group-title="☘️安徽频道",黄山新闻综合
+http://hslive.hsnewsnet.com/lsdream/hve9Wjs/1000/live.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",黄山
 https://gcalic.v.myalicdn.com/gc/ahhs01_1/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",铜陵新闻综合
@@ -309,6 +311,8 @@ https://ls.qingting.fm/live/21303/64k.m3u8
 http://zbbf2.ahbztv.com/live/416.m3u8?zanhd
 #EXTINF:-1 group-title="☘️安徽频道",广德生活
 https://live.gdtv.ah.cn/live/newsTV.m3u8
+#EXTINF:-1 group-title="☘️安徽频道",宿州新闻综合 [Not 24/7]
+http://live.ahsz.tv/video/s10001-szzh/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",七台河新闻综合
 http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",亳州农村
@@ -319,8 +323,6 @@ https://rt-glb.rttv.com/dvr/rtnews/playlist_4500Kb.m3u8
 https://live.zzyxxw.com:2443/live/xwzh.m3u8
 #EXTINF:-1 group-title="☘️福建频道",福州少儿
 http://live.zohi.tv/video/s10001-fztv-4/index.m3u8
-#EXTINF:-1 group-title="☘️福建频道",福建公共
-https://live.264788.xyz/channel/fujianxiangcungonggong?streamid=2987cc24bada6a8c25589409a6452d9e&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
 #EXTINF:-1 group-title="☘️福建频道",福建旅游
 https://live.264788.xyz/channel/fujianlvyou?streamid=8f26765ebf367079cef58c6b7752da1e&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
 #EXTINF:-1 group-title="☘️河南频道",梨园
@@ -389,8 +391,6 @@ http://175.155.106.72:89/live1/live1.m3u8?zsicd
 http://tvfile.jyrmt.cn/nmip-media/channellive/channel104452/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",叙州新闻综合
 http://pili-live-hls.ybcxjd.com/jdh-live/2108111201035597.m3u8?zsicd
-#EXTINF:-1 group-title="☘️四川频道",名山综合
-https://m3u8channel-bx.yunxya.com/nmip-media/channellive/channel104666/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",四川卫视
 http://112.27.235.94:8000/hls/35/index.m3u8
 #EXTINF:-1 group-title="☘️四川频道",四川四姑娘山隆珠措
@@ -403,8 +403,6 @@ http://channel.wcrmt.cn:80/nmip-media/channellive/channel105268/playlist.m3u8
 https://file.ysxtv.cn/nmip-media/channellive/channel101492/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",都江堰鱼嘴
 https://gcalic.v.myalicdn.com/gc/djyqyl1_1/index.m3u8
-#EXTINF:-1 group-title="☘️四川频道",雅安新闻综合
-https://play.yunxya.com/channellive/xinwen.m3u8
 #EXTINF:-1 group-title="☘️四川频道",河综合
 http://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",安顺新闻
@@ -459,8 +457,6 @@ http://110.153.180.106:55555/out_4/index.m3u8
 http://110.153.180.106:55555/out_2/index.m3u8
 #EXTINF:-1 group-title="☘️新疆频道",兵团五师双河新闻综合
 http://liveout.btzx.com.cn/62ds9e/4nxdih.m3u8?fbl=
-#EXTINF:-1 group-title="☘️新疆频道",可克达拉综合
-http://file.loulannews.cn/nmip-media/channellive/channel103824/playlist.m3u8
 #EXTINF:-1 group-title="☘️新疆频道",奎屯哈萨克语
 http://218.84.12.186:8002/hls/main/playlist.m3u8?zxinjd
 #EXTINF:-1 group-title="☘️新疆频道",奎屯汉语
@@ -597,8 +593,6 @@ http://1.94.31.214/php/hebei.php?id=sekj
 http://1.94.31.214/php/hebei.php?id=hbys
 #EXTINF:-1 group-title="☘️河北频道",河北经济
 http://1.94.31.214/php/hebei.php?id=jjsh
-#EXTINF:-1 group-title="☘️河北频道",河北都市
-http://1.94.31.214/php/hebei.php?id=hbds
 #EXTINF:-1 group-title="☘️河北频道",清河经济综艺
 https://jwcdnqx.hebyun.com.cn/live/qinghe1/1500k/tzwj_video.m3u8
 #EXTINF:-1 group-title="☘️河北频道",滦平新闻
