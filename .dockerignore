@@ -20,3 +20,5 @@ README.md
 data/
 output/
 # 不要排除 src/web/
+iptv_cache.db
+config.json
