@@ -5,18 +5,7 @@ import os
 import sys
 from pathlib import Path
 
-
-def get_base_dir():
-    """获取应用根目录（支持 PyInstaller 打包）"""
-    if getattr(sys, 'frozen', False):
-        # 打包环境，exe 所在路径
-        return Path(sys.executable).parent
-    else:
-        # 开发环境，项目根目录
-        return Path(__file__).parent.parent
-
-
-ROOT_DIR = get_base_dir()
+ROOT_DIR = Path(__file__).parent.parent
 DATA_DIR = ROOT_DIR / "data"
 OUTPUT_DIR = ROOT_DIR / "output"
 DEMO_FILE = ROOT_DIR / "demo.txt"
@@ -34,16 +23,7 @@ def is_docker() -> bool:
     """检测是否在 Docker 容器中运行"""
     return os.path.exists("/.dockerenv") or os.path.exists("/run/.containerenv")
 
-def get_base_dir():
-    """获取应用根目录（支持 PyInstaller 打包）"""
-    if getattr(sys, 'frozen', False):
-        # PyInstaller 打包后，数据文件在 sys._MEIPASS 目录下
-        if hasattr(sys, '_MEIPASS'):
-            return Path(sys._MEIPASS)
-        return Path(sys.executable).parent
-    else:
-        return Path(__file__).parent.parent
-        
+
 def get_cdn_proxy() -> str:
     if is_github_actions():
         return ""
@@ -92,10 +72,10 @@ TIMEOUT = int(os.getenv("TIMEOUT", 10))
 
 # ffmpeg 配置
 FFMPEG_ENABLE = os.getenv("FFMPEG_ENABLE", "true").lower() == "true"
-FFMPEG_STRICT = os.getenv("FFMPEG_STRICT", "true").lower() == "true"
+FFMPEG_STRICT = os.getenv("FFMPEG_STRICT", "false").lower() == "true"
 FFMPEG_WORKERS = min(MAX_WORKERS, 5)
 
-# ffmpeg 模式
+# 模式
 FFMPEG_MODE = os.getenv("FFMPEG_MODE", "deep")
 FFPROBE_CACHE_HOURS = int(os.getenv("FFPROBE_CACHE_HOURS", 168))
 
@@ -112,7 +92,6 @@ HEADERS = {
 # 输出分类顺序
 OUTPUT_CATEGORY_ORDER = ["央视", "卫视", "地方", "港澳台"]
 
-# 央视频道排序
 CCTV_ORDER = [
     "CCTV-1", "CCTV-2", "CCTV-3", "CCTV-4", "CCTV-5", "CCTV-5+", "CCTV-6",
     "CCTV-7", "CCTV-8", "CCTV-9", "CCTV-10", "CCTV-11", "CCTV-12", "CCTV-13",
@@ -122,17 +101,12 @@ CCTV_ORDER = [
     "CGTN法语", "CGTN纪录", "CGTN西语", "CGTN阿语"
 ]
 
-# 输出文件名
 M3U_FILE = "tv.m3u"
 TXT_FILE = "tv.txt"
 
-# 缓存时长（小时）
 CACHE_HOURS = int(os.getenv("CACHE_HOURS", 24))
-
-# 每个频道保留的源数量
 MAX_SOURCES_PER_CHANNEL = int(os.getenv("MAX_SOURCES_PER_CHANNEL", 3))
 
-# 功能开关
 ENABLE_DEMO_FILTER = os.getenv("ENABLE_DEMO_FILTER", "true").lower() == "true"
 ENABLE_ALIAS = os.getenv("ENABLE_ALIAS", "true").lower() == "true"
 ENABLE_BLACKLIST = os.getenv("ENABLE_BLACKLIST", "true").lower() == "true"
@@ -141,30 +115,25 @@ DATABASE_ENABLE = os.getenv("DATABASE_ENABLE", "true").lower() == "true"
 DEMO_MATCH_MODE = os.getenv("DEMO_MATCH_MODE", "contains")
 PREFER_H264 = True
 
-# HTTP 服务配置
 WEB_SERVER_PORT = int(os.getenv("WEB_SERVER_PORT", 8080))
 WEB_SERVER_HOST = os.getenv("WEB_SERVER_HOST", "0.0.0.0")
 
-# 运行模式
 RUN_MODE = os.getenv("RUN_MODE", "once")
 SCHEDULE_INTERVAL = int(os.getenv("SCHEDULE_INTERVAL", 21600))
 
-# ========== 缓存优化配置 ==========
 CACHE_RAW_HOURS = int(os.getenv("CACHE_RAW_HOURS", 48))
 CACHE_SPEED_HOURS = int(os.getenv("CACHE_SPEED_HOURS", 24))
 ENABLE_INCREMENTAL_FETCH = os.getenv("ENABLE_INCREMENTAL_FETCH", "true").lower() == "true"
 
-# ========== EPG 配置 ==========
 ENABLE_EPG_INJECTION = os.getenv("ENABLE_EPG_INJECTION", "true").lower() == "true"
 EPG_CACHE_DAYS = int(os.getenv("EPG_CACHE_DAYS", 7))
 
-# ========== 输出格式配置 ==========
 ENABLE_JSON_OUTPUT = os.getenv("ENABLE_JSON_OUTPUT", "true").lower() == "true"
 ENABLE_LITE_VERSION = os.getenv("ENABLE_LITE_VERSION", "true").lower() == "true"
 ENABLE_EPG_OUTPUT = os.getenv("ENABLE_EPG_OUTPUT", "true").lower() == "true"
 
-# ========== 自治模式配置 ==========
-AUTONOMOUS_MODE = os.getenv("AUTONOMOUS_MODE", "true").lower() == "true"
+# 自治模式
+AUTONOMOUS_MODE = os.getenv("AUTONOMOUS_MODE", "false").lower() == "true"
 AUTO_UPDATE_STABLE = os.getenv("AUTO_UPDATE_STABLE", "true").lower() == "true"
 AUTO_REPLACE_FAILED = os.getenv("AUTO_REPLACE_FAILED", "true").lower() == "true"
 QUALITY_CHECK_INTERVAL = int(os.getenv("QUALITY_CHECK_INTERVAL", 24))
@@ -173,44 +142,18 @@ CANDIDATE_MIN_SUCCESS = int(os.getenv("CANDIDATE_MIN_SUCCESS", 10))
 CANDIDATE_MIN_SUCCESS_RATE = float(os.getenv("CANDIDATE_MIN_SUCCESS_RATE", 0.8))
 CANDIDATE_MAX_LATENCY = int(os.getenv("CANDIDATE_MAX_LATENCY", 2000))
 
-# ========== 动态并发配置 ==========
-DYNAMIC_CONCURRENCY = os.getenv("DYNAMIC_CONCURRENCY", "true").lower() == "true"
-MIN_WORKERS = int(os.getenv("MIN_WORKERS", 5))
-MAX_WORKERS = int(os.getenv("MAX_WORKERS", 20))
-
-# ========== 布隆过滤器配置 ==========
-ENABLE_BLOOM_FILTER = os.getenv("ENABLE_BLOOM_FILTER", "true").lower() == "true"
-BLOOM_FILTER_CAPACITY = int(os.getenv("BLOOM_FILTER_CAPACITY", 100000))
-
-# ========== Web 管理界面配置 ==========
-WEB_UI_ENABLE = os.getenv("WEB_UI_ENABLE", "true").lower() == "true"
-WEB_UI_TITLE = os.getenv("WEB_UI_TITLE", "IPTV 智能管理面板")
-
-# ========== GitHub 代理配置（用于 proxy_utils.py） ==========
-ENABLE_GITHUB_PROXY = os.getenv("ENABLE_GITHUB_PROXY", "false").lower() == "true"
-GITHUB_PROXY_TIMEOUT = int(os.getenv("GITHUB_PROXY_TIMEOUT", 15))
-GITHUB_RAW_PROXIES = [
-    "https://ghproxy.net/",
-    "https://gh-proxy.19860519.xyz/",
-    "https://ghproxy.19860519.xyz/",
-]
-
-# ========== 增强优化配置 ==========
-# 测速与验证
+# ========== 新增增强优化配置 ==========
 HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", 8))          # HTTP 请求超时
 DOWNLOAD_CHUNK_SIZE = 262144                              # 分段下载大小 256KB
 MAX_RETRY_BEFORE_BLACKLIST = 2                           # 连续失败次数后入黑名单
 SLOW_SPEED_THRESHOLD = 3000                              # 慢速阈值(ms)，超过则踢回候选池
 
-# 候选池管理
 CANDIDATE_MAX_AGE_HOURS = 72                             # 候选源最大保留时间
 AUTO_PROMOTE_THRESHOLD = 3                               # 稳定所需最少成功次数
 
-# 健康度预测
 HEALTH_HISTORY_DAYS = 30                                 # 用于预测的历史数据天数
 PREDICT_THRESHOLD = 0.6                                  # 失效概率阈值，超过则预替换
 
-# 进度显示
 PROGRESS_UPDATE_INTERVAL = 1.0                           # 进度推送间隔(秒)
 
 # 打印自治模式状态
@@ -223,3 +166,6 @@ if AUTONOMOUS_MODE:
     print(f"   - 最少成功次数: {CANDIDATE_MIN_SUCCESS}")
     print(f"   - 最低成功率: {CANDIDATE_MIN_SUCCESS_RATE}")
     print(f"   - 最大延迟: {CANDIDATE_MAX_LATENCY}ms")
+    print(f"   - 慢速阈值: {SLOW_SPEED_THRESHOLD}ms")
+    print(f"   - 黑名单阈值: {MAX_RETRY_BEFORE_BLACKLIST}次失败")
+    print(f"   - 健康度预测阈值: {PREDICT_THRESHOLD}")
