@@ -123,30 +123,34 @@ class IPTVOrchestrator:
             logger.error(f"❌ 发现新源阶段失败: {e}")
             return {}
     
-    async def observe_phase(self) -> List:
-        logger.info("=" * 50)
-        logger.info("阶段2: 从缓存观察候选源")
-        logger.info("=" * 50)
-        try:
-            observing_count = self.candidate_observer.get_observing_count()
-            if observing_count == 0:
-                logger.info("📭 没有候选源需要观察")
-                return []
-            stable_count = len(self.candidate_observer.get_stable_candidates())
-            logger.info(f"📊 候选池状态: {observing_count} 个正在观察，{stable_count} 个已稳定")
-            stable_candidates = await asyncio.wait_for(
-                self.candidate_observer.observe_batch_from_cache(
-                    batch_size=self.MAX_OBSERVE_PER_RUN
-                ),
-                timeout=45
-            )
-            self.stats["last_observe"] = datetime.now()
-            self.stats["observed_count"] = len(stable_candidates)
-            logger.info(f"✅ 观察阶段完成: {len(stable_candidates)} 个源达到稳定标准")
-            return stable_candidates
-        except Exception as e:
-            logger.error(f"❌ 观察候选源阶段失败: {e}")
+   async def observe_phase(self) -> List:
+    logger.info("=" * 50)
+    logger.info("阶段2: 从缓存观察候选源")
+    logger.info("=" * 50)
+    try:
+        observing_count = self.candidate_observer.get_observing_count()
+        if observing_count == 0:
+            logger.info("📭 没有候选源需要观察")
             return []
+        stable_count = len(self.candidate_observer.get_stable_candidates())
+        logger.info(f"📊 候选池状态: {observing_count} 个正在观察，{stable_count} 个已稳定")
+        # 使用整体超时
+        stable_candidates = await asyncio.wait_for(
+            self.candidate_observer.observe_batch_from_cache(
+                batch_size=self.MAX_OBSERVE_PER_RUN
+            ),
+            timeout=150  # 比内部超时稍长
+        )
+        self.stats["last_observe"] = datetime.now()
+        self.stats["observed_count"] = len(stable_candidates)
+        logger.info(f"✅ 观察阶段完成: {len(stable_candidates)} 个源达到稳定标准")
+        return stable_candidates
+    except asyncio.TimeoutError:
+        logger.warning("⚠️ 观察候选源阶段整体超时")
+        return []
+    except Exception as e:
+        logger.error(f"❌ 观察候选源阶段失败: {e}")
+        return []
     
     async def promote_phase(self, stable_candidates: List = None) -> int:
         logger.info("=" * 50)
