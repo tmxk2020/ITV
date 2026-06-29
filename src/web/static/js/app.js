@@ -501,3 +501,27 @@ async function renderQuality(container) {
         }
     }
 }
+
+let progressInterval = null;
+
+function startProgressPolling() {
+    if (progressInterval) clearInterval(progressInterval);
+    progressInterval = setInterval(async function() {
+        try {
+            const resp = await fetch('/api/collection/progress');
+            const data = await resp.json();
+            const bar = document.getElementById('progress-bar');
+            const info = document.getElementById('progress-info');
+            if (bar) {
+                bar.style.width = data.percent + '%';
+                bar.textContent = data.percent + '%';
+            }
+            if (info) {
+                info.textContent = `已处理 ${data.current}/${data.total}，有效 ${data.valid}，无效 ${data.invalid}`;
+            }
+            if (data.finished) {
+                clearInterval(progressInterval);
+            }
+        } catch(e) {}
+    }, 1000);
+}
