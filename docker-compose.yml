@@ -16,6 +16,11 @@ services:
       - MAX_WORKERS=20
       - TIMEOUT=8
       - FFMPEG_ENABLE=true
+      - HTTP_TIMEOUT=8
+      - MAX_RETRY_BEFORE_BLACKLIST=2
+      - SLOW_SPEED_THRESHOLD=3000
+      - HEALTH_HISTORY_DAYS=30
+      - PREDICT_THRESHOLD=0.6
       # 缓存配置
       - CACHE_HOURS=24
       - CACHE_RAW_HOURS=48
