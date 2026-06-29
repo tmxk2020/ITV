@@ -1,131 +1,65 @@
 // src/web/static/js/app.js
-const API_BASE = '/api';
+// IPTV 智能管理面板前端逻辑
 
-// 页面导航
+const API_BASE = '/api';
+let qualityChartInstance = null;
+
+// ========== 页面导航 ==========
 document.addEventListener('DOMContentLoaded', function() {
-    // 默认加载仪表盘
-    loadPage('dashboard');
-    
-    // 导航点击
     document.querySelectorAll('.nav-link[data-page]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             this.classList.add('active');
-            const page = this.dataset.page;
-            loadPage(page);
+            loadPage(this.dataset.page);
         });
     });
-    
-    // 刷新按钮
     document.getElementById('refresh-btn').addEventListener('click', function() {
-        const activePage = document.querySelector('.nav-link.active')?.dataset?.page || 'dashboard';
-        loadPage(activePage);
+        const active = document.querySelector('.nav-link.active');
+        if (active) loadPage(active.dataset.page);
     });
+    loadPage('dashboard');
 });
 
-// 页面加载函数
-function loadPage(page) {
+async function loadPage(page) {
     const content = document.getElementById('page-content');
     const title = document.getElementById('page-title');
-    
-    switch(page) {
-        case 'dashboard':
-            title.textContent = '📊 仪表盘';
-            renderDashboard(content);
-            break;
-        case 'channels':
-            title.textContent = '📋 频道列表';
-            renderChannels(content);
-            break;
-        case 'fixed':
-            title.textContent = '📌 固定源管理';
-            renderFixedSources(content);
-            break;
-        case 'config':
-            title.textContent = '⚙️ 配置管理';
-            renderConfig(content);
-            break;
-        case 'quality':
-            title.textContent = '📈 质量趋势';
-            renderQuality(content);
-            break;
-        default:
-            content.innerHTML = '<div class="alert alert-warning">页面未找到</div>';
+    try {
+        switch(page) {
+            case 'dashboard': title.textContent = '📊 仪表盘'; await renderDashboard(content); break;
+            case 'channels': title.textContent = '📋 频道列表'; await renderChannels(content); break;
+            case 'fixed': title.textContent = '📌 固定源管理'; await renderFixed(content); break;
+            case 'config': title.textContent = '⚙️ 配置管理'; await renderConfig(content); break;
+            case 'quality': title.textContent = '📈 质量趋势'; await renderQuality(content); break;
+            default: content.innerHTML = '<div class="alert alert-warning">页面未找到</div>';
+        }
+    } catch(e) {
+        content.innerHTML = `<div class="alert alert-danger">加载失败: ${e.message}</div>`;
+        console.error(e);
     }
 }
 
-// ========== 仪表盘 ==========
+// ===== 仪表盘 =====
 async function renderDashboard(container) {
+    const resp = await fetch(`${API_BASE}/status`);
+    const data = await resp.json();
     container.innerHTML = `
         <div class="row">
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h6 class="text-muted">稳定源</h6>
-                        <div class="stat-number" id="stat-stable">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h6 class="text-muted">固定源</h6>
-                        <div class="stat-number" id="stat-fixed">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h6 class="text-muted">源池总量</h6>
-                        <div class="stat-number" id="stat-pool">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h6 class="text-muted">候选观察中</h6>
-                        <div class="stat-number" id="stat-observing">--</div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-md-3 mb-3"><div class="card"><div class="card-body text-center"><h6 class="text-muted">稳定源</h6><div class="stat-number">${data.stable_count || 0}</div></div></div></div>
+            <div class="col-md-3 mb-3"><div class="card"><div class="card-body text-center"><h6 class="text-muted">固定源</h6><div class="stat-number">${data.fixed_count || 0}</div></div></div></div>
+            <div class="col-md-3 mb-3"><div class="card"><div class="card-body text-center"><h6 class="text-muted">源池总量</h6><div class="stat-number">${data.pool_total || 0}</div></div></div></div>
+            <div class="col-md-3 mb-3"><div class="card"><div class="card-body text-center"><h6 class="text-muted">候选观察中</h6><div class="stat-number">${data.candidate_observing || 0}</div></div></div></div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">系统信息</div>
-                    <div class="card-body">
-                        <p><strong>最后运行时间：</strong><span id="last-run">--</span></p>
-                        <p><strong>系统状态：</strong><span class="badge bg-success" id="sys-status">运行中</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="card"><div class="card-header">系统信息</div><div class="card-body"><p><strong>最后运行时间：</strong>${data.last_run || '暂无'}</p><p><strong>系统状态：</strong><span class="badge bg-success">运行中</span></p></div></div>
     `;
-    
-    try {
-        const resp = await fetch(`${API_BASE}/status`);
-        const data = await resp.json();
-        document.getElementById('stat-stable').textContent = data.stable_count || 0;
-        document.getElementById('stat-fixed').textContent = data.fixed_count || 0;
-        document.getElementById('stat-pool').textContent = data.pool_total || 0;
-        document.getElementById('stat-observing').textContent = data.candidate_observing || 0;
-        document.getElementById('last-run').textContent = data.last_run || '暂无';
-        document.getElementById('last-update').textContent = '更新于: ' + new Date().toLocaleString();
-    } catch(e) {
-        console.error('加载仪表盘失败', e);
-    }
+    document.getElementById('last-update').textContent = '更新于: ' + new Date().toLocaleString();
 }
 
-// ========== 频道列表 ==========
+// ===== 频道列表 =====
 async function renderChannels(container) {
     container.innerHTML = `
         <div class="row mb-3">
-            <div class="col-md-4">
-                <input type="text" class="form-control" id="search-input" placeholder="搜索频道...">
-            </div>
+            <div class="col-md-4"><input type="text" class="form-control" id="search-input" placeholder="搜索频道..."></div>
             <div class="col-md-3">
                 <select class="form-select" id="category-filter">
                     <option value="">全部分类</option>
@@ -136,44 +70,25 @@ async function renderChannels(container) {
                     <option value="其他">其他</option>
                 </select>
             </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary" id="apply-filter-btn">筛选</button>
-            </div>
+            <div class="col-md-2"><button class="btn btn-primary" id="apply-filter-btn">筛选</button></div>
         </div>
         <div class="table-responsive">
             <table class="table table-hover" id="channel-table">
-                <thead>
-                    <tr>
-                        <th>频道名</th>
-                        <th>分类</th>
-                        <th>延迟(ms)</th>
-                        <th>编码</th>
-                        <th>固定</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody id="channel-tbody">
-                    <tr><td colspan="6" class="text-center">加载中...</td></tr>
-                </tbody>
+                <thead><tr><th>频道名</th><th>分类</th><th>延迟(ms)</th><th>编码</th><th>固定</th><th>操作</th></tr></thead>
+                <tbody id="channel-tbody"><tr><td colspan="6" class="text-center">加载中...</td></tr></tbody>
             </table>
         </div>
     `;
-    
-    // 绑定筛选事件
     document.getElementById('apply-filter-btn').addEventListener('click', loadChannels);
-    document.getElementById('search-input').addEventListener('keyup', function(e) {
-        if(e.key === 'Enter') loadChannels();
-    });
-    
+    document.getElementById('search-input').addEventListener('keyup', e => { if(e.key === 'Enter') loadChannels(); });
     await loadChannels();
-    
+
     async function loadChannels() {
         const search = document.getElementById('search-input').value.trim();
         const category = document.getElementById('category-filter').value;
         let url = `${API_BASE}/channels?`;
         if(search) url += `search=${encodeURIComponent(search)}&`;
         if(category) url += `category=${encodeURIComponent(category)}&`;
-        
         try {
             const resp = await fetch(url);
             const channels = await resp.json();
@@ -188,7 +103,7 @@ async function renderChannels(container) {
                     <td><span class="badge bg-secondary">${ch.category || '其他'}</span></td>
                     <td>${ch.latency || '--'}</td>
                     <td>${ch.codec || '--'}</td>
-                    <td>${ch.is_fixed ? '<span class="badge bg-primary">固定</span>' : '<span class="badge bg-secondary">普通</span>'}</td>
+                    <td>${ch.is_fixed ? '<span class="badge-fixed">固定</span>' : '<span class="badge-normal">普通</span>'}</td>
                     <td>
                         <button class="btn btn-sm btn-outline-info view-quality" data-name="${ch.name}">
                             <i class="fas fa-chart-line"></i>
@@ -196,14 +111,10 @@ async function renderChannels(container) {
                     </td>
                 </tr>
             `).join('');
-            
-            // 查看质量按钮
             document.querySelectorAll('.view-quality').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const name = this.dataset.name;
-                    // 切换到质量趋势页并加载该频道
                     document.querySelector('.nav-link[data-page="quality"]').click();
-                    // 等待页面加载后设置频道
                     setTimeout(() => {
                         const input = document.getElementById('quality-channel-input');
                         if(input) {
@@ -214,41 +125,41 @@ async function renderChannels(container) {
                 });
             });
         } catch(e) {
-            console.error('加载频道失败', e);
+            console.error(e);
         }
     }
 }
 
-// ========== 固定源管理 ==========
-async function renderFixedSources(container) {
+// ===== 固定源管理（含自动优化开关） =====
+async function renderFixed(container) {
     container.innerHTML = `
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h5>添加固定源</h5>
-                <div class="input-group">
+                <div class="input-group mb-2">
                     <input type="text" class="form-control" id="fixed-name" placeholder="频道名 (如 CCTV-1)">
                     <input type="text" class="form-control" id="fixed-url" placeholder="URL">
                     <button class="btn btn-primary" id="add-fixed-btn">添加</button>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="fixed-auto-optimize">
+                    <label class="form-check-label" for="fixed-auto-optimize">允许自动优化（当质量下降时自动替换）</label>
                 </div>
                 <div id="fixed-message" class="mt-2"></div>
             </div>
         </div>
         <div class="table-responsive">
             <table class="table table-hover" id="fixed-table">
-                <thead>
-                    <tr><th>频道名</th><th>URL</th><th>操作</th></tr>
-                </thead>
-                <tbody id="fixed-tbody">
-                    <tr><td colspan="3" class="text-center">加载中...</td></tr>
-                </tbody>
+                <thead><tr><th>频道名</th><th>URL</th><th>自动优化</th><th>操作</th></tr></thead>
+                <tbody id="fixed-tbody"><tr><td colspan="4" class="text-center">加载中...</td></tr></tbody>
             </table>
         </div>
     `;
-    
     // 添加固定源
     document.getElementById('add-fixed-btn').addEventListener('click', async function() {
         const name = document.getElementById('fixed-name').value.trim();
         const url = document.getElementById('fixed-url').value.trim();
+        const auto_optimize = document.getElementById('fixed-auto-optimize').checked;
         if(!name || !url) {
             document.getElementById('fixed-message').innerHTML = '<div class="alert alert-warning">请填写完整信息</div>';
             return;
@@ -257,13 +168,14 @@ async function renderFixedSources(container) {
             const resp = await fetch(`${API_BASE}/fixed_sources`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name, url})
+                body: JSON.stringify({name, url, auto_optimize})
             });
             const data = await resp.json();
             if(data.success) {
                 document.getElementById('fixed-message').innerHTML = `<div class="alert alert-success">${data.message}</div>`;
                 document.getElementById('fixed-name').value = '';
                 document.getElementById('fixed-url').value = '';
+                document.getElementById('fixed-auto-optimize').checked = false;
                 loadFixedList();
             } else {
                 document.getElementById('fixed-message').innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
@@ -272,40 +184,88 @@ async function renderFixedSources(container) {
             document.getElementById('fixed-message').innerHTML = '<div class="alert alert-danger">添加失败</div>';
         }
     });
-    
     await loadFixedList();
-    
+
     async function loadFixedList() {
         try {
             const resp = await fetch(`${API_BASE}/fixed_sources`);
             const data = await resp.json();
             const tbody = document.getElementById('fixed-tbody');
-            const entries = Object.entries(data);
+            // data 格式: { "CCTV-1": {"url": "...", "auto_optimize": true}, ... }
+            // 兼容旧格式: 若返回的是字符串URL，则转换为对象
+            let entries = Object.entries(data);
+            if (entries.length && typeof entries[0][1] === 'string') {
+                // 旧格式，转换为新格式
+                const newData = {};
+                for (const [name, url] of entries) {
+                    newData[name] = { url, auto_optimize: false };
+                }
+                entries = Object.entries(newData);
+            }
             if(!entries.length) {
-                tbody.innerHTML = '<tr><td colspan="3" class="text-center">暂无固定源</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center">暂无固定源</td></tr>';
                 return;
             }
-            tbody.innerHTML = entries.map(([name, url]) => `
+            tbody.innerHTML = entries.map(([name, info]) => {
+                const url = typeof info === 'string' ? info : info.url;
+                const autoOpt = typeof info === 'string' ? false : !!info.auto_optimize;
+                return `
                 <tr>
                     <td><strong>${name}</strong></td>
                     <td><code>${url}</code></td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input toggle-optimize" type="checkbox" data-name="${name}" ${autoOpt ? 'checked' : ''}>
+                        </div>
+                    </td>
                     <td>
                         <button class="btn btn-sm btn-danger delete-fixed" data-name="${name}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
                 </tr>
-            `).join('');
-            
+            `}).join('');
+
+            // 绑定自动优化切换事件
+            document.querySelectorAll('.toggle-optimize').forEach(cb => {
+                cb.addEventListener('change', async function() {
+                    const name = this.dataset.name;
+                    const auto_optimize = this.checked;
+                    try {
+                        // 使用 PUT 或 POST 更新 auto_optimize
+                        const resp = await fetch(`${API_BASE}/fixed_sources/${encodeURIComponent(name)}/optimize`, {
+                            method: 'PUT',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({auto_optimize})
+                        });
+                        const data = await resp.json();
+                        if(data.success) {
+                            document.getElementById('fixed-message').innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                        } else {
+                            // 回退
+                            this.checked = !auto_optimize;
+                            document.getElementById('fixed-message').innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                        }
+                    } catch(e) {
+                        this.checked = !auto_optimize;
+                        document.getElementById('fixed-message').innerHTML = '<div class="alert alert-danger">更新失败</div>';
+                    }
+                });
+            });
+
+            // 删除固定源
             document.querySelectorAll('.delete-fixed').forEach(btn => {
                 btn.addEventListener('click', async function() {
                     const name = this.dataset.name;
-                    if(!confirm(`确定删除固定源 ${name} 吗？`)) return;
+                    if(!confirm(`确定移除固定源 ${name} 吗？`)) return;
                     try {
-                        const resp = await fetch(`${API_BASE}/fixed_sources/${name}`, {method: 'DELETE'});
-                        if(resp.ok) {
+                        const resp = await fetch(`${API_BASE}/fixed_sources/${encodeURIComponent(name)}`, {method: 'DELETE'});
+                        const data = await resp.json();
+                        if(data.success) {
                             loadFixedList();
-                            document.getElementById('fixed-message').innerHTML = `<div class="alert alert-success">已删除 ${name}</div>`;
+                            document.getElementById('fixed-message').innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                        } else {
+                            alert(data.error || '删除失败');
                         }
                     } catch(e) {
                         alert('删除失败');
@@ -318,7 +278,7 @@ async function renderFixedSources(container) {
     }
 }
 
-// ========== 配置管理 ==========
+// ===== 配置管理 =====
 async function renderConfig(container) {
     container.innerHTML = `
         <div class="card">
@@ -348,12 +308,10 @@ async function renderConfig(container) {
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="cfg-ffmpeg" name="ffmpeg_enable">
-                                <label class="form-check-label">启用 ffmpeg 深度验证</label>
-                            </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="cfg-ffmpeg" name="ffmpeg_enable">
+                            <label class="form-check-label">启用 ffmpeg 深度验证</label>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">保存配置</button>
@@ -362,20 +320,16 @@ async function renderConfig(container) {
             </div>
         </div>
     `;
-    
     // 加载当前配置
     try {
         const resp = await fetch(`${API_BASE}/config`);
         const config = await resp.json();
-        document.getElementById('cfg-max-workers').value = config.max_workers;
-        document.getElementById('cfg-timeout').value = config.timeout;
-        document.getElementById('cfg-max-sources').value = config.max_sources_per_channel;
-        document.getElementById('cfg-demo-mode').value = config.demo_match_mode;
-        document.getElementById('cfg-ffmpeg').checked = config.ffmpeg_enable;
-    } catch(e) {
-        console.error('加载配置失败', e);
-    }
-    
+        document.getElementById('cfg-max-workers').value = config.max_workers || 20;
+        document.getElementById('cfg-timeout').value = config.timeout || 8;
+        document.getElementById('cfg-max-sources').value = config.max_sources_per_channel || 3;
+        document.getElementById('cfg-demo-mode').value = config.demo_match_mode || 'contains';
+        document.getElementById('cfg-ffmpeg').checked = config.ffmpeg_enable || false;
+    } catch(e) { console.error('加载配置失败', e); }
     // 提交表单
     document.getElementById('config-form').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -401,7 +355,7 @@ async function renderConfig(container) {
     });
 }
 
-// ========== 质量趋势 ==========
+// ===== 质量趋势 =====
 async function renderQuality(container) {
     container.innerHTML = `
         <div class="row mb-3">
@@ -422,41 +376,31 @@ async function renderQuality(container) {
         <div class="card">
             <div class="card-header" id="quality-chart-title">请选择频道查看延迟趋势</div>
             <div class="card-body">
-                <canvas id="quality-chart" height="300"></canvas>
+                <canvas id="quality-chart" height="250"></canvas>
             </div>
         </div>
     `;
-    
-    let chartInstance = null;
-    
-    document.getElementById('quality-search-btn').addEventListener('click', async function() {
+    document.getElementById('quality-search-btn').addEventListener('click', loadQuality);
+    document.getElementById('quality-channel-input').addEventListener('keyup', e => { if(e.key === 'Enter') loadQuality(); });
+
+    async function loadQuality() {
         const name = document.getElementById('quality-channel-input').value.trim();
         if(!name) return;
         const days = document.getElementById('quality-days').value;
-        await loadQuality(name, days);
-    });
-    
-    document.getElementById('quality-channel-input').addEventListener('keyup', function(e) {
-        if(e.key === 'Enter') document.getElementById('quality-search-btn').click();
-    });
-    
-    async function loadQuality(name, days) {
         try {
             const resp = await fetch(`${API_BASE}/quality/${encodeURIComponent(name)}?days=${days}`);
             const data = await resp.json();
             if(!data || !data.length) {
                 document.getElementById('quality-chart-title').textContent = `"${name}" 暂无质量数据`;
-                if(chartInstance) { chartInstance.destroy(); chartInstance = null; }
+                if(qualityChartInstance) { qualityChartInstance.destroy(); qualityChartInstance = null; }
                 return;
             }
             document.getElementById('quality-chart-title').textContent = `"${name}" 延迟趋势 (最近${days}天)`;
             const labels = data.map(d => new Date(d.timestamp).toLocaleString());
             const latencies = data.map(d => d.latency || 0);
-            const successes = data.map(d => d.success ? '成功' : '失败');
-            
-            if(chartInstance) chartInstance.destroy();
             const ctx = document.getElementById('quality-chart').getContext('2d');
-            chartInstance = new Chart(ctx, {
+            if(qualityChartInstance) qualityChartInstance.destroy();
+            qualityChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -466,7 +410,7 @@ async function renderQuality(container) {
                         borderColor: 'rgb(13, 110, 253)',
                         backgroundColor: 'rgba(13, 110, 253, 0.1)',
                         tension: 0.2,
-                        pointBackgroundColor: latencies.map((v, i) => data[i].success ? 'green' : 'red'),
+                        pointBackgroundColor: data.map(d => d.success ? 'green' : 'red'),
                         pointRadius: 3,
                     }]
                 },
@@ -484,44 +428,13 @@ async function renderQuality(container) {
                         }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#adb5bd' }
-                        },
-                        x: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#adb5bd', maxTicksLimit: 20 }
-                        }
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#adb5bd' } },
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#adb5bd', maxTicksLimit: 15 } }
                     }
                 }
             });
         } catch(e) {
-            console.error('加载质量数据失败', e);
+            alert('查询失败: ' + e.message);
         }
     }
-}
-
-let progressInterval = null;
-
-function startProgressPolling() {
-    if (progressInterval) clearInterval(progressInterval);
-    progressInterval = setInterval(async function() {
-        try {
-            const resp = await fetch('/api/collection/progress');
-            const data = await resp.json();
-            const bar = document.getElementById('progress-bar');
-            const info = document.getElementById('progress-info');
-            if (bar) {
-                bar.style.width = data.percent + '%';
-                bar.textContent = data.percent + '%';
-            }
-            if (info) {
-                info.textContent = `已处理 ${data.current}/${data.total}，有效 ${data.valid}，无效 ${data.invalid}`;
-            }
-            if (data.finished) {
-                clearInterval(progressInterval);
-            }
-        } catch(e) {}
-    }, 1000);
 }
