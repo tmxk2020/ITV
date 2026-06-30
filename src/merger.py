@@ -170,7 +170,12 @@ def merge_channels_by_name(valid_channels: list) -> list:
                 "logo": logo_matcher.get_logo_url(name),
                 "is_fixed": True,
             })
-    
+
+        # ========== 新增：强制 url 为字符串 ==========
+    for ch in merged:
+        if isinstance(ch.get("url"), list):
+            ch["url"] = ch["url"][0] if ch["url"] else ""
+            
     # 统计固定源使用情况
     fixed_count = sum(1 for ch in merged if ch.get("is_fixed"))
     if fixed_count > 0:
