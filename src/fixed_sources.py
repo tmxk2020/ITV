@@ -7,7 +7,7 @@ CCTV_FIXED_SOURCES = {
          "http://69.30.245.50/live/cctv1.m3u8",
         "http://112.27.235.94:8000/hls/1/index.m3u8",
         "http://112.46.85.60:8009/hls/501/index.m3u8",
-        "http://182.150.23.74:808/hls/1/index.m3u8“
+        "http://182.150.23.74:808/hls/1/index.m3u8"
     ],
     "CCTV-2": [
          "http://69.30.245.50/live/cctv2.m3u8",
