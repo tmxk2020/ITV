@@ -1,6 +1,7 @@
 # src/demo_filter.py
 # Demo 频道筛选与排序模块，支持拼音匹配和省份自动归类
 # 港澳台统一归入 🌊港·澳·台 分类
+# 日本频道归入 日本频道 分类
 # 未匹配频道按省份自动分配到对应分类
 
 import re
@@ -93,9 +94,17 @@ def detect_province(channel_name: str) -> str:
     """
     检测频道名中的省份/城市，返回省份名（如"北京"）
     港澳台返回 "港澳台" 以便统一归类
+    日本返回 "日本"
     """
     name = channel_name
-    # 先检测港澳台
+    
+    # 先检测日本（关键词：NHK, Japan, Tokyo, Fuji, TBS, TV Asahi, NTV, 日本等）
+    jp_keywords = ["NHK", "Japan", "Tokyo", "Fuji", "TBS", "TV Asahi", "NTV", "日本"]
+    for kw in jp_keywords:
+        if kw in name:
+            return "日本"
+    
+    # 检测港澳台
     hmtj_keywords = ["香港", "澳门", "台湾", "港", "澳", "台"]
     for kw in hmtj_keywords:
         if kw in name:
@@ -233,12 +242,20 @@ def get_demo_category_for_province(province: str, demo_order: List[Tuple[str, st
     若 demo 中有 "☘️北京频道,#genre#" 则返回 "☘️北京频道"
     否则返回 "☘️北京频道"
     港澳台统一返回 "🌊港·澳·台"
+    日本返回 "日本频道"
     """
     # 港澳台特殊处理
     if province == "港澳台":
         return "🌊港·澳·台"
-    
-    # 尝试多种格式
+    # 日本特殊处理
+    if province == "日本":
+        # 尝试在 demo 中查找 "日本频道" 或 "日本"
+        for cat, _ in demo_order:
+            if cat == "日本频道" or cat == "日本":
+                return cat
+        # 若没有，返回默认 "日本频道"
+        return "日本频道"
+    # 其他省份
     candidates = [
         f"☘️{province}频道",
         f"{province}频道",
@@ -249,7 +266,6 @@ def get_demo_category_for_province(province: str, demo_order: List[Tuple[str, st
         for cand in candidates:
             if cat.startswith(cand) or cat == cand:
                 return cat
-    # 若没有，返回默认格式
     return f"☘️{province}频道"
 
 
@@ -259,7 +275,8 @@ def filter_and_order_by_demo(channels: list) -> tuple:
     1. 匹配 demo 中的频道（支持拼音）
     2. 未匹配的根据省份/城市自动归类到对应省份分类（包括地级市映射）
     3. 港澳台统一归入 🌊港·澳·台
-    4. 如果 demo_order 为空，则使用 classify_and_filter 按分类输出所有频道（仅保留四大类）
+    4. 日本归入 日本频道
+    5. 如果 demo_order 为空，则使用 classify_and_filter 按分类输出所有频道（仅保留四大类）
     """
     demo_order = parse_demo_order_with_categories()
     if not demo_order:
@@ -314,7 +331,7 @@ def filter_and_order_by_demo(channels: list) -> tuple:
                 logger.debug(f"🎯 匹配: {ch['name']} -> {category}/{demo_name}")
                 break
 
-    # 第二遍：未匹配频道自动归类到省份分类（港澳台统一归入 🌊港·澳·台）
+    # 第二遍：未匹配频道自动归类到省份分类（港澳台统一归入 🌊港·澳·台，日本归入 日本频道）
     remaining = []
     province_appended = {}
     
