@@ -1,13 +1,12 @@
 # src/special_categories.py
-"""特定分类采集模块 - 从 abc123 和 iptv-org 源采集指定类别，并过滤慢速/无效源"""
+"""特定分类采集模块 - 从 abc123 和 iptv-org 源采集指定类别，并经过测速过滤后追加"""
 
 import re
-import asyncio
 from typing import List, Dict, Tuple
 from pathlib import Path
 from src.logger import logger
-from src.config import SLOW_SPEED_THRESHOLD, HTTP_TIMEOUT
-
+from src.speed_tester import test_channels_concurrent
+from src.config import SLOW_SPEED_THRESHOLD
 
 # 需要采集的分类关键词（小写）
 TARGET_CATEGORIES = [
@@ -161,98 +160,42 @@ async def fetch_iptvorg_jp_sports() -> List[Tuple[str, str]]:
 
 
 async def filter_channels_by_speed(
-    channels: List[Tuple[str, str]],
-    max_latency: int = SLOW_SPEED_THRESHOLD,
-    timeout: int = HTTP_TIMEOUT
-) -> List[Tuple[str, str]]:
+    channels: List[Dict],
+    db,
+    max_latency: int = SLOW_SPEED_THRESHOLD
+) -> List[Dict]:
     """
-    对频道列表进行速度过滤，只保留延迟低于 max_latency 的有效源
-    返回过滤后的列表
+    对频道列表进行并发测速过滤，只保留延迟低于 max_latency 的有效频道
     """
     if not channels:
         return []
     
-    # 导入测速函数（避免循环依赖）
-    from src.speed_tester import probe_channel_advanced
-    import aiohttp
+    # 构建测速所需的字典格式
+    channels_dict = {}
+    for ch in channels:
+        key = f"{ch['name']}|{ch['url']}"
+        channels_dict[key] = {"name": ch["name"], "url": ch["url"]}
     
-    semaphore = asyncio.Semaphore(20)  # 限制并发
-    valid_channels = []
+    logger.info(f"⏳ 开始对 {len(channels_dict)} 个智能补充频道进行测速过滤...")
     
-    async def check_one(name, url):
-        async with semaphore:
-            # 构造 channel 字典
-            channel = {"name": name, "url": url}
-            # 调用测速函数，传入 db=None 表示不使用缓存
-            try:
-                # 注意：probe_channel_advanced 返回 (channel, latency, is_valid, speed, is_slow)
-                # 但最新版本可能返回不同，我们适配一下
-                # 如果函数签名变化，这里做简单处理
-                import inspect
-                sig = inspect.signature(probe_channel_advanced)
-                if len(sig.parameters) == 3:
-                    # 旧版本：probe_channel_advanced(session, channel, db)
-                    # 这里我们需要传入 session
-                    # 但由于我们无法在闭包中传递 session，我们直接用内部函数
-                    # 重新实现简化版测速
-                    return await _quick_check(name, url, timeout)
-                else:
-                    # 新版：probe_channel_advanced(session, channel, db)
-                    # 我们不用它，用 _quick_check
-                    return await _quick_check(name, url, timeout)
-            except Exception as e:
-                logger.debug(f"测速异常 {name}: {e}")
-                return None
+    # 调用现有测速函数（会使用缓存）
+    valid = await test_channels_concurrent(channels_dict, db=db)
     
-    async def _quick_check(name, url, timeout):
-        """快速 HEAD + 小段下载检查"""
-        import aiohttp
-        try:
-            async with aiohttp.ClientSession() as session:
-                # HEAD 请求
-                async with session.head(url, timeout=timeout, allow_redirects=True) as resp:
-                    if resp.status != 200:
-                        return None
-                    content_type = resp.headers.get("content-type", "").lower()
-                    if "video" not in content_type and "mpegurl" not in content_type and "x-mpegurl" not in content_type:
-                        return None
-                # 小段下载
-                start = asyncio.get_event_loop().time()
-                async with session.get(url, timeout=timeout, headers={"Range": "bytes=0-65535"}) as resp:
-                    if resp.status not in [200, 206]:
-                        return None
-                    data = await resp.content.read(65536)
-                    # 检查是否视频内容
-                    if data.startswith(b'#EXTM3U') or b'#EXTINF' in data:
-                        pass
-                    else:
-                        # 检查文件头
-                        if not any(data.startswith(sig) for sig in [
-                            b'\x00\x00\x00\x18ftyp', b'\x00\x00\x00\x1cftyp',
-                            b'\x1a\x45\xdf\xa3', b'\x47\x40\x00', b'FLV'
-                        ]):
-                            return None
-                    latency = int((asyncio.get_event_loop().time() - start) * 1000)
-                    if latency < max_latency:
-                        return (name, url)
-                    else:
-                        return None
-        except Exception:
-            return None
+    # 过滤出延迟小于阈值的频道
+    filtered = [ch for ch in valid if ch.get("latency", 9999) <= max_latency]
     
-    # 创建任务
-    tasks = [check_one(name, url) for name, url in channels]
-    results = await asyncio.gather(*tasks)
+    removed = len(channels) - len(filtered)
+    if removed > 0:
+        logger.info(f"📊 测速过滤: {len(channels)} -> {len(filtered)}，移除 {removed} 个无效或慢速源")
     
-    valid_channels = [r for r in results if r is not None]
-    return valid_channels
+    return filtered
 
 
 def append_special_to_output(
     special_data: Dict[str, List[Tuple[str, str]]],
     output_dir: Path
 ) -> int:
-    """将特殊分类追加到输出文件"""
+    """将特殊分类追加到输出文件（仅追加到 tv.m3u 和 tv.txt）"""
     if not special_data:
         return 0
 
@@ -260,8 +203,9 @@ def append_special_to_output(
     m3u_path = output_dir / "tv.m3u"
     txt_path = output_dir / "tv.txt"
 
+    # 追加到 M3U
     with open(m3u_path, 'a', encoding='utf-8') as f:
-        f.write(f"\n# ========== 智能补充分类 ==========\n")
+        f.write(f"\n# ========== 智能补充分类（经测速过滤） ==========\n")
         for cat, channels in special_data.items():
             if not channels:
                 continue
@@ -271,8 +215,9 @@ def append_special_to_output(
                 f.write(f'#EXTINF:-1 group-title="{display_name}",{name}\n{url}\n')
                 total_appended += 1
 
+    # 追加到 TXT
     with open(txt_path, 'a', encoding='utf-8') as f:
-        f.write(f"\n# ========== 智能补充分类 ==========\n")
+        f.write(f"\n# ========== 智能补充分类（经测速过滤） ==========\n")
         for cat, channels in special_data.items():
             if not channels:
                 continue
@@ -286,56 +231,68 @@ def append_special_to_output(
 
 async def collect_and_append_special_categories(output_dir: Path, db=None) -> Dict[str, int]:
     """
-    主函数：从 abc123 和 iptv-org 采集指定分类，过滤慢速/无效源，然后追加
+    主函数：从 abc123 和 iptv-org 采集指定分类，经测速过滤后追加到输出文件
     """
     logger.info("🧠 开始智能补充采集（从 abc123 + iptv-org 体育专类 + 日本体育频道）...")
 
-    # 1. 采集
+    # 1. 从 abc123 获取所有目标分类
     abc123_data = await fetch_abc123_source()
-    iptv_sports = await fetch_iptvorg_sports()
-    iptv_jp_sports = await fetch_iptvorg_jp_sports()
-
-    # 合并
-    combined_data = abc123_data.copy()
-    if "体育竞赛" not in combined_data:
-        combined_data["体育竞赛"] = []
     
-    existing_urls = {url for _, url in combined_data["体育竞赛"]}
+    # 2. 从 iptv-org 主列表获取体育频道
+    iptv_sports = await fetch_iptvorg_sports()
+    
+    # 3. 从 iptv-org 日语源获取日本体育频道
+    iptv_jp_sports = await fetch_iptvorg_jp_sports()
+    
+    # 4. 合并到 combined_data（暂时用列表存放所有频道，分类信息保留）
+    all_channels = []  # 每个元素为 {"name": name, "url": url, "category": cat}
+    for cat, channels in abc123_data.items():
+        for name, url in channels:
+            all_channels.append({"name": name, "url": url, "category": cat})
+    
+    # 添加体育频道（去重）
+    existing_urls = {ch["url"] for ch in all_channels}
     for name, url in iptv_sports:
         if url not in existing_urls:
-            combined_data["体育竞赛"].append((name, url))
+            all_channels.append({"name": name, "url": url, "category": "体育竞赛"})
             existing_urls.add(url)
     for name, url in iptv_jp_sports:
         if url not in existing_urls:
-            combined_data["体育竞赛"].append((name, url))
+            all_channels.append({"name": name, "url": url, "category": "体育竞赛"})
             existing_urls.add(url)
-
-    # 2. 对所有分类进行速度过滤
-    filtered_data = {}
-    logger.info("⏱️ 开始对智能补充频道进行速度过滤...")
-    for cat, channels in combined_data.items():
-        if not channels:
-            continue
-        # 过滤慢速/无效源
-        valid = await filter_channels_by_speed(channels)
-        if valid:
-            filtered_data[cat] = valid
-        else:
-            logger.info(f"   {cat}: 所有频道均未通过速度测试，已丢弃")
-
-    if not filtered_data:
-        logger.warning("⚠️ 速度过滤后无任何可用频道")
+    
+    if not all_channels:
+        logger.warning("⚠️ 未获取到任何智能补充分类内容")
         return {}
-
-    # 统计
-    stats = {cat: len(ch) for cat, ch in filtered_data.items()}
+    
+    # 5. 测速过滤
+    filtered_channels = await filter_channels_by_speed(all_channels, db)
+    
+    if not filtered_channels:
+        logger.warning("⚠️ 测速过滤后无有效频道")
+        return {}
+    
+    # 6. 按分类重组
+    result = {cat: [] for cat in TARGET_CATEGORIES}
+    for ch in filtered_channels:
+        cat = ch.get("category", "其他")
+        if cat in result:
+            result[cat].append((ch["name"], ch["url"]))
+        else:
+            # 若分类不存在，放入“其他”（但不会发生）
+            pass
+    
+    # 移除空分类
+    result = {k: v for k, v in result.items() if v}
+    
+    # 7. 统计并追加
+    stats = {cat: len(channels) for cat, channels in result.items()}
     total = sum(stats.values())
-    logger.info(f"📊 速度过滤后统计: 共 {total} 个有效频道")
+    logger.info(f"📊 智能补充统计（测速后）: 共 {total} 个有效频道")
     for cat, count in stats.items():
         logger.info(f"   {CATEGORY_DISPLAY_NAME.get(cat, cat)}: {count} 个频道")
-
-    # 3. 追加到输出文件
-    appended = append_special_to_output(filtered_data, output_dir)
-    logger.info(f"✅ 已将 {appended} 个智能补充频道（已过滤慢速源）追加到输出文件")
-
+    
+    appended = append_special_to_output(result, output_dir)
+    logger.info(f"✅ 已将 {appended} 个智能补充频道追加到输出文件")
+    
     return stats
