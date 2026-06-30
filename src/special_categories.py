@@ -2,11 +2,16 @@
 """特定分类采集模块 - 从 abc123 和 iptv-org 源采集指定类别，并经过测速过滤后追加"""
 
 import re
+import os
 from typing import List, Dict, Tuple
 from pathlib import Path
 from src.logger import logger
 from src.speed_tester import test_channels_concurrent
 from src.config import SLOW_SPEED_THRESHOLD
+
+# 从环境变量读取是否启用测速过滤
+ENABLE_SPEED_FILTER = os.getenv("ENABLE_SPEED_FILTER", "true").lower() == "true"
+SPEED_FILTER_MAX_LATENCY = int(os.getenv("SPEED_FILTER_MAX_LATENCY", SLOW_SPEED_THRESHOLD))
 
 # 需要采集的分类关键词（小写）
 TARGET_CATEGORIES = [
@@ -161,13 +166,21 @@ async def fetch_iptvorg_jp_sports() -> List[Tuple[str, str]]:
 
 async def filter_channels_by_speed(
     channels: List[Dict],
-    max_latency: int = SLOW_SPEED_THRESHOLD
+    max_latency: int = SPEED_FILTER_MAX_LATENCY
 ) -> List[Dict]:
     """
     对频道列表进行并发测速过滤，只保留延迟低于 max_latency 的有效频道
     """
     if not channels:
         return []
+    
+    # 如果不启用测速过滤，直接返回所有频道
+    if not ENABLE_SPEED_FILTER:
+        logger.info("⏭️ 测速过滤已禁用，保留所有频道")
+        return channels
+    
+    # 构建 URL -> category 映射（用于恢复分类）
+    url_to_category = {ch["url"]: ch.get("category", "其他") for ch in channels}
     
     # 构建测速所需的字典格式
     channels_dict = {}
@@ -177,8 +190,12 @@ async def filter_channels_by_speed(
     
     logger.info(f"⏳ 开始对 {len(channels_dict)} 个智能补充频道进行测速过滤...")
     
-    # 调用现有测速函数（不传递 db 参数，内部会自动获取）
+    # 调用现有测速函数
     valid = await test_channels_concurrent(channels_dict)
+    
+    # 给有效频道补回 category 字段
+    for ch in valid:
+        ch["category"] = url_to_category.get(ch["url"], "其他")
     
     # 过滤出延迟小于阈值的频道
     filtered = [ch for ch in valid if ch.get("latency", 9999) <= max_latency]
@@ -186,6 +203,8 @@ async def filter_channels_by_speed(
     removed = len(channels) - len(filtered)
     if removed > 0:
         logger.info(f"📊 测速过滤: {len(channels)} -> {len(filtered)}，移除 {removed} 个无效或慢速源")
+    else:
+        logger.info(f"📊 测速过滤: 全部 {len(filtered)} 个频道均有效")
     
     return filtered
 
@@ -264,7 +283,7 @@ async def collect_and_append_special_categories(output_dir: Path, db=None) -> Di
         logger.warning("⚠️ 未获取到任何智能补充分类内容")
         return {}
     
-    # 5. 测速过滤（不传递 db 参数）
+    # 5. 测速过滤
     filtered_channels = await filter_channels_by_speed(all_channels)
     
     if not filtered_channels:
@@ -278,8 +297,10 @@ async def collect_and_append_special_categories(output_dir: Path, db=None) -> Di
         if cat in result:
             result[cat].append((ch["name"], ch["url"]))
         else:
-            # 若分类不存在，放入“其他”（但不会发生）
-            pass
+            # 如果分类不在预定义中，单独创建一个 "其他" 分类（但不会发生）
+            if "其他" not in result:
+                result["其他"] = []
+            result["其他"].append((ch["name"], ch["url"]))
     
     # 移除空分类
     result = {k: v for k, v in result.items() if v}
