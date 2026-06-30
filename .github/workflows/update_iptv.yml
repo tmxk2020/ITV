@@ -91,18 +91,18 @@ jobs:
         echo "🚀 推送到 main 分支（带重试）..."
         for i in 1 2 3; do
           echo "尝试第 $i 次推送..."
-          if git push origin HEAD:main; then
+          if git push origin refs/heads/main; then
             echo "✅ 推送成功"
             exit 0
           else
             echo "⚠️ 推送失败，拉取最新更改后重试..."
-            git pull origin main --rebase --autostash
+            git push origin refs/heads/main --rebase --autostash
             sleep 2
           fi
         done
         
         echo "⚠️ 重试后仍失败，尝试安全强制推送..."
-        git push --force-with-lease origin HEAD:main
+        git push --force-with-lease origin refs/heads/main
         echo "✅ 安全强制推送成功"
 
     - name: 部署到 GitHub Pages
