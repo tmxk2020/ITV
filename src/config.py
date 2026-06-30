@@ -46,6 +46,7 @@ RAW_SOURCES = [
 # 直接访问的源（特殊处理）
 DIRECT_SOURCES = [
     "https://tv.19860519.xyz/abc123",
+    "https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u",
 ]
 
 # ========== 日本频道源（新增，保留不被过滤） ==========
