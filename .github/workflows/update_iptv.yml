@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 jobs:
   update-iptv:
@@ -27,16 +28,6 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-    - name: 删除冲突的 main 标签
-      run: |
-        if git tag | grep -q "^main$"; then
-          echo "发现冲突的 'main' 标签，正在删除..."
-          git tag -d main
-          echo "✅ 冲突标签已删除。"
-        else
-          echo "✅ 未发现冲突的 'main' 标签。"
-        fi
-
     - name: 设置 Python
       uses: actions/setup-python@v5
       with:
@@ -48,6 +39,15 @@ jobs:
         pip install -r requirements.txt
         sudo apt-get update
         sudo apt-get install -y ffmpeg
+
+    - name: 清理未跟踪文件（避免冲突）
+      run: |
+        # 删除所有未跟踪的文件和目录（包括 data/ output/ *.db __pycache__/ 等）
+        git clean -fd
+        # 同时删除 .gitignore 中定义的缓存文件（如果有）
+        rm -rf data/ output/ *.db *.log 2>/dev/null || true
+        # 确保关键目录存在
+        mkdir -p data output
 
     - name: 运行采集程序
       run: python -m src.run
@@ -64,41 +64,30 @@ jobs:
         IPTV_ORG_ENABLE: true
         ENABLE_GLOBAL_CHANNELS: false
         ENABLE_JSON_OUTPUT: true
-        ENABLE_LITE_VERSION: false
-        ENABLE_EPG_OUTPUT: false
+        ENABLE_LITE_VERSION: true
+        ENABLE_EPG_OUTPUT: true
         AUTONOMOUS_MODE: true
         AUTO_UPDATE_STABLE: true
         AUTO_REPLACE_FAILED: true
         QUALITY_CHECK_INTERVAL: 24
         CANDIDATE_OBSERVATION_HOURS: 24
-        CANDIDATE_MIN_SUCCESS: 3
-        CANDIDATE_MIN_SUCCESS_RATE: 0.5
-        CANDIDATE_MAX_LATENCY: 3000
-
-    - name: 准备提交（忽略动态文件的冲突）
-      run: |
-        # 从索引中移除动态文件（但保留本地工作区）
-        git rm -r --cached data/ 2>/dev/null || true
-        git rm --cached iptv_cache.db 2>/dev/null || true
-        git rm -r --cached output/ 2>/dev/null || true
-        git rm -r --cached */__pycache__/ 2>/dev/null || true
-        git rm -r --cached src/__pycache__/ 2>/dev/null || true
+        CANDIDATE_MIN_SUCCESS: 10
+        CANDIDATE_MIN_SUCCESS_RATE: 0.8
+        CANDIDATE_MAX_LATENCY: 2000
 
     - name: 提交并推送更改到 main 分支
       run: |
+        # 拉取最新远程更改（使用 rebase 避免冲突）
         echo "🔄 拉取远程最新更改..."
         git pull origin main --rebase --autostash || echo "拉取失败或无更新，继续..."
         
+        # 添加所有更改（只添加必要的文件）
         echo "📝 检查并添加更改（仅添加必要的文件）..."
-        # 只添加源码文件和配置文件
-        git add src/*.py
-        git add src/*/*.py
-        git add alias.txt blacklist.txt demo.txt
-        git add .gitignore
-        git add requirements.txt Dockerfile docker-compose.yml entrypoint.sh
+        git add output/*.m3u output/*.txt output/*.json data/*.db 2>/dev/null || true
+        git add -A  # 如果上述通配符不匹配，则添加所有变更（但已被 .gitignore 过滤）
         
         if git diff --cached --quiet; then
-          echo "✅ 没有检测到新更改（源码部分）"
+          echo "✅ 没有检测到新更改"
           exit 0
         fi
         
@@ -122,13 +111,13 @@ jobs:
         git push --force-with-lease origin main
         echo "✅ 安全强制推送成功"
 
-    - name: 上传输出文件作为 artifacts（可选）
-      uses: actions/upload-artifact@v4
+    - name: 部署到 GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        name: iptv-output
-        path: |
-          output/*.m3u
-          output/*.txt
-          output/*.json
-          output/*.log
-        retention-days: 7
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output
+        publish_branch: gh-pages
+        keep_files: false
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: '更新 IPTV 播放列表 - ${{ github.run_id }}'
