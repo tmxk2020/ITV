@@ -1,24 +1,23 @@
-__pycache__
+# 动态数据和缓存
+data/
+iptv_cache.db
+*.db
+*.db-journal
+
+# 输出文件
+output/
+*.m3u
+*.txt
+*.json
+*.log
+
+# Python 缓存
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-*.so
-*.egg
-*.egg-info
-dist
-build
-.venv
-venv
-ENV
+*.pyc
+
+# 其他
 .env
-.git
-.gitignore
-README.md
 .DS_Store
-*.log
-data/
-output/
-# 不要排除 src/web/
-iptv_cache.db
-config.json
