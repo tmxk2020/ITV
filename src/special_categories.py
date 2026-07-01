@@ -1,12 +1,15 @@
 # src/special_categories.py
-"""特定分类采集模块 - 从 abc123 源采集指定类别，并验证频道可用性"""
+"""特定分类采集模块 - 从 abc123 源采集指定类别，并验证频道可用性
+   增加对地方频道的省份归类支持
+"""
 
 import re
 import asyncio
 import aiohttp
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from pathlib import Path
 from src.logger import logger
+from src.classifier import PROVINCES  # 导入省份列表
 
 # ========== 需要采集的分类关键词及匹配规则 ==========
 TARGET_CATEGORIES = [
@@ -61,16 +64,36 @@ PROBE_TIMEOUT = 5          # 每个频道探测超时(秒)
 PROBE_CONCURRENCY = 20     # 并发探测数
 
 
+def detect_province_from_category(cat_name: str) -> Optional[str]:
+    """
+    检测分类名中的省份（如“吉林地方” -> “吉林”）
+    返回省份名，如果未检测到则返回 None
+    """
+    for prov in PROVINCES:
+        if cat_name.startswith(prov) and "地方" in cat_name:
+            return prov
+    return None
+
+
 def parse_abc123_for_targets(content: str) -> Dict[str, List[Tuple[str, str]]]:
     """
     解析 abc123 源内容，提取目标分类下的频道
+    特殊处理：
+      - 源中"歌团★"分类归入"韩国女团"
+      - 包含"体育"或"竞赛"的分类归入"体育竞赛"
+      - "省份+地方"分类归入对应的省份分类（如"吉林地方" -> "☘️吉林频道"）
     """
     if not content:
         return {}
     
+    # 结果字典：key 为分类名（包括省份分类），value 为频道列表
     result = {cat: [] for cat in TARGET_CATEGORIES}
+    # 额外存储省份分类的频道
+    province_channels = {}  # province_name -> list of (name, url)
+    
     lines = content.splitlines()
     current_category = None
+    current_province = None  # 用于地方分类
 
     for line in lines:
         line = line.strip()
@@ -81,10 +104,19 @@ def parse_abc123_for_targets(content: str) -> Dict[str, List[Tuple[str, str]]]:
         if line.endswith(",#genre#") or line.endswith(", #genre#"):
             cat_name = line.replace(",#genre#", "").replace(", #genre#", "").strip()
             current_category = None
+            current_province = None
             
-            # 遍历目标分类，检查是否匹配关键词
+            # 首先检查是否为“省份+地方”分类
+            prov = detect_province_from_category(cat_name)
+            if prov:
+                # 这是一个地方分类，将其归类到省份分类
+                current_province = prov
+                current_category = None  # 不进入常规分类
+                continue
+            
+            # 常规分类匹配
             for target, keywords in CATEGORY_KEYWORDS.items():
-                # 特殊处理韩国女团（也匹配“歌团”）
+                # 韩国女团特殊匹配
                 if target == "韩国女团" and ("歌团" in cat_name or "女团" in cat_name):
                     current_category = target
                     break
@@ -98,16 +130,32 @@ def parse_abc123_for_targets(content: str) -> Dict[str, List[Tuple[str, str]]]:
         if line.startswith('#'):
             continue
 
-        # 解析频道行（格式：频道名,URL）
-        if ',' in line and current_category in result:
+        # 解析频道行
+        if ',' in line and (current_category in result or current_province):
             parts = line.split(',', 1)
             if len(parts) == 2:
                 name = parts[0].strip()
                 url = parts[1].strip()
                 if url.startswith(('http://', 'https://')):
-                    existing_urls = [u for _, u in result[current_category]]
-                    if url not in existing_urls:
-                        result[current_category].append((name, url))
+                    # 去重（基于URL）
+                    if current_province:
+                        # 存入省份分类
+                        if current_province not in province_channels:
+                            province_channels[current_province] = []
+                        existing_urls = [u for _, u in province_channels[current_province]]
+                        if url not in existing_urls:
+                            province_channels[current_province].append((name, url))
+                    elif current_category in result:
+                        existing_urls = [u for _, u in result[current_category]]
+                        if url not in existing_urls:
+                            result[current_category].append((name, url))
+
+    # 将省份分类合并到结果中，使用特殊键 "province:省份名"
+    for prov, channels in province_channels.items():
+        if channels:
+            # 使用 "☘️X频道" 作为分类名（与 demo 中的格式一致）
+            key = f"☘️{prov}频道"
+            result[key] = channels
 
     # 只返回非空分类
     return {k: v for k, v in result.items() if v}
@@ -194,7 +242,8 @@ async def fetch_abc123_source() -> Dict[str, List[Tuple[str, str]]]:
                     if valid:
                         validated[cat] = valid
                         total_after += len(valid)
-                    display = CATEGORY_DISPLAY_NAME.get(cat, cat)
+                    # 显示分类名，如果是省份分类则显示为 "☘️X频道"
+                    display = cat if cat.startswith("☘️") else CATEGORY_DISPLAY_NAME.get(cat, cat)
                     logger.info(f"   {display}: {len(valid)}/{len(channels)} 可用")
                 
                 if total_before > 0:
@@ -209,7 +258,7 @@ def append_special_to_output(
     special_data: Dict[str, List[Tuple[str, str]]],
     output_dir: Path
 ) -> int:
-    """追加到输出文件"""
+    """追加到输出文件，group-title 使用分类名（省份分类直接使用"☘️X频道"）"""
     if not special_data:
         return 0
 
@@ -222,7 +271,11 @@ def append_special_to_output(
         for cat, channels in special_data.items():
             if not channels:
                 continue
-            display_name = CATEGORY_DISPLAY_NAME.get(cat, cat)
+            # 如果是省份分类（以"☘️"开头），直接使用 cat 作为 group-title
+            if cat.startswith("☘️"):
+                display_name = cat
+            else:
+                display_name = CATEGORY_DISPLAY_NAME.get(cat, cat)
             f.write(f"\n# ----- {display_name} ({len(channels)}个频道) -----\n")
             for name, url in channels:
                 f.write(f'#EXTINF:-1 group-title="{display_name}",{name}\n{url}\n')
@@ -233,7 +286,10 @@ def append_special_to_output(
         for cat, channels in special_data.items():
             if not channels:
                 continue
-            display_name = CATEGORY_DISPLAY_NAME.get(cat, cat)
+            if cat.startswith("☘️"):
+                display_name = cat
+            else:
+                display_name = CATEGORY_DISPLAY_NAME.get(cat, cat)
             f.write(f"\n{display_name},#genre#\n")
             for name, url in channels:
                 f.write(f"{name},{url}\n")
@@ -255,7 +311,8 @@ async def collect_and_append_special_categories(output_dir: Path, db=None) -> Di
     total = sum(stats.values())
     logger.info(f"📊 智能补充统计: 共 {total} 个有效频道")
     for cat, count in stats.items():
-        logger.info(f"   {CATEGORY_DISPLAY_NAME.get(cat, cat)}: {count} 个频道")
+        display = cat if cat.startswith("☘️") else CATEGORY_DISPLAY_NAME.get(cat, cat)
+        logger.info(f"   {display}: {count} 个频道")
 
     if total == 0:
         logger.warning("⚠️ 没有符合分类规则的频道")
