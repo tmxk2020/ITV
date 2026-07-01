@@ -2,12 +2,11 @@ name: IPTV 源智能更新与整理
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
-  workflow_dispatch:
+    - cron: '0 */6 * * *'   # 每6小时运行一次
+  workflow_dispatch:         # 允许手动触发
 
 permissions:
-  contents: write
-  pages: write
+  contents: write            # 只需要写入 main 分支的权限
 
 jobs:
   update-iptv:
@@ -40,12 +39,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ffmpeg
 
-    - name: 清理未跟踪文件（避免冲突）
-      run: |
-        git clean -fd
-        rm -rf data/ output/ *.db *.log 2>/dev/null || true
-        mkdir -p data output
-
     - name: 运行采集程序
       run: python -m src.run
       env:
@@ -58,8 +51,9 @@ jobs:
         ENABLE_BLACKLIST: true
         DATABASE_ENABLE: true
         RUN_MODE: once
-        IPTV_ORG_ENABLE: true
-        ENABLE_GLOBAL_CHANNELS: false
+        CACHE_RAW_HOURS: 48
+        CACHE_SPEED_HOURS: 24
+        ENABLE_INCREMENTAL_FETCH: true
         ENABLE_JSON_OUTPUT: true
         ENABLE_LITE_VERSION: true
         ENABLE_EPG_OUTPUT: true
@@ -68,9 +62,12 @@ jobs:
         AUTO_REPLACE_FAILED: true
         QUALITY_CHECK_INTERVAL: 24
         CANDIDATE_OBSERVATION_HOURS: 24
-        CANDIDATE_MIN_SUCCESS: 10
-        CANDIDATE_MIN_SUCCESS_RATE: 0.8
-        CANDIDATE_MAX_LATENCY: 2000
+        CANDIDATE_MIN_SUCCESS: 3
+        CANDIDATE_MIN_SUCCESS_RATE: 0.5
+        CANDIDATE_MAX_LATENCY: 3000
+        SLOW_SPEED_THRESHOLD: 3000
+        MAX_RETRY_BEFORE_BLACKLIST: 2
+        PREDICT_THRESHOLD: 0.6
 
     - name: 提交并推送更改到 main 分支
       run: |
@@ -91,27 +88,28 @@ jobs:
         echo "🚀 推送到 main 分支（带重试）..."
         for i in 1 2 3; do
           echo "尝试第 $i 次推送..."
-          if git push origin refs/heads/main; then
+          if git push origin main; then
             echo "✅ 推送成功"
             exit 0
           else
             echo "⚠️ 推送失败，拉取最新更改后重试..."
-            git push origin refs/heads/main --rebase --autostash
+            # 关键修正：使用 git pull 而不是 git push
+            git pull origin main --rebase --autostash
             sleep 2
           fi
         done
         
         echo "⚠️ 重试后仍失败，尝试安全强制推送..."
-        git push --force-with-lease origin refs/heads/main
+        git push --force-with-lease origin main
         echo "✅ 安全强制推送成功"
 
-    - name: 部署到 GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: 上传输出文件作为 artifacts（可选）
+      uses: actions/upload-artifact@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./output
-        publish_branch: gh-pages
-        keep_files: false
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: '更新 IPTV 播放列表 - ${{ github.run_id }}'
+        name: iptv-output
+        path: |
+          output/*.m3u
+          output/*.txt
+          output/*.json
+          output/*.log
+        retention-days: 7
