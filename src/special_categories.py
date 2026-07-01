@@ -1,7 +1,9 @@
 # src/special_categories.py
-"""特定分类采集模块 - 从 abc123 源采集指定类别：音乐、广播、韩国女团、电影、电视剧、动漫、体育竞赛"""
+"""特定分类采集模块 - 从 abc123 源采集指定类别，并验证频道可用性"""
 
 import re
+import asyncio
+import aiohttp
 from typing import List, Dict, Tuple
 from pathlib import Path
 from src.logger import logger
@@ -27,6 +29,10 @@ CATEGORY_DISPLAY_NAME = {
     "动漫": "🎬 动漫频道",
     "体育竞赛": "🏀 体育竞赛频道",
 }
+
+# ========== 验证配置 ==========
+PROBE_TIMEOUT = 5          # 每个频道探测超时(秒)
+PROBE_CONCURRENCY = 20     # 并发探测数
 
 
 def parse_abc123_for_targets(content: str) -> Dict[str, List[Tuple[str, str]]]:
@@ -89,9 +95,78 @@ def parse_abc123_for_targets(content: str) -> Dict[str, List[Tuple[str, str]]]:
     return {k: v for k, v in result.items() if v}
 
 
+async def probe_channel_quick(url: str, session: aiohttp.ClientSession) -> bool:
+    """
+    快速探测频道是否可用（HEAD请求 + Content-Type检查）
+    返回 True 表示可播放
+    """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive",
+    }
+    try:
+        async with session.head(url, timeout=PROBE_TIMEOUT, allow_redirects=True, headers=headers) as resp:
+            if resp.status != 200:
+                return False
+            content_type = resp.headers.get("content-type", "").lower()
+            # 检查是否为视频流或M3U8
+            if any(ct in content_type for ct in ["video", "mpegurl", "x-mpegurl", "application/vnd.apple.mpegurl"]):
+                return True
+            # 如果 Content-Type 未明确，尝试 GET 一小段数据验证
+            # 但为了减少流量，先仅依赖 HEAD
+            return False
+    except Exception:
+        return False
+
+
+async def validate_channels(
+    channels: List[Tuple[str, str]]
+) -> List[Tuple[str, str]]:
+    """
+    对频道列表进行可用性验证，只保留有效的
+    """
+    if not channels:
+        return []
+    
+    valid = []
+    semaphore = asyncio.Semaphore(PROBE_CONCURRENCY)
+    
+    async with aiohttp.ClientSession() as session:
+        async def check_one(name, url):
+            async with semaphore:
+                ok = await probe_channel_quick(url, session)
+                if ok:
+                    return (name, url)
+                return None
+        
+        tasks = [check_one(name, url) for name, url in channels]
+        results = await asyncio.gather(*tasks)
+        valid = [r for r in results if r is not None]
+    
+    return valid
+
+
+def filter_valid_channels(
+    special_data: Dict[str, List[Tuple[str, str]]]
+) -> Dict[str, List[Tuple[str, str]]]:
+    """
+    对每个分类下的频道进行验证，返回仅包含有效频道的字典
+    同时输出统计日志
+    """
+    if not special_data:
+        return {}
+    
+    # 由于验证是异步的，我们需要在异步上下文中运行
+    # 此函数将被 collect_and_append_special_categories 调用
+    # 那里已经有 async，所以我们直接返回一个协程
+    # 改为在 collect 中直接调用异步验证
+    return special_data
+
+
 async def fetch_abc123_source() -> Dict[str, List[Tuple[str, str]]]:
-    """直接拉取 abc123 源内容并解析目标分类"""
-    import aiohttp
+    """直接拉取 abc123 源内容并解析目标分类，然后验证可用性"""
     source_url = "https://tv.19860519.xyz/abc123"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
@@ -111,7 +186,28 @@ async def fetch_abc123_source() -> Dict[str, List[Tuple[str, str]]]:
                     logger.warning(f"⚠️ abc123 源返回 HTTP {resp.status}")
                     return {}
                 content = await resp.text()
-                return parse_abc123_for_targets(content)
+                parsed = parse_abc123_for_targets(content)
+                if not parsed:
+                    return {}
+                
+                # ===== 验证频道可用性 =====
+                logger.info("🔍 开始验证智能补充频道的可用性...")
+                validated = {}
+                total_before = 0
+                total_after = 0
+                for cat, channels in parsed.items():
+                    if not channels:
+                        continue
+                    total_before += len(channels)
+                    valid = await validate_channels(channels)
+                    if valid:
+                        validated[cat] = valid
+                        total_after += len(valid)
+                    logger.info(f"   {CATEGORY_DISPLAY_NAME.get(cat, cat)}: {len(valid)}/{len(channels)} 可用")
+                
+                if total_before > 0:
+                    logger.info(f"📊 验证完成: {total_after}/{total_before} 个频道可用")
+                return validated
     except Exception as e:
         logger.error(f"❌ 获取 abc123 源失败: {e}")
         return {}
@@ -156,7 +252,7 @@ def append_special_to_output(
 
 
 async def collect_and_append_special_categories(output_dir: Path, db=None) -> Dict[str, int]:
-    """主函数：采集指定分类并追加到输出文件"""
+    """主函数：采集指定分类、验证可用性并追加到输出文件"""
     logger.info("🧠 开始智能补充采集（从 abc123 源）...")
 
     special_data = await fetch_abc123_source()
@@ -167,7 +263,7 @@ async def collect_and_append_special_categories(output_dir: Path, db=None) -> Di
 
     stats = {cat: len(channels) for cat, channels in special_data.items()}
     total = sum(stats.values())
-    logger.info(f"📊 智能补充统计: 共 {total} 个频道")
+    logger.info(f"📊 智能补充统计: 共 {total} 个有效频道")
     for cat, count in stats.items():
         logger.info(f"   {CATEGORY_DISPLAY_NAME.get(cat, cat)}: {count} 个频道")
 
