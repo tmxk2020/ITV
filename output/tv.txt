@@ -1,11 +1,11 @@
 📺央视频道,#genre#
 CCTV-1,http://69.30.245.50/live/cctv1.m3u8
-CCTV-2,http://112.27.235.94:8000/hls/2/index.m3u8
+CCTV-2,http://74.91.26.218:82/live/cctv2hd.m3u8
 CCTV-3,http://74.91.26.218:82/live/cctv3hd.m3u8
-CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u8?auth_key=1783872000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-5fe593f4aa221ce85c0cab354c325337&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+CCTV-4,https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8
 CCTV-5,http://112.27.235.94:8000/hls/5/index.m3u8
 CCTV-5+,http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
-CCTV-6,http://112.27.235.94:8000/hls/7/index.m3u8
+CCTV-6,http://69.30.245.50/live/cctv6.m3u8
 CCTV-7,http://74.91.26.218:82/live/cctv7hd.m3u8
 CCTV-8,http://74.91.26.218:82/live/cctv8hd.m3u8
 CCTV-9,http://112.27.235.94:8000/hls/10/index.m3u8
@@ -23,8 +23,6 @@ CGTN,https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8
 CGTN纪录,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 CGTN阿语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
 CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
-中央电视塔东,https://gcalic.v.myalicdn.com/gc/ztd_1/index.m3u8
-中央电视塔南,https://gcalic.v.myalicdn.com/gc/ztn_1/index.m3u8
 CHC家庭影院,http://61.162.52.6:8088/newlive/live/hls/60/live.m3u8
 📡卫视频道,#genre#
 广东卫视,http://112.27.235.94:8000/hls/30/index.m3u8
@@ -65,7 +63,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 ☘️广东频道,#genre#
 广东卫视,http://112.27.235.94:8000/hls/30/index.m3u8
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
-泰山白云亭悬崖,https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
 龙门飞甲,http://jsmov2.a.yximgs.com/bs3/video-hls/5203346449046555193_hlsb.m3u8
 ☘️浙江频道,#genre#
@@ -109,12 +106,10 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 湖南张家界宝峰湖,https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8
 湖南张家界御笔峰,https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8
 湖南张家界水绕四门,https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8
-湖南张家界天门山西线玻璃栈道,https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8
 ☘️广西频道,#genre#
 广西卫视,https://hlscdn.liangtv.cn/live/de0f97348eb84f62aa6b7d8cf0430770/dd505d87880c478f901f38560ca4d4e6.m3u8
 广西桂林漓江景区,https://gcalic.v.myalicdn.com/gc/gllj01_1/index.m3u8
 来宾综合,http://zb.gxlbamc.com:1935/live/lbzh.stream/playlist.m3u8
-灌阳新闻综合,https://ls.qingting.fm/live/5043/64k.m3u8
 象山综合,http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-800189c57a5a44d3b823b60cf84f6756-0-a6f6828a62d5c167cff5e68735fa0d39
 广西国际,https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f490690f6a36a16e09c79.m3u8
 ☘️海南频道,#genre#
@@ -128,7 +123,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 四川峨眉山云海日出,https://gcalic.v.myalicdn.com/gc/emsarm_1/index.m3u8
 广元综合,https://m3u8.channel.dzsm.com/nmip-media/channellive/channel100999/playlist.m3u8
 朝天综合,https://m3u8.channel.dzsm.com/nmip-media/channellive/channel104601/playlist.m3u8
-荥经综合,https://file.ysxtv.cn/nmip-media/channellive/channel101492/playlist.m3u8
 ☘️贵州频道,#genre#
 安顺新闻,https://ls.qingting.fm/live/5022203/64k.m3u8
 贵州卫视,http://112.27.235.94:8000/hls/46/index.m3u8
@@ -142,7 +136,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 黄龙,https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
 黄龙,https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
 ☘️甘肃频道,#genre#
-张掖七彩丹霞,https://gcalic.v.myalicdn.com/gc/zyqcdx01_1/index.m3u8
 ☘️青海频道,#genre#
 西宁新闻综合,https://liveout.xntv.tv/a65jur/96iln2.m3u8?zqinghd
 ☘️宁夏频道,#genre#
@@ -181,7 +174,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 黑龙江少儿,https://ls.qingting.fm/live/4972/64k.m3u8
 黑龙江新闻,https://ls.qingting.fm/live/4974/64k.m3u8
 ☘️河北频道,#genre#
-河北,https://event.pull.hebtv.com:443/live/live101.m3u8
 河北农民,https://jwcdnqx.hebyun.com.cn/live/clzhpd/1500k/tzwj_video.m3u8?zhebd
 河北卫视,http://112.27.235.94:8000/hls/39/index.m3u8
 🌊港·澳·台,#genre#
@@ -248,6 +240,7 @@ CNR经济之声,http://45.192.97.170:8880/play/5951.m3u8
 贵州旅游广播,http://45.192.97.170:8880/play/5995.m3u8
 贵州故事广播,http://45.192.97.170:8880/play/5996.m3u8
 贵州综合广播,http://45.192.97.170:8880/play/5997.m3u8
+延边文艺生活广播,http://45.192.97.170:8880/play/5998.m3u8
 辽宁之声,http://45.192.97.170:8880/play/5999.m3u8
 辽宁乡村广播,http://45.192.97.170:8880/play/6000.m3u8
 辽宁经济广播,http://45.192.97.170:8880/play/6001.m3u8
@@ -303,9 +296,11 @@ CRI HIT FM,http://45.192.97.170:8880/play/6044.m3u8
 深圳飞扬971,http://45.192.97.170:8880/play/6067.m3u8
 深圳生活942,http://45.192.97.170:8880/play/6068.m3u8
 海南音乐广播,http://45.192.97.170:8880/play/6069.m3u8
+贵州音乐广播,http://45.192.97.170:8880/play/6070.m3u8
 贵州都市广播,http://45.192.97.170:8880/play/6071.m3u8
 宁夏音乐广播,http://45.192.97.170:8880/play/6072.m3u8
 重庆音乐广播,http://45.192.97.170:8880/play/6073.m3u8
+黑龙江音乐广播,http://45.192.97.170:8880/play/6075.m3u8
 青岛摩登音乐调频,http://45.192.97.170:8880/play/6077.m3u8
 辽宁经典音乐广播,http://45.192.97.170:8880/play/6078.m3u8
 青海交通音乐广播,http://45.192.97.170:8880/play/6079.m3u8
@@ -346,6 +341,7 @@ CGTN Radio,http://45.192.97.170:8880/play/6080.m3u8
 安徽故事广播,http://45.192.97.170:8880/play/6122.m3u8
 湖北之声,http://45.192.97.170:8880/play/6123.m3u8
 楚天交通广播,http://45.192.97.170:8880/play/6124.m3u8
+河北文艺广播,http://45.192.97.170:8880/play/6129.m3u8
 河北综合广播,http://45.192.97.170:8880/play/6130.m3u8
 河北交通广播,http://45.192.97.170:8880/play/6131.m3u8
 河北经济广播,http://45.192.97.170:8880/play/6132.m3u8
@@ -582,7 +578,7 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 埋堆堆天地争霸美猴王,http://45.192.97.170:8880/play/1709.m3u8
 埋堆堆大唐双龙传,http://45.192.97.170:8880/play/1710.m3u8
 埋堆堆陀枪师姐,http://45.192.97.170:8880/play/1711.m3u8
-埋堆堆妙手仁心,http://45.192.97.170:8880/play/1713.m3u8
+埋堆堆扫黄先锋,http://45.192.97.170:8880/play/1712.m3u8
 埋堆堆野蛮亲家,http://45.192.97.170:8880/play/1714.m3u8
 埋堆堆笑看风云,http://45.192.97.170:8880/play/1715.m3u8
 埋堆堆韦小宝,http://45.192.97.170:8880/play/1716.m3u8
@@ -604,9 +600,9 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 邓超专场,http://45.192.97.170:8880/play/1733.m3u8
 梁家辉专场,http://45.192.97.170:8880/play/1734.m3u8
 张卫健专场,http://45.192.97.170:8880/play/1735.m3u8
+王宝强专场,http://45.192.97.170:8880/play/1736.m3u8
 陈小春专场,http://45.192.97.170:8880/play/1737.m3u8
 郭富城专场,http://45.192.97.170:8880/play/1738.m3u8
-吴镇宇专场,http://45.192.97.170:8880/play/1739.m3u8
 陆小凤专场,http://45.192.97.170:8880/play/1740.m3u8
 强森专场,http://45.192.97.170:8880/play/1741.m3u8
 斯坦森专场,http://45.192.97.170:8880/play/1742.m3u8
@@ -616,24 +612,22 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 科幻片系列,http://45.192.97.170:8880/play/1746.m3u8
 丧尸片系列,http://45.192.97.170:8880/play/1747.m3u8
 怪兽片系列,http://45.192.97.170:8880/play/1748.m3u8
-战争片系列,http://45.192.97.170:8880/play/1749.m3u8
+硬汉片系列,http://45.192.97.170:8880/play/1750.m3u8
 竞速片系列,http://45.192.97.170:8880/play/1751.m3u8
 动作片系列,http://45.192.97.170:8880/play/1752.m3u8
 爱情片系列,http://45.192.97.170:8880/play/1753.m3u8
 犯罪片系列,http://45.192.97.170:8880/play/1754.m3u8
-奇幻片系列,http://45.192.97.170:8880/play/1755.m3u8
-冒险片系列,http://45.192.97.170:8880/play/1756.m3u8
 盗墓片系列,http://45.192.97.170:8880/play/1757.m3u8
 穿越片系列,http://45.192.97.170:8880/play/1758.m3u8
 悬疑片系列,http://45.192.97.170:8880/play/1759.m3u8
 喜剧片系列,http://45.192.97.170:8880/play/1760.m3u8
+英雄片系列,http://45.192.97.170:8880/play/1761.m3u8
 枪战片系列,http://45.192.97.170:8880/play/1762.m3u8
-武侠片系列,http://45.192.97.170:8880/play/1763.m3u8
 复仇片系列,http://45.192.97.170:8880/play/1764.m3u8
 星球片系列,http://45.192.97.170:8880/play/1765.m3u8
 校园片系列,http://45.192.97.170:8880/play/1766.m3u8
-警匪片系列,http://45.192.97.170:8880/play/1767.m3u8
 谍战片系列,http://45.192.97.170:8880/play/1768.m3u8
+动画片系列,http://45.192.97.170:8880/play/1769.m3u8
 恐怖片系列,http://45.192.97.170:8880/play/1770.m3u8
 惊悚片系列,http://45.192.97.170:8880/play/1771.m3u8
 僵尸片系列,http://45.192.97.170:8880/play/1772.m3u8
@@ -647,6 +641,7 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 高分片系列,http://45.192.97.170:8880/play/1780.m3u8
 短片系列,http://45.192.97.170:8880/play/1781.m3u8
 探案剧专区,http://45.192.97.170:8880/play/1782.m3u8
+都市剧专区,http://45.192.97.170:8880/play/1783.m3u8
 刑侦剧专区,http://45.192.97.170:8880/play/1784.m3u8
 家庭剧专区,http://45.192.97.170:8880/play/1785.m3u8
 经典剧专区,http://45.192.97.170:8880/play/1786.m3u8
@@ -655,6 +650,7 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 抗战剧专区,http://45.192.97.170:8880/play/1789.m3u8
 台湾剧专区,http://45.192.97.170:8880/play/1790.m3u8
 美国剧专区,http://45.192.97.170:8880/play/1792.m3u8
+英国剧专区,http://45.192.97.170:8880/play/1793.m3u8
 校园剧专区,http://45.192.97.170:8880/play/1794.m3u8
 谍战剧专区,http://45.192.97.170:8880/play/1795.m3u8
 古装剧专区,http://45.192.97.170:8880/play/1796.m3u8
@@ -695,7 +691,9 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 钢之炼金术师,http://45.192.97.170:8880/play/1811.m3u8
 黑子的篮球,http://45.192.97.170:8880/play/1812.m3u8
 瑞克与莫蒂,http://45.192.97.170:8880/play/1813.m3u8
+星辰变,http://45.192.97.170:8880/play/1814.m3u8
 成龙历险记,http://45.192.97.170:8880/play/1815.m3u8
+飞天小女警,http://45.192.97.170:8880/play/1816.m3u8
 蜡笔小新,http://45.192.97.170:8880/play/1817.m3u8
 樱桃小丸子,http://45.192.97.170:8880/play/1818.m3u8
 猫和老鼠,http://45.192.97.170:8880/play/1819.m3u8
@@ -703,6 +701,7 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 全职高手,http://45.192.97.170:8880/play/1821.m3u8
 哆啦A梦,http://45.192.97.170:8880/play/1822.m3u8
 海绵宝宝,http://45.192.97.170:8880/play/1823.m3u8
+魔法少女,http://45.192.97.170:8880/play/1824.m3u8
 全职猎人,http://45.192.97.170:8880/play/1825.m3u8
 四驱兄弟,http://45.192.97.170:8880/play/1826.m3u8
 一人之上,http://45.192.97.170:8880/play/1827.m3u8
@@ -713,19 +712,18 @@ CRI HIT FM,http://45.192.97.170:8880/play/6241.m3u8
 游戏王,http://45.192.97.170:8880/play/1832.m3u8
 男子高中生的日常,http://45.192.97.170:8880/play/1833.m3u8
 元气少女缘结神,http://45.192.97.170:8880/play/1834.m3u8
+尸兄,http://45.192.97.170:8880/play/1836.m3u8
 大头儿子小头爸爸,http://45.192.97.170:8880/play/1837.m3u8
+龙族,http://45.192.97.170:8880/play/1839.m3u8
 间谍过家家,http://45.192.97.170:8880/play/1840.m3u8
 罗小黑战记,http://45.192.97.170:8880/play/1841.m3u8
 葫芦兄弟,http://45.192.97.170:8880/play/1843.m3u8
-咒术回战,http://45.192.97.170:8880/play/1844.m3u8
 反叛的鲁路修,http://45.192.97.170:8880/play/1845.m3u8
 超自然武装当哒当,http://45.192.97.170:8880/play/1846.m3u8
-新世纪福音战士,http://45.192.97.170:8880/play/1847.m3u8
 足球小将,http://45.192.97.170:8880/play/1848.m3u8
 虫师,http://45.192.97.170:8880/play/1850.m3u8
 魔神英雄传,http://45.192.97.170:8880/play/1851.m3u8
 埋堆堆直播1,http://45.192.97.170:8880/play/1852.m3u8
-埋堆堆直播2,http://45.192.97.170:8880/play/1853.m3u8
 国产动漫系列,http://45.192.97.170:8880/play/1854.m3u8
 
 🔥 热门歌曲,#genre#
