@@ -47,6 +47,10 @@ https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CGTN英语
 https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
+#EXTINF:-1 group-title="📺央视频道",中央电视塔东
+https://gcalic.v.myalicdn.com/gc/ztd_1/index.m3u8
+#EXTINF:-1 group-title="📺央视频道",中央电视塔南
+https://gcalic.v.myalicdn.com/gc/ztn_1/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CHC家庭影院
 http://61.162.52.6:8088/newlive/live/hls/60/live.m3u8
 #EXTINF:-1 group-title="📡卫视频道",广东卫视
@@ -115,6 +119,8 @@ http://183.64.181.25:40023/rongchang01.m3u8
 http://112.27.235.94:8000/hls/30/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
 http://8.138.7.223/tv/gzjs.m3u8
+#EXTINF:-1 group-title="☘️广东频道",泰山白云亭悬崖
+https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
 http://8.138.7.223/tv/gzjs.m3u8
 #EXTINF:-1 group-title="☘️广东频道",龙门飞甲
@@ -145,12 +151,8 @@ http://ali-m-l.cztv.com/channels/lantian/channel009/1080p.m3u8
 http://nklive.nbs.cn/hls/75b3c462-b831-4de7-a34b-5d3221db2069/index.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",南京新闻综合
 http://nklive.nbs.cn/hls/d511bc9d-a694-4453-b3a2-4fc842cc97a1/index.m3u8
-#EXTINF:-1 group-title="☘️江苏频道",南京玄武湖公园
-https://gcalic.v.myalicdn.com/gc/xwh01_1/index.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",武进新闻 [Not 24/7]
 https://live.wjyanghu.com/live/CH1.m3u8
-#EXTINF:-1 group-title="☘️江苏频道",江苏徐州云龙湖风景区云龙山观景台西
-https://gcalic.v.myalicdn.com/gc/ylh04_1/index.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",武进生活 [Not 24/7]
 https://live.wjyanghu.com/live/CH2.m3u8
 #EXTINF:-1 group-title="☘️江苏频道",镇江新闻综合
@@ -163,8 +165,6 @@ http://112.27.235.94:8000/hls/25/index.m3u8
 http://112.27.235.94:8000/hls/18/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",固镇新闻
 http://www.guzhenm.com:7001/hls/hd-live.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]
-#EXTINF:-1 group-title="☘️安徽频道",黄山新闻综合
-http://hslive.hsnewsnet.com/lsdream/hve9Wjs/1000/live.m3u8?zanhd
 #EXTINF:-1 group-title="☘️安徽频道",黄山
 https://gcalic.v.myalicdn.com/gc/ahhs01_1/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",铜陵新闻综合
@@ -183,12 +183,16 @@ https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8
 https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界水绕四门
 https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8
+#EXTINF:-1 group-title="☘️湖南频道",湖南张家界天门山西线玻璃栈道
+https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8
 #EXTINF:-1 group-title="☘️广西频道",广西卫视
 https://hlscdn.liangtv.cn/live/de0f97348eb84f62aa6b7d8cf0430770/dd505d87880c478f901f38560ca4d4e6.m3u8
 #EXTINF:-1 group-title="☘️广西频道",广西桂林漓江景区
 https://gcalic.v.myalicdn.com/gc/gllj01_1/index.m3u8
 #EXTINF:-1 group-title="☘️广西频道",来宾综合
 http://zb.gxlbamc.com:1935/live/lbzh.stream/playlist.m3u8
+#EXTINF:-1 group-title="☘️广西频道",灌阳新闻综合
+https://ls.qingting.fm/live/5043/64k.m3u8
 #EXTINF:-1 group-title="☘️广西频道",象山综合
 http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-800189c57a5a44d3b823b60cf84f6756-0-a6f6828a62d5c167cff5e68735fa0d39
 #EXTINF:-1 group-title="☘️广西频道",广西国际
@@ -199,8 +203,6 @@ https://gcalic.v.myalicdn.com/gc/tyhjtys_1/index.m3u8
 https://gcalic.v.myalicdn.com/gc/lsdfgfl_1/index.m3u8
 #EXTINF:-1 group-title="☘️四川频道",乐至综合
 http://175.155.106.72:89/live1/live1.m3u8?zsicd
-#EXTINF:-1 group-title="☘️四川频道",井研综合
-http://tvfile.jyrmt.cn/nmip-media/channellive/channel104452/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",剑阁综合
 https://m3u8.channel.dzsm.com/nmip-media/channellive/channel105549/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",四川卫视
@@ -209,14 +211,12 @@ http://112.27.235.94:8000/hls/35/index.m3u8
 https://gcalic.v.myalicdn.com/gc/emsarm_1/index.m3u8
 #EXTINF:-1 group-title="☘️四川频道",广元综合
 https://m3u8.channel.dzsm.com/nmip-media/channellive/channel100999/playlist.m3u8
-#EXTINF:-1 group-title="☘️四川频道",朝天综合
-https://m3u8.channel.dzsm.com/nmip-media/channellive/channel104601/playlist.m3u8
+#EXTINF:-1 group-title="☘️四川频道",荥经综合
+https://file.ysxtv.cn/nmip-media/channellive/channel101492/playlist.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",安顺新闻
 https://ls.qingting.fm/live/5022203/64k.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",贵州卫视
 http://112.27.235.94:8000/hls/46/index.m3u8
-#EXTINF:-1 group-title="☘️贵州频道",贵州省兴义市万峰林
-https://gcalic.v.myalicdn.com/gc/xywfl_1/index.m3u8
 #EXTINF:-1 group-title="☘️云南频道",丽江古城万古楼遥望玉龙雪山
 https://gcalic.v.myalicdn.com/gc/ljgcwglytylxs_1/index.m3u8
 #EXTINF:-1 group-title="☘️云南频道",云南丽江蓝月谷
@@ -229,6 +229,8 @@ http://112.27.235.94:8000/hls/43/index.m3u8
 https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
 #EXTINF:-1 group-title="☘️陕西频道",黄龙
 https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
+#EXTINF:-1 group-title="☘️甘肃频道",张掖七彩丹霞
+https://gcalic.v.myalicdn.com/gc/zyqcdx01_1/index.m3u8
 #EXTINF:-1 group-title="☘️青海频道",西宁新闻综合
 https://liveout.xntv.tv/a65jur/96iln2.m3u8?zqinghd
 #EXTINF:-1 group-title="☘️宁夏频道",绍兴公共
@@ -243,16 +245,12 @@ http://110.153.180.106:55555/out_4/index.m3u8
 http://110.153.180.106:55555/out_2/index.m3u8
 #EXTINF:-1 group-title="☘️新疆频道",奎屯汉语
 http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
-#EXTINF:-1 group-title="☘️新疆频道",玛纳斯综合
-http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd,
 #EXTINF:-1 group-title="☘️新疆频道",伊犁维吾尔
 http://110.153.180.106:55555/out_2/index.m3u8
 #EXTINF:-1 group-title="☘️新疆频道",伊犁哈萨克
 http://110.153.180.106:55555/out_3/index.m3u8?zxinjd
 #EXTINF:-1 group-title="☘️山西频道",山西卫视
 http://112.27.235.94:8000/hls/45/index.m3u8
-#EXTINF:-1 group-title="☘️山西频道",长子综合
-https://www.wxhcgbds.com:8081/channelTv/WXTV_1.m3u8?zshanxd
 #EXTINF:-1 group-title="☘️辽宁频道",乌镇西市河
 https://gcalic.v.myalicdn.com/gc/zjwzbblh_1/index.m3u8
 #EXTINF:-1 group-title="☘️辽宁频道",泰山太平岭
@@ -285,8 +283,6 @@ https://stream.hrbtv.net/zxpd/sd/live.m3u8
 http://112.27.235.94:8000/hls/48/index.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",黑龙江少儿
 https://ls.qingting.fm/live/4972/64k.m3u8
-#EXTINF:-1 group-title="☘️黑龙江频道",黑龙江新闻
-https://ls.qingting.fm/live/4974/64k.m3u8
 #EXTINF:-1 group-title="☘️河北频道",河北农民
 https://jwcdnqx.hebyun.com.cn/live/clzhpd/1500k/tzwj_video.m3u8?zhebd
 #EXTINF:-1 group-title="☘️河北频道",河北卫视
