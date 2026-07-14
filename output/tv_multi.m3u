@@ -12,11 +12,11 @@ http://112.27.235.94:8000/hls/5/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5+
 http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-6
-http://69.30.245.50/live/cctv6.m3u8 # http://112.27.235.94:8000/hls/7/index.m3u8 # http://198.204.240.250:82/live/cctv6.m3u8
+http://69.30.245.50/live/cctv6.m3u8 # http://198.204.240.250:82/live/cctv6.m3u8 # http://112.27.235.94:8000/hls/7/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-7
 http://74.91.26.218:82/live/cctv7hd.m3u8 # http://112.27.235.94:8000/hls/8/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-8
-http://74.91.26.218:82/live/cctv8hd.m3u8 # http://192.151.150.154/live/cctv8k.m3u8 # http://112.27.235.94:8000/hls/9/index.m3u8
+http://192.151.150.154/live/cctv8k.m3u8 # http://112.27.235.94:8000/hls/9/index.m3u8 # http://74.91.26.218:82/live/cctv8hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
 http://112.27.235.94:8000/hls/10/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
@@ -157,10 +157,10 @@ http://112.27.235.94:8000/hls/18/index.m3u8
 http://www.guzhenm.com:7001/hls/hd-live.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]
 #EXTINF:-1 group-title="☘️安徽频道",铜陵新闻综合
 https://ls.qingting.fm/live/21303/64k.m3u8
+#EXTINF:-1 group-title="☘️安徽频道",祁门综合
+http://zbbf2.ahbztv.com/live/416.m3u8?zanhd
 #EXTINF:-1 group-title="☘️安徽频道",七台河新闻综合
 http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8
-#EXTINF:-1 group-title="☘️安徽频道",亳州农村
-http://zbbf2.ahbztv.com/live/418.m3u8
 #EXTINF:-1 group-title="☘️河南频道",洛阳文旅
 http://devlivepull.migucloud.com/live/Q081CD54_C0.flv
 #EXTINF:-1 group-title="☘️河南频道",河南都市
@@ -177,8 +177,6 @@ http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-8001
 https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f490690f6a36a16e09c79.m3u8
 #EXTINF:-1 group-title="☘️四川频道",乐至综合
 http://175.155.106.72:89/live1/live1.m3u8?zsicd
-#EXTINF:-1 group-title="☘️四川频道",井研综合
-http://tvfile.jyrmt.cn/nmip-media/channellive/channel104452/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",剑阁综合
 https://m3u8.channel.dzsm.com/nmip-media/channellive/channel105549/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",四川卫视
@@ -211,8 +209,6 @@ http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:800
 http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 #EXTINF:-1 group-title="☘️新疆频道",伊犁维吾尔
 http://110.153.180.106:55555/out_2/index.m3u8
-#EXTINF:-1 group-title="☘️山西频道",太谷新闻综合
-https://p2.vzan.com/slowlive/596867413819827251/live.m3u8?zbid=1725814272&amp;amp;tpid=1516989100&amp;amp;type=0
 #EXTINF:-1 group-title="☘️山西频道",山西卫视
 http://112.27.235.94:8000/hls/45/index.m3u8
 #EXTINF:-1 group-title="☘️辽宁频道",辽宁体育
