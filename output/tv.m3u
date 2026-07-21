@@ -14,17 +14,17 @@ http://112.27.235.94:8000/hls/6/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-6
 http://69.30.245.50/live/cctv6.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-7
-http://74.91.26.218:82/live/cctv7hd.m3u8
+http://112.27.235.94:8000/hls/8/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-8
 http://74.91.26.218:82/live/cctv8hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
 http://112.27.235.94:8000/hls/10/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
-http://112.27.235.94:8000/hls/11/index.m3u8
+http://74.91.26.218:82/live/cctv10hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-11
 http://74.91.26.218:82/live/cctv11hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-12
-http://74.91.26.218:82/live/cctv12hd.m3u8
+http://112.27.235.94:8000/hls/13/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-13
 http://112.27.235.94:8000/hls/14/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-14
@@ -49,6 +49,8 @@ https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 #EXTINF:-1 group-title="📺央视频道",中央电视塔东
 https://gcalic.v.myalicdn.com/gc/ztd_1/index.m3u8
+#EXTINF:-1 group-title="📺央视频道",中央电视塔南
+https://gcalic.v.myalicdn.com/gc/ztn_1/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CHC家庭影院
 http://61.162.52.6:8088/newlive/live/hls/60/live.m3u8
 #EXTINF:-1 group-title="📡卫视频道",浙江卫视
@@ -135,6 +137,8 @@ http://183.64.181.25:40023/rongchang01.m3u8
 http://222.179.155.21:1935/ch1.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
 http://8.138.7.223/tv/gzjs.m3u8
+#EXTINF:-1 group-title="☘️广东频道",泰山白云亭悬崖
+https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州综合
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=f0147ae6453a80f5989f382368b72aad&txTime=18d00acf487
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
@@ -191,12 +195,22 @@ http://zbbf2.ahbztv.com/live/418.m3u8
 https://ls.qingting.fm/live/5022100/64k.m3u8
 #EXTINF:-1 group-title="☘️河南频道",洛阳文旅
 http://devlivepull.migucloud.com/live/Q081CD54_C0.flv
+#EXTINF:-1 group-title="☘️河南频道",河南都市
+http://1.94.31.214/php/hntv.php?id=hnds
 #EXTINF:-1 group-title="☘️湖南频道",湖南卫视
 http://112.27.235.94:8000/hls/31/index.m3u8
+#EXTINF:-1 group-title="☘️湖南频道",湖南张家界宝峰湖
+https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8
+#EXTINF:-1 group-title="☘️湖南频道",湖南张家界御笔峰
+https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8
+#EXTINF:-1 group-title="☘️湖南频道",湖南张家界水绕四门
+https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界天门山西线玻璃栈道
 https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8
 #EXTINF:-1 group-title="☘️广西频道",广西卫视
 https://hlscdn.liangtv.cn/live/de0f97348eb84f62aa6b7d8cf0430770/dd505d87880c478f901f38560ca4d4e6.m3u8
+#EXTINF:-1 group-title="☘️广西频道",广西桂林漓江景区
+https://gcalic.v.myalicdn.com/gc/gllj01_1/index.m3u8
 #EXTINF:-1 group-title="☘️广西频道",来宾综合
 http://zb.gxlbamc.com:1935/live/lbzh.stream/playlist.m3u8
 #EXTINF:-1 group-title="☘️广西频道",象山综合
@@ -225,6 +239,8 @@ http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 https://ls.qingting.fm/live/5022203/64k.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",贵州卫视
 http://112.27.235.94:8000/hls/46/index.m3u8
+#EXTINF:-1 group-title="☘️贵州频道",贵州省兴义市万峰林
+https://gcalic.v.myalicdn.com/gc/xywfl_1/index.m3u8
 #EXTINF:-1 group-title="☘️云南频道",丽江古城万古楼遥望玉龙雪山
 https://gcalic.v.myalicdn.com/gc/ljgcwglytylxs_1/index.m3u8
 #EXTINF:-1 group-title="☘️云南频道",云南丽江玉龙雪山草甸
@@ -235,6 +251,8 @@ https://gcalic.v.myalicdn.com/gc/ylxs12_1/index.m3u8
 http://112.27.235.94:8000/hls/40/index.m3u8
 #EXTINF:-1 group-title="☘️陕西频道",陕西卫视
 http://112.27.235.94:8000/hls/43/index.m3u8
+#EXTINF:-1 group-title="☘️甘肃频道",张掖七彩丹霞
+https://gcalic.v.myalicdn.com/gc/zyqcdx01_1/index.m3u8
 #EXTINF:-1 group-title="☘️宁夏频道",绍兴公共
 http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8
 #EXTINF:-1 group-title="☘️宁夏频道",大立电视台
@@ -249,6 +267,10 @@ http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 http://112.27.235.94:8000/hls/49/index.m3u8
 #EXTINF:-1 group-title="☘️山西频道",山西卫视
 http://112.27.235.94:8000/hls/45/index.m3u8
+#EXTINF:-1 group-title="☘️辽宁频道",乌镇西市河
+https://gcalic.v.myalicdn.com/gc/zjwzbblh_1/index.m3u8
+#EXTINF:-1 group-title="☘️辽宁频道",泰山太平岭
+https://gcalic.v.myalicdn.com/gc/hkts09_1/index.m3u8
 #EXTINF:-1 group-title="☘️辽宁频道",辽宁卫视
 http://112.27.235.94:8000/hls/47/index.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",七台河新闻综合
@@ -265,10 +287,14 @@ http://stream.hrbtv.net/shpd/sd/live.m3u8?zheild
 http://stream.hrbtv.net/zxpd/sd/live.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",哈尔滨都市咨询
 http://stream.hrbtv.net/zxpd/sd/live.m3u8?zheild
+#EXTINF:-1 group-title="☘️黑龙江频道",恒山悬空寺全景
+https://gcalic.v.myalicdn.com/gc/hsxksqj_1/index.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",甘南县综合
 https://stream.hrbtv.net/zxpd/sd/live.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",黑龙江卫视
 http://112.27.235.94:8000/hls/48/index.m3u8
+#EXTINF:-1 group-title="☘️河北频道",河北农民
+https://ls.qingting.fm/live/1650/64k.m3u8
 #EXTINF:-1 group-title="☘️河北频道",河北卫视
 http://112.27.235.94:8000/hls/39/index.m3u8
 #EXTINF:-1 group-title="🌊港·澳·台",环球电视
@@ -294,7 +320,7 @@ https://tbs5.mov3.co/hls/tbs.m3u8
 
 # ========== 智能补充分类 ==========
 
-# ----- 📻 网络电台 (244个频道) -----
+# ----- 📻 网络电台 (263个频道) -----
 #EXTINF:-1 group-title="📻 网络电台",香港第三台
 http://45.192.97.170:8880/play/6190.m3u8
 #EXTINF:-1 group-title="📻 网络电台",亚洲热歌
@@ -321,6 +347,8 @@ http://45.192.97.170:8880/play/6217.m3u8
 http://45.192.97.170:8880/play/6218.m3u8
 #EXTINF:-1 group-title="📻 网络电台",上海第一财经广播
 http://45.192.97.170:8880/play/6219.m3u8
+#EXTINF:-1 group-title="📻 网络电台",江苏新闻综合广播
+http://45.192.97.170:8880/play/6220.m3u8
 #EXTINF:-1 group-title="📻 网络电台",江苏文艺广播
 http://45.192.97.170:8880/play/6221.m3u8
 #EXTINF:-1 group-title="📻 网络电台",江苏财经广播
@@ -331,6 +359,10 @@ http://45.192.97.170:8880/play/6223.m3u8
 http://45.192.97.170:8880/play/6224.m3u8
 #EXTINF:-1 group-title="📻 网络电台",安徽经济广播
 http://45.192.97.170:8880/play/6225.m3u8
+#EXTINF:-1 group-title="📻 网络电台",安徽交通广播
+http://45.192.97.170:8880/play/6226.m3u8
+#EXTINF:-1 group-title="📻 网络电台",安徽旅游广播·高速之声
+http://45.192.97.170:8880/play/6227.m3u8
 #EXTINF:-1 group-title="📻 网络电台",安徽戏曲广播·动听995
 http://45.192.97.170:8880/play/6228.m3u8
 #EXTINF:-1 group-title="📻 网络电台",安徽故事广播
@@ -357,22 +389,32 @@ http://45.192.97.170:8880/play/6239.m3u8
 http://45.192.97.170:8880/play/6240.m3u8
 #EXTINF:-1 group-title="📻 网络电台",陕西农村广播
 http://45.192.97.170:8880/play/6242.m3u8
+#EXTINF:-1 group-title="📻 网络电台",陕西新闻广播
+http://45.192.97.170:8880/play/6244.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江之声
 http://45.192.97.170:8880/play/6245.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江经济广播
 http://45.192.97.170:8880/play/6246.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江交通之声
 http://45.192.97.170:8880/play/6247.m3u8
+#EXTINF:-1 group-title="📻 网络电台",浙江民生资讯广播
+http://45.192.97.170:8880/play/6248.m3u8
+#EXTINF:-1 group-title="📻 网络电台",浙江城市之声
+http://45.192.97.170:8880/play/6249.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江旅游之声
 http://45.192.97.170:8880/play/6250.m3u8
 #EXTINF:-1 group-title="📻 网络电台",四川交通广播
 http://45.192.97.170:8880/play/6257.m3u8
+#EXTINF:-1 group-title="📻 网络电台",四川综合广播四川之声
+http://45.192.97.170:8880/play/6258.m3u8
 #EXTINF:-1 group-title="📻 网络电台",四川私家车广播
 http://45.192.97.170:8880/play/6259.m3u8
 #EXTINF:-1 group-title="📻 网络电台",贵州经济广播
 http://45.192.97.170:8880/play/6260.m3u8
 #EXTINF:-1 group-title="📻 网络电台",贵州旅游广播
 http://45.192.97.170:8880/play/6261.m3u8
+#EXTINF:-1 group-title="📻 网络电台",贵州故事广播
+http://45.192.97.170:8880/play/6262.m3u8
 #EXTINF:-1 group-title="📻 网络电台",贵州综合广播
 http://45.192.97.170:8880/play/6263.m3u8
 #EXTINF:-1 group-title="📻 网络电台",延边文艺生活广播
@@ -437,6 +479,8 @@ http://45.192.97.170:8880/play/6295.m3u8
 http://45.192.97.170:8880/play/6296.m3u8
 #EXTINF:-1 group-title="📻 网络电台",宁夏新闻广播
 http://45.192.97.170:8880/play/6299.m3u8
+#EXTINF:-1 group-title="📻 网络电台",青海新闻综合广播
+http://45.192.97.170:8880/play/6301.m3u8
 #EXTINF:-1 group-title="📻 网络电台",青海经济广播
 http://45.192.97.170:8880/play/6302.m3u8
 #EXTINF:-1 group-title="📻 网络电台",开州之声
@@ -445,6 +489,8 @@ http://45.192.97.170:8880/play/6303.m3u8
 http://45.192.97.170:8880/play/6308.m3u8
 #EXTINF:-1 group-title="📻 网络电台",CRI HIT FM
 http://45.192.97.170:8880/play/6310.m3u8
+#EXTINF:-1 group-title="📻 网络电台",陕西音乐广播
+http://45.192.97.170:8880/play/6311.m3u8
 #EXTINF:-1 group-title="📻 网络电台",陕西青少广播·好听1055
 http://45.192.97.170:8880/play/6312.m3u8
 #EXTINF:-1 group-title="📻 网络电台",山东音乐广播
@@ -453,6 +499,8 @@ http://45.192.97.170:8880/play/6313.m3u8
 http://45.192.97.170:8880/play/6314.m3u8
 #EXTINF:-1 group-title="📻 网络电台",安徽音乐广播
 http://45.192.97.170:8880/play/6315.m3u8
+#EXTINF:-1 group-title="📻 网络电台",内蒙古音乐之声
+http://45.192.97.170:8880/play/6318.m3u8
 #EXTINF:-1 group-title="📻 网络电台",湖北经典音乐广播
 http://45.192.97.170:8880/play/6319.m3u8
 #EXTINF:-1 group-title="📻 网络电台",甘肃青春调频
@@ -461,6 +509,8 @@ http://45.192.97.170:8880/play/6320.m3u8
 http://45.192.97.170:8880/play/6321.m3u8
 #EXTINF:-1 group-title="📻 网络电台",广西音乐广播
 http://45.192.97.170:8880/play/6322.m3u8
+#EXTINF:-1 group-title="📻 网络电台",广西经济广播·女主播电台
+http://45.192.97.170:8880/play/6323.m3u8
 #EXTINF:-1 group-title="📻 网络电台",云南音乐广播
 http://45.192.97.170:8880/play/6324.m3u8
 #EXTINF:-1 group-title="📻 网络电台",江苏音乐广播
@@ -481,6 +531,8 @@ http://45.192.97.170:8880/play/6334.m3u8
 http://45.192.97.170:8880/play/6335.m3u8
 #EXTINF:-1 group-title="📻 网络电台",贵州音乐广播
 http://45.192.97.170:8880/play/6336.m3u8
+#EXTINF:-1 group-title="📻 网络电台",贵州都市广播
+http://45.192.97.170:8880/play/6337.m3u8
 #EXTINF:-1 group-title="📻 网络电台",宁夏音乐广播
 http://45.192.97.170:8880/play/6338.m3u8
 #EXTINF:-1 group-title="📻 网络电台",重庆音乐广播
@@ -575,6 +627,8 @@ http://45.192.97.170:8880/play/6395.m3u8
 http://45.192.97.170:8880/play/6396.m3u8
 #EXTINF:-1 group-title="📻 网络电台",河北交通广播
 http://45.192.97.170:8880/play/6397.m3u8
+#EXTINF:-1 group-title="📻 网络电台",河北经济广播
+http://45.192.97.170:8880/play/6398.m3u8
 #EXTINF:-1 group-title="📻 网络电台",河北生活广播
 http://45.192.97.170:8880/play/6399.m3u8
 #EXTINF:-1 group-title="📻 网络电台",福建新闻广播
@@ -605,12 +659,16 @@ http://45.192.97.170:8880/play/6414.m3u8
 http://45.192.97.170:8880/play/6415.m3u8
 #EXTINF:-1 group-title="📻 网络电台",陕西农村广播
 http://45.192.97.170:8880/play/6417.m3u8
+#EXTINF:-1 group-title="📻 网络电台",陕西新闻广播
+http://45.192.97.170:8880/play/6419.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江之声
 http://45.192.97.170:8880/play/6420.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江经济广播
 http://45.192.97.170:8880/play/6421.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江交通之声
 http://45.192.97.170:8880/play/6422.m3u8
+#EXTINF:-1 group-title="📻 网络电台",浙江民生资讯广播
+http://45.192.97.170:8880/play/6423.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江城市之声
 http://45.192.97.170:8880/play/6424.m3u8
 #EXTINF:-1 group-title="📻 网络电台",浙江旅游之声
@@ -649,12 +707,16 @@ http://45.192.97.170:8880/play/6442.m3u8
 http://45.192.97.170:8880/play/6443.m3u8
 #EXTINF:-1 group-title="📻 网络电台",贵州旅游广播
 http://45.192.97.170:8880/play/6444.m3u8
+#EXTINF:-1 group-title="📻 网络电台",贵州故事广播
+http://45.192.97.170:8880/play/6445.m3u8
 #EXTINF:-1 group-title="📻 网络电台",贵州综合广播
 http://45.192.97.170:8880/play/6446.m3u8
 #EXTINF:-1 group-title="📻 网络电台",河南新闻广播
 http://45.192.97.170:8880/play/6447.m3u8
 #EXTINF:-1 group-title="📻 网络电台",河南经济广播
 http://45.192.97.170:8880/play/6448.m3u8
+#EXTINF:-1 group-title="📻 网络电台",河南戏曲广播
+http://45.192.97.170:8880/play/6449.m3u8
 #EXTINF:-1 group-title="📻 网络电台",河南教育广播
 http://45.192.97.170:8880/play/6450.m3u8
 #EXTINF:-1 group-title="📻 网络电台",河南信息广播
@@ -677,6 +739,8 @@ http://45.192.97.170:8880/play/6458.m3u8
 http://45.192.97.170:8880/play/6459.m3u8
 #EXTINF:-1 group-title="📻 网络电台",黑龙江新闻广播
 http://45.192.97.170:8880/play/6460.m3u8
+#EXTINF:-1 group-title="📻 网络电台",黑龙江交通广播
+http://45.192.97.170:8880/play/6461.m3u8
 #EXTINF:-1 group-title="📻 网络电台",黑龙江都市女性广播
 http://45.192.97.170:8880/play/6462.m3u8
 #EXTINF:-1 group-title="📻 网络电台",黑龙江高校广播
@@ -1012,7 +1076,7 @@ http://45.192.97.170:8880/play/6144.m3u8
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★153
 http://45.192.97.170:8880/play/6145.m3u8
 
-# ----- 🎬 电影频道 (113个频道) -----
+# ----- 🎬 电影频道 (109个频道) -----
 #EXTINF:-1 group-title="🎬 电影频道",短剧陈翔六点半
 http://45.192.97.170:8880/play/1968.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",短剧人生回答机本机
@@ -1027,12 +1091,8 @@ http://45.192.97.170:8880/play/1972.m3u8
 http://45.192.97.170:8880/play/1973.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆封神榜
 http://45.192.97.170:8880/play/1974.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",埋堆堆天地争霸美猴王
-http://45.192.97.170:8880/play/1975.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆大唐双龙传
 http://45.192.97.170:8880/play/1976.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",埋堆堆陀枪师姐
-http://45.192.97.170:8880/play/1977.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆扫黄先锋
 http://45.192.97.170:8880/play/1978.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆野蛮亲家
@@ -1069,8 +1129,6 @@ http://45.192.97.170:8880/play/1995.m3u8
 http://45.192.97.170:8880/play/1996.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",徐克专场
 http://45.192.97.170:8880/play/1997.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",徐峥专场
-http://45.192.97.170:8880/play/1998.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",邓超专场
 http://45.192.97.170:8880/play/1999.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",梁家辉专场
@@ -1101,10 +1159,6 @@ http://45.192.97.170:8880/play/2012.m3u8
 http://45.192.97.170:8880/play/2013.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",怪兽片系列
 http://45.192.97.170:8880/play/2014.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",战争片系列
-http://45.192.97.170:8880/play/2015.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",硬汉片系列
-http://45.192.97.170:8880/play/2016.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",竞速片系列
 http://45.192.97.170:8880/play/2017.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",动作片系列
@@ -1115,8 +1169,6 @@ http://45.192.97.170:8880/play/2019.m3u8
 http://45.192.97.170:8880/play/2020.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",奇幻片系列
 http://45.192.97.170:8880/play/2021.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",冒险片系列
-http://45.192.97.170:8880/play/2022.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",盗墓片系列
 http://45.192.97.170:8880/play/2023.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",穿越片系列
@@ -1143,10 +1195,14 @@ http://45.192.97.170:8880/play/2033.m3u8
 http://45.192.97.170:8880/play/2034.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",动画片系列
 http://45.192.97.170:8880/play/2035.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",恐怖片系列
+http://45.192.97.170:8880/play/2036.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",惊悚片系列
 http://45.192.97.170:8880/play/2037.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",僵尸片系列
 http://45.192.97.170:8880/play/2038.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",杀手片系列
+http://45.192.97.170:8880/play/2040.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",体育片系列
 http://45.192.97.170:8880/play/2041.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",西部片系列
@@ -1163,6 +1219,8 @@ http://45.192.97.170:8880/play/2046.m3u8
 http://45.192.97.170:8880/play/2047.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",探案剧专区
 http://45.192.97.170:8880/play/2048.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",都市剧专区
+http://45.192.97.170:8880/play/2049.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",刑侦剧专区
 http://45.192.97.170:8880/play/2050.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",家庭剧专区
@@ -1185,10 +1243,6 @@ http://45.192.97.170:8880/play/2058.m3u8
 http://45.192.97.170:8880/play/2059.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",校园剧专区
 http://45.192.97.170:8880/play/2060.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",谍战剧专区
-http://45.192.97.170:8880/play/2061.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",古装剧专区
-http://45.192.97.170:8880/play/2062.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",乡村剧专区
 http://45.192.97.170:8880/play/2063.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",偶像剧专区
@@ -1199,6 +1253,8 @@ http://45.192.97.170:8880/play/2065.m3u8
 http://45.192.97.170:8880/play/2066.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",武侠剧专区
 http://45.192.97.170:8880/play/2067.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",穿越剧专区
+http://45.192.97.170:8880/play/2068.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",年代剧专区
 http://45.192.97.170:8880/play/2069.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",醉拳
@@ -1240,7 +1296,7 @@ http://45.192.97.170:8880/play/5711.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",战狼
 http://45.192.97.170:8880/play/5712.m3u8
 
-# ----- 🎬 动漫频道 (42个频道) -----
+# ----- 🎬 动漫频道 (41个频道) -----
 #EXTINF:-1 group-title="🎬 动漫频道",名侦探柯南
 http://45.192.97.170:8880/play/2070.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",火影忍者
@@ -1253,6 +1309,8 @@ http://45.192.97.170:8880/play/2073.m3u8
 http://45.192.97.170:8880/play/2076.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",钢之炼金术师
 http://45.192.97.170:8880/play/2077.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",黑子的篮球
+http://45.192.97.170:8880/play/2078.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",瑞克与莫蒂
 http://45.192.97.170:8880/play/2079.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",星辰变
@@ -1285,14 +1343,14 @@ http://45.192.97.170:8880/play/2093.m3u8
 http://45.192.97.170:8880/play/2094.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",网球王子
 http://45.192.97.170:8880/play/2095.m3u8
-#EXTINF:-1 group-title="🎬 动漫频道",玩具总动员
-http://45.192.97.170:8880/play/2096.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",通灵王
 http://45.192.97.170:8880/play/2097.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",游戏王
 http://45.192.97.170:8880/play/2098.m3u8
-#EXTINF:-1 group-title="🎬 动漫频道",男子高中生的日常
-http://45.192.97.170:8880/play/2099.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",元气少女缘结神
+http://45.192.97.170:8880/play/2100.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",全职法师
+http://45.192.97.170:8880/play/2101.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",尸兄
 http://45.192.97.170:8880/play/2102.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",大头儿子小头爸爸
@@ -1311,12 +1369,8 @@ http://45.192.97.170:8880/play/2109.m3u8
 http://45.192.97.170:8880/play/2111.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",超自然武装当哒当
 http://45.192.97.170:8880/play/2112.m3u8
-#EXTINF:-1 group-title="🎬 动漫频道",新世纪福音战士
-http://45.192.97.170:8880/play/2113.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",足球小将
 http://45.192.97.170:8880/play/2114.m3u8
-#EXTINF:-1 group-title="🎬 动漫频道",轻羽飞扬
-http://45.192.97.170:8880/play/2115.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",虫师
 http://45.192.97.170:8880/play/2116.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",魔神英雄传
