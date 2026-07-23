@@ -93,8 +93,6 @@ http://112.27.235.94:8000/hls/34/index.m3u8
 http://112.27.235.94:8000/hls/45/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",陕西卫视
 http://112.27.235.94:8000/hls/43/index.m3u8
-#EXTINF:-1 group-title="📡卫视频道",四川卫视
-http://182.150.23.74:808/hls/38/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",深圳卫视
 http://112.27.235.94:8000/hls/33/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",三沙卫视
@@ -119,8 +117,8 @@ http://61.216.67.119:1935/bltvhd/bltv1/chunklist_w1266569526.m3u
 http://112.27.235.94:8000/hls/33/index.m3u8
 #EXTINF:-1 group-title="☘️北京频道",耀才财经
 https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
-#EXTINF:-1 group-title="☘️上海频道",铜陵新闻综合
-https://ls.qingting.fm/live/21303/64k.m3u8
+#EXTINF:-1 group-title="☘️上海频道",南京新闻综合
+http://nklive.nbs.cn/hls/d511bc9d-a694-4453-b3a2-4fc842cc97a1/index.m3u8
 #EXTINF:-1 group-title="☘️上海频道",普陀山
 https://gcalic.v.myalicdn.com/gc/pts01_1/index.m3u8
 #EXTINF:-1 group-title="☘️天津频道",天津卫视
@@ -131,22 +129,16 @@ http://222.179.155.21:1935/ch1.m3u8
 http://112.27.235.94:8000/hls/36/index.m3u8
 #EXTINF:-1 group-title="☘️重庆频道",铜梁综合
 http://183.64.174.171:40123/ch1.m3u8?zzhongqd
-#EXTINF:-1 group-title="☘️重庆频道",荣昌综合 [Not 24/7]
-http://183.64.181.25:40023/rongchang01.m3u8
 #EXTINF:-1 group-title="☘️重庆频道",江津新闻综合
 http://222.179.155.21:1935/ch1.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广东卫视
 http://112.27.235.94:8000/hls/30/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
 http://8.138.7.223/tv/gzjs.m3u8
-#EXTINF:-1 group-title="☘️广东频道",泰山白云亭悬崖
-https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州综合
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=439b0fd2cf766b363c93a59cbcbe1370&txTime=18d00acf488
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
 http://8.138.7.223/tv/gzjs.m3u8
-#EXTINF:-1 group-title="☘️广东频道",龙门飞甲
-http://jsmov2.a.yximgs.com/bs3/video-hls/5203346449046555193_hlsb.m3u8
 #EXTINF:-1 group-title="☘️浙江频道",浙江经济生活
 http://ali-m-l.cztv.com/channels/lantian/channel03/1080p.m3u8#https://ali-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8#http://ali-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8
 #EXTINF:-1 group-title="☘️浙江频道",浙江民生
@@ -179,10 +171,6 @@ http://112.27.235.94:8000/hls/25/index.m3u8
 http://112.27.235.94:8000/hls/18/index.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",固镇新闻
 http://www.guzhenm.com:7001/hls/hd-live.m3u8
-#EXTINF:-1 group-title="☘️安徽频道",黄山
-https://gcalic.v.myalicdn.com/gc/ahhs01_1/index.m3u8
-#EXTINF:-1 group-title="☘️安徽频道",铜陵新闻综合
-https://ls.qingting.fm/live/21303/64k.m3u8
 #EXTINF:-1 group-title="☘️安徽频道",祁门综合
 http://zbbf2.ahbztv.com/live/416.m3u8?zanhd
 #EXTINF:-1 group-title="☘️安徽频道",七台河新闻综合
@@ -195,16 +183,10 @@ https://ls.qingting.fm/live/5022100/64k.m3u8
 http://112.27.235.94:8000/hls/31/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界宝峰湖
 https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8
-#EXTINF:-1 group-title="☘️湖南频道",湖南张家界御笔峰
-https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8
-#EXTINF:-1 group-title="☘️湖南频道",湖南张家界水绕四门
-https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界天门山西线玻璃栈道
 https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8
 #EXTINF:-1 group-title="☘️广西频道",广西卫视
 https://hlscdn.liangtv.cn/live/de0f97348eb84f62aa6b7d8cf0430770/dd505d87880c478f901f38560ca4d4e6.m3u8
-#EXTINF:-1 group-title="☘️广西频道",广西桂林漓江景区
-https://gcalic.v.myalicdn.com/gc/gllj01_1/index.m3u8
 #EXTINF:-1 group-title="☘️广西频道",来宾综合
 http://zb.gxlbamc.com:1935/live/lbzh.stream/playlist.m3u8
 #EXTINF:-1 group-title="☘️广西频道",象山综合
@@ -213,26 +195,18 @@ http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-8001
 https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f490690f6a36a16e09c79.m3u8
 #EXTINF:-1 group-title="☘️海南频道",天涯石
 https://gcalic.v.myalicdn.com/gc/tyhjtys_1/index.m3u8
-#EXTINF:-1 group-title="☘️四川频道",乐山大佛全景
-https://gcalic.v.myalicdn.com/gc/lsdfgfl_1/index.m3u8
 #EXTINF:-1 group-title="☘️四川频道",乐至综合
 http://175.155.106.72:89/live1/live1.m3u8?zsicd;http://rmlive.lzxrmtzx.com/live1/live1.m3u8?zsicd
 #EXTINF:-1 group-title="☘️四川频道",井研综合
 http://tvfile.jyrmt.cn/nmip-media/channellive/channel104452/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",剑阁综合
 https://m3u8.channel.dzsm.com/nmip-media/channellive/channel105549/playlist.m3u8
-#EXTINF:-1 group-title="☘️四川频道",四川卫视
-http://182.150.23.74:808/hls/38/index.m3u8
-#EXTINF:-1 group-title="☘️四川频道",朝天综合
-https://m3u8.channel.dzsm.com/nmip-media/channellive/channel104601/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",青川综合
 http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",安顺新闻
 https://ls.qingting.fm/live/5022203/64k.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",贵州卫视
 http://112.27.235.94:8000/hls/46/index.m3u8
-#EXTINF:-1 group-title="☘️贵州频道",贵州省兴义市万峰林
-https://gcalic.v.myalicdn.com/gc/xywfl_1/index.m3u8
 #EXTINF:-1 group-title="☘️云南频道",丽江古城万古楼遥望玉龙雪山
 https://gcalic.v.myalicdn.com/gc/ljgcwglytylxs_1/index.m3u8
 #EXTINF:-1 group-title="☘️云南频道",云南丽江玉龙雪山草甸
@@ -247,8 +221,6 @@ http://112.27.235.94:8000/hls/43/index.m3u8
 https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
 #EXTINF:-1 group-title="☘️陕西频道",黄龙
 https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
-#EXTINF:-1 group-title="☘️甘肃频道",张掖七彩丹霞
-https://gcalic.v.myalicdn.com/gc/zyqcdx01_1/index.m3u8
 #EXTINF:-1 group-title="☘️宁夏频道",绍兴公共
 http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8
 #EXTINF:-1 group-title="☘️宁夏频道",大立电视台
@@ -263,10 +235,6 @@ http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 http://112.27.235.94:8000/hls/49/index.m3u8
 #EXTINF:-1 group-title="☘️山西频道",山西卫视
 http://112.27.235.94:8000/hls/45/index.m3u8
-#EXTINF:-1 group-title="☘️辽宁频道",乌镇西市河
-https://gcalic.v.myalicdn.com/gc/zjwzbblh_1/index.m3u8
-#EXTINF:-1 group-title="☘️辽宁频道",泰山太平岭
-https://gcalic.v.myalicdn.com/gc/hkts09_1/index.m3u8
 #EXTINF:-1 group-title="☘️辽宁频道",辽宁卫视
 http://112.27.235.94:8000/hls/47/index.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",七台河新闻综合
@@ -287,8 +255,6 @@ https://gcalic.v.myalicdn.com/gc/hsxksqj_1/index.m3u8
 https://stream.hrbtv.net/zxpd/sd/live.m3u8
 #EXTINF:-1 group-title="☘️黑龙江频道",黑龙江卫视
 http://112.27.235.94:8000/hls/48/index.m3u8
-#EXTINF:-1 group-title="☘️河北频道",河北农民
-https://ls.qingting.fm/live/1650/64k.m3u8
 #EXTINF:-1 group-title="🌊港·澳·台",环球电视
 http://utv1.hqtvzb.com:9999/hls/world.m3u8
 #EXTINF:-1 group-title="🌊港·澳·台",台视新闻
@@ -840,7 +806,7 @@ http://45.192.97.170:8880/play/6498.m3u8
 #EXTINF:-1 group-title="📻 网络电台",青海交通音乐广播
 http://45.192.97.170:8880/play/6500.m3u8
 
-# ----- 🎤 韩国女团 (112个频道) -----
+# ----- 🎤 韩国女团 (113个频道) -----
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★021
 http://45.192.97.170:8880/play/6007.m3u8
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★022
@@ -1023,6 +989,8 @@ http://45.192.97.170:8880/play/6095.m3u8
 http://45.192.97.170:8880/play/6096.m3u8
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★129
 http://45.192.97.170:8880/play/6097.m3u8
+#EXTINF:-1 group-title="🎤 韩国女团",歌团★130
+http://45.192.97.170:8880/play/6098.m3u8
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★131
 http://45.192.97.170:8880/play/6099.m3u8
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★133
@@ -1066,7 +1034,7 @@ http://45.192.97.170:8880/play/6118.m3u8
 #EXTINF:-1 group-title="🎤 韩国女团",歌团★153
 http://45.192.97.170:8880/play/6119.m3u8
 
-# ----- 🎬 电影频道 (106个频道) -----
+# ----- 🎬 电影频道 (102个频道) -----
 #EXTINF:-1 group-title="🎬 电影频道",短剧陈翔六点半
 http://45.192.97.170:8880/play/1942.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",短剧人生回答机本机
@@ -1077,18 +1045,12 @@ http://45.192.97.170:8880/play/1944.m3u8
 http://45.192.97.170:8880/play/1945.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",短剧不思异剧场
 http://45.192.97.170:8880/play/1946.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",埋堆堆楚汉骄雄
-http://45.192.97.170:8880/play/1947.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆天地争霸美猴王
 http://45.192.97.170:8880/play/1949.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",埋堆堆陀枪师姐
-http://45.192.97.170:8880/play/1951.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",埋堆堆大唐双龙传
+http://45.192.97.170:8880/play/1950.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆扫黄先锋
 http://45.192.97.170:8880/play/1952.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",埋堆堆妙手仁心
-http://45.192.97.170:8880/play/1953.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",埋堆堆野蛮亲家
-http://45.192.97.170:8880/play/1954.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆笑看风云
 http://45.192.97.170:8880/play/1955.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",埋堆堆韦小宝
@@ -1133,6 +1095,8 @@ http://45.192.97.170:8880/play/1976.m3u8
 http://45.192.97.170:8880/play/1977.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",郭富城专场
 http://45.192.97.170:8880/play/1978.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",吴镇宇专场
+http://45.192.97.170:8880/play/1979.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",陆小凤专场
 http://45.192.97.170:8880/play/1980.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",强森专场
@@ -1143,22 +1107,20 @@ http://45.192.97.170:8880/play/1982.m3u8
 http://45.192.97.170:8880/play/1983.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",贺岁片系列
 http://45.192.97.170:8880/play/1985.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",科幻片系列
-http://45.192.97.170:8880/play/1986.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",丧尸片系列
 http://45.192.97.170:8880/play/1987.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",怪兽片系列
 http://45.192.97.170:8880/play/1988.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",战争片系列
-http://45.192.97.170:8880/play/1989.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",硬汉片系列
 http://45.192.97.170:8880/play/1990.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",竞速片系列
 http://45.192.97.170:8880/play/1991.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",动作片系列
 http://45.192.97.170:8880/play/1992.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",冒险片系列
-http://45.192.97.170:8880/play/1996.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",犯罪片系列
+http://45.192.97.170:8880/play/1994.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",奇幻片系列
+http://45.192.97.170:8880/play/1995.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",盗墓片系列
 http://45.192.97.170:8880/play/1997.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",穿越片系列
@@ -1171,8 +1133,6 @@ http://45.192.97.170:8880/play/2000.m3u8
 http://45.192.97.170:8880/play/2001.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",枪战片系列
 http://45.192.97.170:8880/play/2002.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",武侠片系列
-http://45.192.97.170:8880/play/2003.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",复仇片系列
 http://45.192.97.170:8880/play/2004.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",星球片系列
@@ -1183,8 +1143,6 @@ http://45.192.97.170:8880/play/2006.m3u8
 http://45.192.97.170:8880/play/2007.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",谍战片系列
 http://45.192.97.170:8880/play/2008.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",动画片系列
-http://45.192.97.170:8880/play/2009.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",恐怖片系列
 http://45.192.97.170:8880/play/2010.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",惊悚片系列
@@ -1197,34 +1155,32 @@ http://45.192.97.170:8880/play/2014.m3u8
 http://45.192.97.170:8880/play/2015.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",西部片系列
 http://45.192.97.170:8880/play/2016.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",香港片系列
+http://45.192.97.170:8880/play/2017.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",印度片系列
 http://45.192.97.170:8880/play/2018.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",热门片系列
 http://45.192.97.170:8880/play/2019.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",高分片系列
 http://45.192.97.170:8880/play/2020.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",短片系列
-http://45.192.97.170:8880/play/2021.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",探案剧专区
 http://45.192.97.170:8880/play/2022.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",都市剧专区
 http://45.192.97.170:8880/play/2023.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",刑侦剧专区
-http://45.192.97.170:8880/play/2024.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",家庭剧专区
 http://45.192.97.170:8880/play/2025.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",经典剧专区
 http://45.192.97.170:8880/play/2026.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",怀旧剧专区
 http://45.192.97.170:8880/play/2027.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",僵尸剧专区
+http://45.192.97.170:8880/play/2028.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",抗战剧专区
 http://45.192.97.170:8880/play/2029.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",台湾剧专区
 http://45.192.97.170:8880/play/2030.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",美国剧专区
 http://45.192.97.170:8880/play/2032.m3u8
-#EXTINF:-1 group-title="🎬 电影频道",英国剧专区
-http://45.192.97.170:8880/play/2033.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",校园剧专区
 http://45.192.97.170:8880/play/2034.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",谍战剧专区
@@ -1235,10 +1191,14 @@ http://45.192.97.170:8880/play/2036.m3u8
 http://45.192.97.170:8880/play/2037.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",偶像剧专区
 http://45.192.97.170:8880/play/2038.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",爱情剧专区
+http://45.192.97.170:8880/play/2039.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",搞笑剧专区
 http://45.192.97.170:8880/play/2040.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",武侠剧专区
 http://45.192.97.170:8880/play/2041.m3u8
+#EXTINF:-1 group-title="🎬 电影频道",穿越剧专区
+http://45.192.97.170:8880/play/2042.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",年代剧专区
 http://45.192.97.170:8880/play/2043.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",醉拳
@@ -1280,7 +1240,7 @@ http://45.192.97.170:8880/play/5685.m3u8
 #EXTINF:-1 group-title="🎬 电影频道",战狼
 http://45.192.97.170:8880/play/5686.m3u8
 
-# ----- 🎬 动漫频道 (42个频道) -----
+# ----- 🎬 动漫频道 (44个频道) -----
 #EXTINF:-1 group-title="🎬 动漫频道",名侦探柯南
 http://45.192.97.170:8880/play/2044.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",火影忍者
@@ -1289,6 +1249,8 @@ http://45.192.97.170:8880/play/2045.m3u8
 http://45.192.97.170:8880/play/2046.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",精灵宝可梦
 http://45.192.97.170:8880/play/2047.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",神奇宝贝
+http://45.192.97.170:8880/play/2048.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",宫崎骏
 http://45.192.97.170:8880/play/2050.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",钢之炼金术师
@@ -1327,8 +1289,6 @@ http://45.192.97.170:8880/play/2067.m3u8
 http://45.192.97.170:8880/play/2068.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",网球王子
 http://45.192.97.170:8880/play/2069.m3u8
-#EXTINF:-1 group-title="🎬 动漫频道",玩具总动员
-http://45.192.97.170:8880/play/2070.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",通灵王
 http://45.192.97.170:8880/play/2071.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",游戏王
@@ -1343,20 +1303,24 @@ http://45.192.97.170:8880/play/2076.m3u8
 http://45.192.97.170:8880/play/2077.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",哪吒传奇
 http://45.192.97.170:8880/play/2078.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",龙族
+http://45.192.97.170:8880/play/2079.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",间谍过家家
 http://45.192.97.170:8880/play/2080.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",罗小黑战记
 http://45.192.97.170:8880/play/2081.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",葫芦兄弟
 http://45.192.97.170:8880/play/2083.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",咒术回战
+http://45.192.97.170:8880/play/2084.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",反叛的鲁路修
 http://45.192.97.170:8880/play/2085.m3u8
-#EXTINF:-1 group-title="🎬 动漫频道",超自然武装当哒当
-http://45.192.97.170:8880/play/2086.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",新世纪福音战士
 http://45.192.97.170:8880/play/2087.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",足球小将
 http://45.192.97.170:8880/play/2088.m3u8
+#EXTINF:-1 group-title="🎬 动漫频道",轻羽飞扬
+http://45.192.97.170:8880/play/2089.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",虫师
 http://45.192.97.170:8880/play/2090.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",魔神英雄传
@@ -1366,7 +1330,7 @@ http://45.192.97.170:8880/play/2092.m3u8
 #EXTINF:-1 group-title="🎬 动漫频道",国产动漫系列
 http://45.192.97.170:8880/play/2094.m3u8
 
-# ----- 🏀 体育竞赛频道 (84个频道) -----
+# ----- 🏀 体育竞赛频道 (88个频道) -----
 #EXTINF:-1 group-title="🏀 体育竞赛频道",WTT 关文皓迎首胜 博加尔·豪格横扫晋级 全场回放（徐铭辰） 04:00
 http://45.192.97.170:8880/play/63.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",WTT 关文皓迎首胜 博加尔·豪格横扫晋级 全场回放（一号桌） 04:00
@@ -1399,10 +1363,14 @@ http://45.192.97.170:8880/play/76.m3u8
 http://45.192.97.170:8880/play/77.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 庞俊旭5-2布雷切尔 邓壕辉、周跃龙出局 【回放】大卫·吉尔伯特5-4阿什利·休吉尔（赛场原声） 17:00
 http://45.192.97.170:8880/play/78.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 庞俊旭5-2布雷切尔 邓壕辉、周跃龙出局 【回放】雷佩凡5-4马修·塞尔特（赛场原声） 17:00
+http://45.192.97.170:8880/play/79.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",BWF 经典重映-BWF日本站 王祉怡、梁王速胜晋级 【回放】崔率圭/吴蔚昇0-2梁伟铿/王昶（鸿昆） 18:00
 http://45.192.97.170:8880/play/81.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",NBA经典赛事 NBA精彩重播：火箭vs雷霆 全场回放（连睿、周鹏、拜月宁） 18:00
 http://45.192.97.170:8880/play/82.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 周冠达、杨硕、小马哥前瞻看点 全场回放（周冠达、杨硕、小马哥） 18:00
+http://45.192.97.170:8880/play/83.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 东莞新世纪74-76上海交通大学 全场回放（赛场原声） 19:25
 http://45.192.97.170:8880/play/84.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",浙BA 平阳75-82瑞安 2026浙江省城市篮球联赛全场回放：平阳VS瑞安（赛场原声） 19:30
@@ -1447,20 +1415,24 @@ http://45.192.97.170:8880/play/103.m3u8
 http://45.192.97.170:8880/play/104.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",WTT 吴晙诚/刘叡潾、杜达/米特兰姆皆3-2晋级 全场回放（三号桌） 04:00
 http://45.192.97.170:8880/play/105.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",贵州省运会 羽毛球决赛 赛场原声 08:30
+http://45.192.97.170:8880/play/106.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",中国羽毛球公开赛 主场作战！陈雨菲迎战辛杜 CCTV5 09:00
 http://45.192.97.170:8880/play/107.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 新疆天山vs黑龙江队 清流播出 09:55
 http://45.192.97.170:8880/play/109.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 徐儒叶 11:00
+http://45.192.97.170:8880/play/110.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 1号桌 11:00
+http://45.192.97.170:8880/play/111.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 2号桌 11:00
 http://45.192.97.170:8880/play/112.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 5号桌 11:00
-http://45.192.97.170:8880/play/113.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 6号桌 11:00
 http://45.192.97.170:8880/play/114.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 3号桌 12:00
 http://45.192.97.170:8880/play/115.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 王楚钦率魏桥冲开门红 林诗栋率队出战 4号桌 12:00
-http://45.192.97.170:8880/play/116.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",中国羽毛球公开赛 主场作战！圣坛组合迎战中国台北强档 CCTV5+ 14:00
+http://45.192.97.170:8880/play/117.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 北京师范大学vs赣州章贡赣星 清流播出 14:25
 http://45.192.97.170:8880/play/118.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 河南豫光金铅vs东莞新世纪 清流播出 14:25
@@ -1471,32 +1443,14 @@ http://45.192.97.170:8880/play/120.m3u8
 http://45.192.97.170:8880/play/121.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 江苏南钢vs山西竹叶青酒 清流播出 16:55
 http://45.192.97.170:8880/play/122.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 周跃龙PK吉米·罗伯逊 张安达VS博登 2号桌 17:00
-http://45.192.97.170:8880/play/128.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 周跃龙PK吉米·罗伯逊 张安达VS博登 3号桌 17:00
-http://45.192.97.170:8880/play/129.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 周跃龙PK吉米·罗伯逊 张安达VS博登 4号桌 17:00
-http://45.192.97.170:8880/play/130.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 周跃龙PK吉米·罗伯逊 张安达VS博登 6号桌 17:00
-http://45.192.97.170:8880/play/132.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 周跃龙PK吉米·罗伯逊 张安达VS博登 7号桌 17:00
-http://45.192.97.170:8880/play/133.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 周跃龙PK吉米·罗伯逊 张安达VS博登 8号桌 17:00
-http://45.192.97.170:8880/play/134.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",BWF 经典重映-梁王组合国羽德比完胜晋级 伪直播 18:00
-http://45.192.97.170:8880/play/135.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 周冠达 杨硕 小马哥 17:00
-http://45.192.97.170:8880/play/137.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 徐铭辰 18:00
 http://45.192.97.170:8880/play/138.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 1号桌 18:00
-http://45.192.97.170:8880/play/139.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 2号桌 18:00
 http://45.192.97.170:8880/play/140.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 6号桌 18:00
-http://45.192.97.170:8880/play/142.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 3号桌 19:00
-http://45.192.97.170:8880/play/143.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 5号桌 18:00
+http://45.192.97.170:8880/play/141.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 孙颖莎领衔深大冲开门红 向鹏率黄石争胜 4号桌 19:00
+http://45.192.97.170:8880/play/144.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 山东赤水河酒vs武汉盛帆黄鹤 清流播出 19:25
 http://45.192.97.170:8880/play/145.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 浙江稠州银行vs石家庄英励 清流播出 19:25
@@ -1505,36 +1459,54 @@ http://45.192.97.170:8880/play/146.m3u8
 http://45.192.97.170:8880/play/147.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",浙BA 安吉VS长兴 赛场原声 19:30
 http://45.192.97.170:8880/play/148.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",浙BA 缙云VS云和 赛场原声 19:30
+http://45.192.97.170:8880/play/149.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",世界女排联赛 美国队vs中国队 CCTV5 19:30
 http://45.192.97.170:8880/play/150.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 合肥文旅vs北京师范大学 清流播出 09:55
+http://45.192.97.170:8880/play/161.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 周泽昊 11:00
 http://45.192.97.170:8880/play/162.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 1号桌 11:00
 http://45.192.97.170:8880/play/163.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 2号桌 11:00
 http://45.192.97.170:8880/play/164.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 3号桌 11:00
+http://45.192.97.170:8880/play/165.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 4号桌 11:00
+http://45.192.97.170:8880/play/166.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 5号桌 11:00
+http://45.192.97.170:8880/play/167.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 蒯曼领衔鲁能女队PK魏桥 王楚钦率队争胜 6号桌 11:00
+http://45.192.97.170:8880/play/168.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 赣州章贡赣星vs山东赤水河酒 清流播出 14:25
+http://45.192.97.170:8880/play/169.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 石家庄英励vs江苏南钢 清流播出 14:25
 http://45.192.97.170:8880/play/170.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 巩晨智PK徐思 赵翰洋、许医尘出战 1号桌 17:00
-http://45.192.97.170:8880/play/177.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 巩晨智PK徐思 赵翰洋、许医尘出战 2号桌 17:00
-http://45.192.97.170:8880/play/178.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 巩晨智PK徐思 赵翰洋、许医尘出战 8号桌 17:00
-http://45.192.97.170:8880/play/184.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 4号桌 18:00
-http://45.192.97.170:8880/play/192.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 武汉盛帆黄鹤vs黑龙江队 清流播出 16:55
+http://45.192.97.170:8880/play/171.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 上海交通大学vs河南豫光金铅 清流播出 16:55
+http://45.192.97.170:8880/play/172.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",斯诺克 巩晨智PK徐思 赵翰洋、许医尘出战 6号桌 17:00
+http://45.192.97.170:8880/play/182.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 周冠达 杨硕 小马哥 17:00
+http://45.192.97.170:8880/play/187.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 徐铭辰 18:00
+http://45.192.97.170:8880/play/188.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 1号桌 18:00
+http://45.192.97.170:8880/play/189.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 3号桌 18:00
+http://45.192.97.170:8880/play/191.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 5号桌 18:00
 http://45.192.97.170:8880/play/193.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 东莞新世纪vs山西竹叶青酒 清流播出 19:25
-http://45.192.97.170:8880/play/197.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",乒超 林诗栋率上海地产冲胜 向鹏领衔黄石出战 6号桌 18:00
+http://45.192.97.170:8880/play/194.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",全国女子篮球锦标赛 新疆天山vs陕西榆林天泽 清流播出 19:25
+http://45.192.97.170:8880/play/196.m3u8
 #EXTINF:-1 group-title="🏀 体育竞赛频道",浙BA 永嘉VS龙湾 赛场原声 19:30
 http://45.192.97.170:8880/play/198.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",浙BA 柯桥VS嵊州 赛场原声 19:30
-http://45.192.97.170:8880/play/199.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",ONE冠军赛 ONE周五格斗夜：庞佩VS纳卡敏 赵正东冲击三连胜 李威蓄 21:30
-http://45.192.97.170:8880/play/202.m3u8
-#EXTINF:-1 group-title="🏀 体育竞赛频道",ONE冠军赛 ONE周五格斗夜：庞佩VS纳卡敏 赵正东冲击三连胜 英文原声 21:30
-http://45.192.97.170:8880/play/203.m3u8
+#EXTINF:-1 group-title="🏀 体育竞赛频道",浙BA 龙游VS柯城 赛场原声 19:30
+http://45.192.97.170:8880/play/200.m3u8
 
 # ----- 🔥 热门歌曲 (118个频道) -----
 #EXTINF:-1 group-title="🔥 热门歌曲",汪明荃30首经典
