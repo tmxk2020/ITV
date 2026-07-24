@@ -4,17 +4,17 @@ http://69.30.245.50/live/cctv1.m3u8 # http://45.192.97.170:8880/play/1.m3u8 # ht
 #EXTINF:-1 group-title="📺央视频道",CCTV-2
 http://74.91.26.218:82/live/cctv2hd.m3u8 # http://112.27.235.94:8000/hls/2/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-3
-http://74.91.26.218:82/live/cctv3hd.m3u8 # http://112.27.235.94:8000/hls/3/index.m3u8
+http://112.27.235.94:8000/hls/3/index.m3u8 # http://74.91.26.218:82/live/cctv3hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-6
 http://69.30.245.50/live/cctv6.m3u8 # http://112.27.235.94:8000/hls/7/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5
 http://112.27.235.94:8000/hls/5/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5+
 http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
-#EXTINF:-1 group-title="📺央视频道",CCTV-7
-http://74.91.26.218:82/live/cctv7hd.m3u8 # http://183.11.239.36:808/hls/25/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-8
 http://74.91.26.218:82/live/cctv8hd.m3u8 # http://192.151.150.154/live/cctv8k.m3u8
+#EXTINF:-1 group-title="📺央视频道",CCTV-7
+http://183.11.239.36:808/hls/25/index.m3u8 # http://74.91.26.218:82/live/cctv7hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
 http://74.91.26.218:82/live/cctv10hd.m3u8 # http://112.27.235.94:8000/hls/11/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
@@ -137,8 +137,6 @@ http://222.179.155.21:1935/ch1.m3u8
 http://112.27.235.94:8000/hls/30/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
 http://8.138.7.223/tv/gzjs.m3u8
-#EXTINF:-1 group-title="☘️广东频道",泰山白云亭悬崖
-https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广州综合
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=439b0fd2cf766b363c93a59cbcbe1370&txTime=18d00acf488
 #EXTINF:-1 group-title="☘️广东频道",广州竞赛
@@ -193,8 +191,6 @@ https://ls.qingting.fm/live/5022100/64k.m3u8
 http://112.27.235.94:8000/hls/31/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界宝峰湖
 https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8
-#EXTINF:-1 group-title="☘️湖南频道",湖南张家界御笔峰
-https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界水绕四门
 https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8
 #EXTINF:-1 group-title="☘️湖南频道",湖南张家界天门山西线玻璃栈道
