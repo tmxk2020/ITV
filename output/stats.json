@@ -1,6 +1,6 @@
 {
   "total_channels": 104,
-  "timestamp": "2026-07-30T14:03:14.929982",
+  "timestamp": "2026-07-30T19:26:41.153761",
   "category_stats": {
     "📺央视频道": 24,
     "📡卫视频道": 26,
@@ -25,15 +25,5 @@
   "features": {
     "epg_injection_enabled": false,
     "incremental_mode": true
-  },
-  "special_categories": {
-    "广播": 261,
-    "韩国女团": 113,
-    "电影": 99,
-    "动漫": 43,
-    "体育竞赛": 61,
-    "热门歌曲": 118,
-    "动感舞曲": 41,
-    "广场舞": 201
   }
 }
