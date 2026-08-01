@@ -41,10 +41,8 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 深圳卫视,http://112.27.235.94:8000/hls/33/index.m3u8
 三沙卫视,http://221.226.51.220:50081/newlive/live/hls/38/live.m3u8
 新疆卫视,http://123.163.114.121:9901/tsfile/live/0110_1.m3u8?key=txiptv&playlive=1&authid=0
-云南卫视,http://101.66.194.129:9901/tsfile/live/0119_1.m3u8?key=txiptv&playlive=0&authid=0
 上海卫视,http://112.27.235.94:8000/hls/28/index.m3u8
 海峡卫视,http://38.64.72.148:80/hls/modn/list/4009/chunklist0.m3u8
-金鹰卡通,http://101.66.194.115:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=0&authid=0
 Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 翡翠台,http://r.jdshipin.com/qrfbg
@@ -57,7 +55,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 江津新闻综合,http://222.179.155.21:1935/ch1.m3u8
 ☘️天津频道,#genre#
 ☘️重庆频道,#genre#
-江津新闻,http://222.179.155.21:1935/ch1.m3u8?zzhongqd
 重庆卫视,http://112.27.235.94:8000/hls/36/index.m3u8
 铜梁综合,http://183.64.174.171:40123/ch1.m3u8?zzhongqd
 荣昌综合 [Not 24/7],http://183.64.181.25:40023/rongchang01.m3u8
@@ -112,7 +109,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 安顺新闻,https://ls.qingting.fm/live/5022203/64k.m3u8
 贵州卫视,http://112.27.235.94:8000/hls/46/index.m3u8
 ☘️云南频道,#genre#
-云南卫视,http://101.66.194.129:9901/tsfile/live/0119_1.m3u8?key=txiptv&playlive=0&authid=0
 ☘️陕西频道,#genre#
 ☘️甘肃频道,#genre#
 ☘️青海频道,#genre#

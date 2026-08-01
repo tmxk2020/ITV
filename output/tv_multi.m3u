@@ -16,7 +16,7 @@ http://69.30.245.50/live/cctv6.m3u8 # http://112.27.235.94:8000/hls/7/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-7
 http://74.91.26.218:82/live/cctv7hd.m3u8 # http://112.27.235.94:8000/hls/8/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-8
-http://192.151.150.154/live/cctv8k.m3u8 # http://112.27.235.94:8000/hls/9/index.m3u8 # http://74.91.26.218:82/live/cctv8hd.m3u8
+http://192.151.150.154/live/cctv8k.m3u8 # http://74.91.26.218:82/live/cctv8hd.m3u8 # http://112.27.235.94:8000/hls/9/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
 http://74.91.26.218:82/live/cctv9hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
@@ -81,14 +81,10 @@ http://112.27.235.94:8000/hls/33/index.m3u8
 http://221.226.51.220:50081/newlive/live/hls/38/live.m3u8
 #EXTINF:-1 group-title="📡卫视频道",新疆卫视
 http://123.163.114.121:9901/tsfile/live/0110_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 group-title="📡卫视频道",云南卫视
-http://101.66.194.129:9901/tsfile/live/0119_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 group-title="📡卫视频道",上海卫视
 http://112.27.235.94:8000/hls/28/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",海峡卫视
 http://38.64.72.148:80/hls/modn/list/4009/chunklist0.m3u8
-#EXTINF:-1 group-title="📡卫视频道",金鹰卡通
-http://101.66.194.115:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 group-title="📡卫视频道",Bread TV面包台
 https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",大立电视台
@@ -105,8 +101,6 @@ http://112.27.235.94:8000/hls/33/index.m3u8
 https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 #EXTINF:-1 group-title="☘️上海频道",江津新闻综合
 http://222.179.155.21:1935/ch1.m3u8
-#EXTINF:-1 group-title="☘️重庆频道",江津新闻
-http://222.179.155.21:1935/ch1.m3u8?zzhongqd
 #EXTINF:-1 group-title="☘️重庆频道",重庆卫视
 http://112.27.235.94:8000/hls/36/index.m3u8
 #EXTINF:-1 group-title="☘️重庆频道",铜梁综合
@@ -185,8 +179,6 @@ http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 https://ls.qingting.fm/live/5022203/64k.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",贵州卫视
 http://112.27.235.94:8000/hls/46/index.m3u8
-#EXTINF:-1 group-title="☘️云南频道",云南卫视
-http://101.66.194.129:9901/tsfile/live/0119_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 group-title="☘️宁夏频道",绍兴公共
 http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8
 #EXTINF:-1 group-title="☘️宁夏频道",大立电视台
