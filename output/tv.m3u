@@ -2,7 +2,7 @@
 #EXTINF:-1 group-title="📺央视频道",CCTV-1
 http://112.27.235.94:8000/hls/1/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-2
-http://112.27.235.94:8000/hls/2/index.m3u8
+http://74.91.26.218:82/live/cctv2hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-3
 http://74.91.26.218:82/live/cctv3hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-4
@@ -12,11 +12,11 @@ http://112.27.235.94:8000/hls/5/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5+
 http://112.27.235.94:8000/hls/6/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-6
-http://112.27.235.94:8000/hls/7/index.m3u8
+http://69.30.245.50/live/cctv6.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-7
 http://74.91.26.218:82/live/cctv7hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-8
-http://192.151.150.154/live/cctv8k.m3u8
+http://74.91.26.218:82/live/cctv8hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
 http://112.27.235.94:8000/hls/10/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
@@ -85,10 +85,6 @@ http://112.27.235.94:8000/hls/45/index.m3u8
 http://112.27.235.94:8000/hls/35/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",深圳卫视
 http://112.27.235.94:8000/hls/33/index.m3u8
-#EXTINF:-1 group-title="📡卫视频道",三沙卫视
-http://221.226.51.220:50081/newlive/live/hls/38/live.m3u8
-#EXTINF:-1 group-title="📡卫视频道",新疆卫视
-http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd
 #EXTINF:-1 group-title="📡卫视频道",上海卫视
 http://112.27.235.94:8000/hls/28/index.m3u8
 #EXTINF:-1 group-title="📡卫视频道",海峡卫视
@@ -113,8 +109,6 @@ http://222.179.155.21:1935/ch1.m3u8
 http://222.179.155.21:1935/ch1.m3u8?zzhongqd
 #EXTINF:-1 group-title="☘️重庆频道",重庆卫视
 http://112.27.235.94:8000/hls/36/index.m3u8
-#EXTINF:-1 group-title="☘️重庆频道",铜梁综合
-http://183.64.174.171:40123/ch1.m3u8?zzhongqd
 #EXTINF:-1 group-title="☘️重庆频道",荣昌综合 [Not 24/7]
 http://183.64.181.25:40023/rongchang01.m3u8
 #EXTINF:-1 group-title="☘️重庆频道",江津新闻综合
@@ -167,12 +161,12 @@ http://zb.gxlbamc.com:1935/live/lbzh.stream/playlist.m3u8
 https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f490690f6a36a16e09c79.m3u8
 #EXTINF:-1 group-title="☘️四川频道",乐至综合
 http://175.155.106.72:89/live1/live1.m3u8?zsicd
-#EXTINF:-1 group-title="☘️四川频道",井研综合
-http://tvfile.jyrmt.cn/nmip-media/channellive/channel104452/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",剑阁综合
 https://m3u8.channel.dzsm.com/nmip-media/channellive/channel105549/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",四川卫视
 http://112.27.235.94:8000/hls/35/index.m3u8
+#EXTINF:-1 group-title="☘️四川频道",朝天综合
+https://m3u8.channel.dzsm.com/nmip-media/channellive/channel104601/playlist.m3u8
 #EXTINF:-1 group-title="☘️四川频道",青川综合
 http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 #EXTINF:-1 group-title="☘️贵州频道",贵州卫视
@@ -185,8 +179,6 @@ http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 http://110.153.180.106:55555/out_4/index.m3u8
 #EXTINF:-1 group-title="☘️新疆频道",奎屯汉语
 http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
-#EXTINF:-1 group-title="☘️新疆频道",新疆卫视
-http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd
 #EXTINF:-1 group-title="☘️新疆频道",玛纳斯
 http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 #EXTINF:-1 group-title="☘️内蒙古频道",内蒙古卫视
