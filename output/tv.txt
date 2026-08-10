@@ -9,7 +9,7 @@ CCTV-6,http://69.30.245.50/live/cctv6.m3u8
 CCTV-7,http://74.91.26.218:82/live/cctv7hd.m3u8
 CCTV-8,http://74.91.26.218:82/live/cctv8hd.m3u8
 CCTV-9,http://112.30.73.119:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV-10,http://112.27.235.94:8000/hls/11/index.m3u8
+CCTV-10,http://74.91.26.218:82/live/cctv10hd.m3u8
 CCTV-11,http://74.91.26.218:82/live/cctv11hd.m3u8
 CCTV-12,http://74.91.26.218:82/live/cctv12hd.m3u8
 CCTV-13,http://112.27.235.94:8000/hls/14/index.m3u8
@@ -31,7 +31,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 湖南卫视,http://112.27.235.94:8000/hls/31/index.m3u8
 北京卫视,http://112.27.235.94:8000/hls/27/index.m3u8
 湖北卫视,http://112.27.235.94:8000/hls/41/index.m3u8
-黑龙江卫视,http://112.27.235.94:8000/hls/48/index.m3u8
 甘肃卫视,http://218.13.170.98:9901/tsfile/live/0141_1.m3u8
 广西卫视,https://hlscdn.liangtv.cn/live/de0f97348eb84f62aa6b7d8cf0430770/dd505d87880c478f901f38560ca4d4e6.m3u8
 河北卫视,http://120.7.86.96:808/hls/17/index.m3u8
@@ -99,7 +98,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 ☘️海南频道,#genre#
 ☘️四川频道,#genre#
 乐至综合,http://175.155.106.72:89/live1/live1.m3u8?zsicd
-井研综合,http://tvfile.jyrmt.cn/nmip-media/channellive/channel104452/playlist.m3u8
 四川卫视,http://112.27.235.94:8000/hls/35/index.m3u8
 青川综合,http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 ☘️贵州频道,#genre#
@@ -133,7 +131,6 @@ Bread TV面包台,https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 哈尔滨资讯,http://stream.hrbtv.net/zxpd/sd/live.m3u8
 哈尔滨都市咨询,http://stream.hrbtv.net/zxpd/sd/live.m3u8?zheild
 甘南县综合,https://stream.hrbtv.net/zxpd/sd/live.m3u8
-黑龙江卫视,http://112.27.235.94:8000/hls/48/index.m3u8
 ☘️河北频道,#genre#
 河北卫视,http://120.7.86.96:808/hls/17/index.m3u8
 邢台综合,http://jwplay.hebyun.com.cn/live/xtsrmtzs/1500k/tzwj_video.m3u8
