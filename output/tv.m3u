@@ -10,7 +10,7 @@ https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth
 #EXTINF:-1 group-title="📺央视频道",CCTV-5
 http://112.30.73.119:229/tsfile/live/0005_2.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 group-title="📺央视频道",CCTV-5+
-http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
+http://112.27.235.94:8000/hls/6/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-6
 http://69.30.245.50/live/cctv6.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-7
@@ -20,7 +20,7 @@ http://74.91.26.218:82/live/cctv8hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
 http://112.30.73.119:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
-http://74.91.26.218:82/live/cctv10hd.m3u8
+http://112.27.235.94:8000/hls/11/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-11
 http://74.91.26.218:82/live/cctv11hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-12
@@ -99,10 +99,14 @@ http://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
 http://61.216.67.119:1935/bltvhd/bltv1/chunklist_w1266569526.m3u
 #EXTINF:-1 group-title="☘️北京频道",耀才财经
 https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
-#EXTINF:-1 group-title="☘️上海频道",三明新闻综合
-https://ls.qingting.fm/live/5022100/64k.m3u8
+#EXTINF:-1 group-title="☘️上海频道",铜陵新闻综合
+https://ls.qingting.fm/live/21303/64k.m3u8
 #EXTINF:-1 group-title="☘️重庆频道",江津新闻
 http://222.179.155.21:1935/ch1.m3u8?zzhongqd
+#EXTINF:-1 group-title="☘️重庆频道",铜梁综合
+http://183.64.174.171:40123/ch1.m3u8?zzhongqd
+#EXTINF:-1 group-title="☘️重庆频道",荣昌综合 [Not 24/7]
+http://183.64.181.25:40023/rongchang01.m3u8
 #EXTINF:-1 group-title="☘️广东频道",广东体育
 http://r.jdshipin.com/LiYdg
 #EXTINF:-1 group-title="☘️广东频道",广东卫视
