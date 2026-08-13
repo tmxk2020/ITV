@@ -2,21 +2,21 @@
 #EXTINF:-1 group-title="📺央视频道",CCTV-1
 http://112.27.235.94:8000/hls/1/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-2
-http://112.27.235.94:8000/hls/2/index.m3u8
+http://74.91.26.218:82/live/cctv2hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-3
 http://74.91.26.218:82/live/cctv3hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-4
-http://119.39.9.8:9901/tsfile/live/0004_1.m3u8?key=txiptv&playlive=0&authid=0
+https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u8?auth_key=1786590000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-c9aa4c8dd81bbe7f96e0ab1a896f8a85&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
 #EXTINF:-1 group-title="📺央视频道",CCTV-5
 http://69.30.245.50/live/cctv5.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5+
 http://112.27.235.94:8000/hls/6/index.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-6
-http://112.27.235.94:8000/hls/7/index.m3u8
+http://69.30.245.50/live/cctv6.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-7
 http://74.91.26.218:82/live/cctv7hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-8
-http://192.151.150.154/live/cctv8k.m3u8
+http://74.91.26.218:82/live/cctv8hd.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-9
 http://69.30.245.50/live/cctv9.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-10
@@ -115,8 +115,8 @@ http://61.216.67.119:1935/bltvhd/bltv1/chunklist_w1266569526.m3u
 http://112.27.235.94:8000/hls/33/index.m3u8
 #EXTINF:-1 group-title="☘️北京频道",耀才财经
 https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
-#EXTINF:-1 group-title="☘️上海频道",嘉兴新闻综合
-http://tvfile.jyrmt.cn:80/nmip-media/channellive/channel104452/playlist.m3u8
+#EXTINF:-1 group-title="☘️上海频道",铜陵新闻综合
+https://ls.qingting.fm/live/21303/64k.m3u8
 #EXTINF:-1 group-title="☘️重庆频道",江津新闻
 http://222.179.155.21:1935/ch1.m3u8?zzhongqd
 #EXTINF:-1 group-title="☘️重庆频道",重庆卫视
@@ -223,8 +223,6 @@ http://stream.hrbtv.net/zxpd/sd/live.m3u8
 http://stream.hrbtv.net/zxpd/sd/live.m3u8?zheild
 #EXTINF:-1 group-title="☘️黑龙江频道",甘南县综合
 https://stream.hrbtv.net/zxpd/sd/live.m3u8
-#EXTINF:-1 group-title="☘️河北频道",河北农民
-http://1.94.31.214/php/hebei.php?id=nmpd
 #EXTINF:-1 group-title="🌊港·澳·台",凤凰香港
 http://r.jdshipin.com/NfC0f
 #EXTINF:-1 group-title="🌊港·澳·台",环球电视
