@@ -6,7 +6,7 @@ CCTV-4,http://69.30.245.50/live/cctv4.m3u8
 CCTV-5,http://69.30.245.50/live/cctv5.m3u8
 CCTV-5+,http://112.27.235.94:8000/hls/6/index.m3u8
 CCTV-6,http://69.30.245.50/live/cctv6.m3u8
-CCTV-7,http://112.27.235.94:8000/hls/8/index.m3u8
+CCTV-7,http://74.91.26.218:82/live/cctv7hd.m3u8
 CCTV-8,http://74.91.26.218:82/live/cctv8hd.m3u8
 CCTV-9,http://69.30.245.50/live/cctv9.m3u8
 CCTV-10,http://74.91.26.218:82/live/cctv10hd.m3u8
@@ -48,7 +48,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 ☘️北京频道,#genre#
 耀才财经,https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 ☘️上海频道,#genre#
-南京新闻综合,http://nklive.nbs.cn/hls/d511bc9d-a694-4453-b3a2-4fc842cc97a1/index.m3u8
+哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8?zheild
 ☘️天津频道,#genre#
 ☘️重庆频道,#genre#
 江津新闻,http://222.179.155.21:1935/ch1.m3u8?zzhongqd
