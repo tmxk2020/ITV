@@ -96,6 +96,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 ☘️四川频道,#genre#
 青川综合,http://qcfile.qcrmt.com/nmip-media/channellive/channel100933/playlist.m3u8
 ☘️贵州频道,#genre#
+安顺新闻,https://ls.qingting.fm/live/5022203/64k.m3u8
 贵州卫视,http://112.27.235.94:8000/hls/46/index.m3u8
 ☘️云南频道,#genre#
 云南卫视,http://112.27.235.94:8000/hls/40/index.m3u8
@@ -127,7 +128,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 甘南县综合,https://stream.hrbtv.net/zxpd/sd/live.m3u8
 双鸭山综合,http://live.qthnews.org.cn:1935/live/live2/800k/tzwj_video.m3u8
 ☘️河北频道,#genre#
-河北农民,http://1.94.31.214/php/hebei.php?id=nmpd
 🌊港·澳·台,#genre#
 凤凰香港,http://r.jdshipin.com/NfC0f
 环球电视,http://utv1.hqtvzb.com:9999/hls/world.m3u8
