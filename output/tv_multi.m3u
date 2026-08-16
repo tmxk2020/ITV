@@ -6,7 +6,7 @@ http://74.91.26.218:82/live/cctv2hd.m3u8 # http://113.90.154.189:9901/tsfile/liv
 #EXTINF:-1 group-title="📺央视频道",CCTV-3
 http://74.91.26.218:82/live/cctv3hd.m3u8 # http://113.90.154.189:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 group-title="📺央视频道",CCTV-4
-https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u8?auth_key=1786892400-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-1a4e45e63edd54ad06de1f1d255f55e8&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c # https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1786892400-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-5b9c9913f497292aafb666ab0efeb64e&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+http://69.30.245.50/live/cctv4.m3u8 # http://45.192.97.170:8880/play/4.m3u8 # http://112.27.235.94:8000/hls/4/index.m3u8 # http://182.150.23.74:808/hls/4/index.m3u8 # https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5
 http://69.30.245.50/live/cctv5.m3u8 # http://45.192.97.170:8880/play/5.m3u8 # http://112.27.235.94:8000/hls/5/index.m3u8 # http://182.150.23.74:808/hls/5/index.m3u8 # http://222.169.85.8:9901/tsfile/live/0005_1.m3u8
 #EXTINF:-1 group-title="📺央视频道",CCTV-5+
@@ -157,6 +157,8 @@ http://110.153.180.106:55555/out_3/index.m3u8?zxinjd
 http://110.153.180.106:55555/out_4/index.m3u8
 #EXTINF:-1 group-title="☘️新疆频道",伊犁维吾尔
 http://110.153.180.106:55555/out_2/index.m3u8?zxinjd
+#EXTINF:-1 group-title="☘️新疆频道",奎屯汉语
+http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
 #EXTINF:-1 group-title="☘️新疆频道",玛纳斯
 http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 #EXTINF:-1 group-title="☘️新疆频道",伊犁维吾尔
