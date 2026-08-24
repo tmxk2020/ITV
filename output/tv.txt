@@ -6,12 +6,12 @@ CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u
 CCTV-5,http://221.7.175.154:8445/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-5+,http://223.78.65.165:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-6,http://112.30.73.119:229/tsfile/live/0006_2.m3u8?key=txiptv&playlive=0&authid=0
-CCTV-7,http://74.91.26.218:82/live/cctv7hd.m3u8
+CCTV-7,http://113.9.214.47:9003/hls/7/index.m3u8
 CCTV-8,http://74.91.26.218:82/live/cctv8hd.m3u8
 CCTV-9,http://219.147.245.238:25480/newlive/live/hls/10/live.m3u8
 CCTV-10,http://74.91.26.218:82/live/cctv10hd.m3u8
 CCTV-11,http://74.91.26.218:82/live/cctv11hd.m3u8
-CCTV-12,http://74.91.26.218:82/live/cctv12hd.m3u8
+CCTV-12,http://113.9.214.47:9003/hls/12/index.m3u8
 CCTV-13,http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8
 CCTV-14,http://74.91.26.218:82/live/cctv14hd.m3u8
 CCTV-15,http://74.91.26.218:82/live/cctv15hd.m3u8
@@ -33,6 +33,8 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 河北卫视,http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8
 河南卫视,http://111.59.139.82:11888/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0
 吉林卫视,http://112.249.75.196:9989/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
+内蒙古卫视,http://112.123.243.37:50085/tsfile/live/0118_1.m3u8?key=txiptv&playlive=0&authid=0
+宁夏卫视,http://112.123.243.37:50085/tsfile/live/0125_1.m3u8?key=txiptv&playlive=0&authid=0
 山东卫视,http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
 山西卫视,http://119.39.9.8:9901/tsfile/live/0118_1.m3u8
 四川卫视,http://113.9.214.47:9003/hls/40/index.m3u8
@@ -91,11 +93,13 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 甘肃卫视,http://113.9.214.47:9003/hls/54/index.m3u8
 ☘️青海频道,#genre#
 ☘️宁夏频道,#genre#
+宁夏卫视,http://112.123.243.37:50085/tsfile/live/0125_1.m3u8?key=txiptv&playlive=0&authid=0
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 ☘️新疆频道,#genre#
 奎屯汉语,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
 玛纳斯,http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 ☘️内蒙古频道,#genre#
+内蒙古卫视,http://112.123.243.37:50085/tsfile/live/0118_1.m3u8?key=txiptv&playlive=0&authid=0
 ☘️山西频道,#genre#
 山西卫视,http://119.39.9.8:9901/tsfile/live/0118_1.m3u8
 ☘️辽宁频道,#genre#
