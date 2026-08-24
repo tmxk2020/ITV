@@ -1,6 +1,6 @@
 📺央视频道,#genre#
 CCTV-1,http://69.30.245.50/live/cctv1.m3u8
-CCTV-2,http://74.91.26.218:82/live/cctv2hd.m3u8
+CCTV-2,http://221.7.175.154:8445/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-3,http://74.91.26.218:82/live/cctv3hd.m3u8
 CCTV-4,http://69.30.245.50/live/cctv4.m3u8
 CCTV-5,http://221.7.175.154:8445/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -16,7 +16,7 @@ CCTV-13,http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8
 CCTV-14,http://74.91.26.218:82/live/cctv14hd.m3u8
 CCTV-15,http://74.91.26.218:82/live/cctv15hd.m3u8
 CCTV-16,http://219.147.245.238:25480/newlive/live/hls/17/live.m3u8
-CCTV-17,http://221.7.175.154:8445/tsfile/live/1009_1.m3u8?key=txiptv&playlive=1&authid=0
+CCTV-17,http://74.91.26.218:82/live/cctv17hd.m3u8
 CCTV4欧洲,http://45.192.97.170:8880/play/18.m3u8
 CCTV4美洲,http://45.192.97.170:8880/play/19.m3u8
 CGTN,https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8
@@ -123,6 +123,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 甘南县综合,https://stream.hrbtv.net/zxpd/sd/live.m3u8
 黑龙江卫视,http://113.9.214.47:9003/hls/19/index.m3u8
 ☘️河北频道,#genre#
+河北农民,http://1.94.31.214/php/hebei.php?id=nmpd
 河北卫视,http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8
 🌊港·澳·台,#genre#
 翡翠台,http://r.jdshipin.com/62WM7
