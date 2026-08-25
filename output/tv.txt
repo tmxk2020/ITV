@@ -62,7 +62,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 浙江教科,http://ali-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
 数码时代,http://ali-m-l.cztv.com/channels/lantian/channel12/720p.m3u8?zzhed
 浙江休闲台,http://ali-m-l.cztv.com/channels/lantian/channel006/720p.m3u8
-嘉兴新闻综合,http://tvfile.jyrmt.cn:80/nmip-media/channellive/channel104452/playlist.m3u8
 象山综合,http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-800189c57a5a44d3b823b60cf84f6756-0-a6f6828a62d5c167cff5e68735fa0d39
 ☘️江苏频道,#genre#
 武进生活,http://live.wjyanghu.com/live/CH2.m3u8
@@ -96,7 +95,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 宁夏卫视,http://112.123.243.37:50085/tsfile/live/0125_1.m3u8?key=txiptv&playlive=0&authid=0
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 ☘️新疆频道,#genre#
-奎屯汉语,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
 玛纳斯,http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 ☘️内蒙古频道,#genre#
 内蒙古卫视,http://112.123.243.37:50085/tsfile/live/0118_1.m3u8?key=txiptv&playlive=0&authid=0
@@ -115,12 +113,10 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 甘南县综合,https://stream.hrbtv.net/zxpd/sd/live.m3u8
 ☘️河北频道,#genre#
 河北卫视,http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8
-邢台综合,http://jwplay.hebyun.com.cn/live/xtsrmtzs/1500k/tzwj_video.m3u8
 🌊港·澳·台,#genre#
 凤凰中文,http://221.7.175.154:85/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0
 凤凰资讯,http://221.7.175.154:85/tsfile/live/1021_1.m3u8?key=txiptv&playlive=1&authid=0
 凤凰香港,http://r.jdshipin.com/NfC0f
-凤凰电影,http://221.7.175.154:85/tsfile/live/1022_1.m3u8?key=txiptv&playlive=1&authid=0
 环球电视,http://utv1.hqtvzb.com:9999/hls/world.m3u8
 台视新闻,http://38.64.72.148/hls/modn/list/4013/chunklist1.m3u8
 TVBS新闻台,http://61.221.215.25:8800/hls/9/index.m3u8
