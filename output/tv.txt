@@ -1,8 +1,8 @@
 📺央视频道,#genre#
 CCTV-1,http://69.30.245.50/live/cctv1.m3u8
 CCTV-2,http://74.91.26.218:82/live/cctv2hd.m3u8
-CCTV-3,http://112.30.73.119:229/tsfile/live/0003_2.m3u8?key=txiptv&playlive=0&authid=0
-CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1788624000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-7b21af022e04de62496d15672072058a&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+CCTV-3,http://74.91.26.218:82/live/cctv3hd.m3u8
+CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u8?auth_key=1788624000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-3efac9292711b02b79acbd77b09fad44&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
 CCTV-5,http://112.30.73.119:9901/tsfile/live/0005_2.m3u8?key=txiptv&playlive=0&authid=0
 CCTV-5+,http://45.192.97.170:8880/play/6.m3u8
 CCTV-6,http://69.30.245.50/live/cctv6.m3u8
@@ -27,8 +27,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 浙江卫视,https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
 湖南卫视,https://txmov2.a.kwimgs.com/bs3/video-hls/5199687338554291078_hlsb.m3u8
 吉林卫视,http://221.7.175.154:8445/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0
-西藏卫视,http://112.27.5.218:9901/tsfile/live/0111_1.m3u8?key=txiptv&playlive=1&authid=0
-新疆卫视,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd
 福建海峡卫视,http://38.64.72.148/hls/modn/list/4009/playlist.m3u8
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 TVB星河,http://r.jdshipin.com/sXuuD
@@ -37,9 +35,10 @@ TVB星河,http://r.jdshipin.com/sXuuD
 ☘️北京频道,#genre#
 耀才财经,https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 ☘️上海频道,#genre#
-荆门新闻综合,https://stream.jmtv.com.cn/xwzh/playlist.m3u8?_upt=3e28e7271664278691
+哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8?zheild
 ☘️天津频道,#genre#
 ☘️重庆频道,#genre#
+铜梁综合,http://183.64.174.171:40123/ch1.m3u8?zzhongqd
 ☘️广东频道,#genre#
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
@@ -80,8 +79,6 @@ TVB星河,http://r.jdshipin.com/sXuuD
 ☘️新疆频道,#genre#
 伊犁经济法制,http://110.153.180.106:55555/out_4/index.m3u8?zxinjd
 伊犁维吾尔,http://110.153.180.106:55555/out_2/index.m3u8?zxinjd
-奎屯汉语,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
-新疆卫视,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd
 玛纳斯,http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 伊犁维吾尔,http://110.153.180.106:55555/out_2/index.m3u8?zxinjd
 ☘️内蒙古频道,#genre#
