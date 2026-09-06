@@ -35,7 +35,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8?zheild
 ☘️天津频道,#genre#
 ☘️重庆频道,#genre#
-铜梁综合,http://183.64.174.171:40123/ch1.m3u8?zzhongqd
 ☘️广东频道,#genre#
 广东体育,http://r.jdshipin.com/LiYdg
 广州竞赛,http://8.138.7.223/tv/gzjs.m3u8
