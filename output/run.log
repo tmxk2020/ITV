@@ -43266,3 +43266,160 @@
 2026-09-07 03:08:55,159 - IPTVCollector - WARNING - ⚠️ abc123 源返回 HTTP 403
 2026-09-07 03:08:55,160 - IPTVCollector - WARNING - ⚠️ 未获取到任何智能补充分类内容
 2026-09-07 03:08:55,160 - IPTVCollector - INFO - 🎉 完成！有效频道总数: 63
+2026-09-07 11:41:47,865 - IPTVCollector - INFO - 🔀 根据 AUTONOMOUS_MODE=true 启用自治模式
+2026-09-07 11:41:47,865 - IPTVCollector - INFO - 📌 自治模式将先发现新源，然后执行传统模式完整采集
+2026-09-07 11:41:47,865 - IPTVCollector - INFO - ============================================================
+2026-09-07 11:41:47,865 - IPTVCollector - INFO - 🤖 IPTV 自治系统启动 (发现新源)
+2026-09-07 11:41:47,865 - IPTVCollector - INFO - ============================================================
+2026-09-07 11:41:47,903 - IPTVCollector - INFO - 📦 加载源池: 2411 个源
+2026-09-07 11:41:47,925 - IPTVCollector - INFO - 📦 加载候选池: 2411 个候选源
+2026-09-07 11:41:47,925 - IPTVCollector - INFO - 🚀 IPTV 自治系统启动
+2026-09-07 11:41:47,926 - IPTVCollector - INFO - 📊 配置: 每批发现 5000 个，每批观察 3000 个
+2026-09-07 11:41:47,926 - IPTVCollector - INFO - 📌 只处理国内频道，国外频道自动过滤
+2026-09-07 11:41:47,926 - IPTVCollector - INFO - ⚡ 强制刷新模式：重新拉取所有源
+2026-09-07 11:41:47,928 - IPTVCollector - INFO - ✅ 数据库缓存已启用: /home/runner/work/ITV/ITV/iptv_cache.db
+2026-09-07 11:41:47,928 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:41:47,928 - IPTVCollector - INFO - 阶段1: 发现新源（国内频道）
+2026-09-07 11:41:47,928 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:41:47,929 - IPTVCollector - INFO - 🔍 开始发现新源... (仅国内频道)
+2026-09-07 11:41:47,929 - IPTVCollector - INFO - ⚡ 强制刷新模式：重新拉取所有源
+2026-09-07 11:41:47,929 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/cn.m3u
+2026-09-07 11:41:47,929 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.txt
+2026-09-07 11:41:47,930 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/zzgpy1/iptv-api/master/output/result.txt
+2026-09-07 11:41:47,930 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/dogwalkerg/IPTV-collect-tv-txt/main/live.txt
+2026-09-07 11:41:47,930 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/zzgpy1/Collect-IPTV/main/best_sorted.m3u
+2026-09-07 11:41:47,930 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u
+2026-09-07 11:41:47,930 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u
+2026-09-07 11:41:47,930 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
+2026-09-07 11:41:47,931 - IPTVCollector - INFO - 🔄 拉取: https://tv.19860519.xyz/abc123
+2026-09-07 11:41:47,931 - IPTVCollector - INFO - 🔄 拉取: https://iptv-org.github.io/iptv/countries/jp.m3u
+2026-09-07 11:41:48,141 - IPTVCollector - WARNING -   重试 https://tv.19860519.xyz/abc123 (1/3)，等待 1s
+2026-09-07 11:41:49,196 - IPTVCollector - WARNING -   重试 https://tv.19860519.xyz/abc123 (2/3)，等待 2s
+2026-09-07 11:41:51,249 - IPTVCollector - WARNING - ⚠️ 拉取失败 https://tv.19860519.xyz/abc123: 拉取失败
+2026-09-07 11:41:51,364 - IPTVCollector - INFO - ✅ 发现新源: 14 个，涉及 13 个频道
+2026-09-07 11:41:51,364 - IPTVCollector - INFO - 📊 过滤掉 768 个国外频道（保留国内频道）
+2026-09-07 11:41:51,398 - IPTVCollector - INFO - 📝 批量添加 14 个候选源
+2026-09-07 11:41:51,399 - IPTVCollector - INFO - ✅ 发现阶段完成: 14 个新源进入候选池
+2026-09-07 11:41:51,399 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:41:51,399 - IPTVCollector - INFO - 阶段2: 从缓存观察候选源
+2026-09-07 11:41:51,399 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:41:51,399 - IPTVCollector - INFO - 📊 候选池状态: 2425 个正在观察，0 个已稳定
+2026-09-07 11:41:51,400 - IPTVCollector - INFO - 🔍 本次观察 2425 个候选源（共 2425 个待观察）...
+2026-09-07 11:41:54,752 - IPTVCollector - INFO -   📊 观察进度: 100/2425，稳定 0 个
+2026-09-07 11:41:58,958 - IPTVCollector - INFO -   📊 观察进度: 200/2425，稳定 0 个
+2026-09-07 11:42:02,557 - IPTVCollector - INFO -   📊 观察进度: 300/2425，稳定 0 个
+2026-09-07 11:42:05,882 - IPTVCollector - INFO -   📊 观察进度: 400/2425，稳定 0 个
+2026-09-07 11:42:09,224 - IPTVCollector - INFO -   📊 观察进度: 500/2425，稳定 0 个
+2026-09-07 11:42:12,544 - IPTVCollector - INFO -   📊 观察进度: 600/2425，稳定 0 个
+2026-09-07 11:42:15,858 - IPTVCollector - INFO -   📊 观察进度: 700/2425，稳定 0 个
+2026-09-07 11:42:19,258 - IPTVCollector - INFO -   📊 观察进度: 800/2425，稳定 0 个
+2026-09-07 11:42:22,638 - IPTVCollector - INFO -   📊 观察进度: 900/2425，稳定 0 个
+2026-09-07 11:42:25,964 - IPTVCollector - INFO -   📊 观察进度: 1000/2425，稳定 0 个
+2026-09-07 11:42:29,332 - IPTVCollector - INFO -   📊 观察进度: 1100/2425，稳定 0 个
+2026-09-07 11:42:32,653 - IPTVCollector - INFO -   📊 观察进度: 1200/2425，稳定 0 个
+2026-09-07 11:42:35,955 - IPTVCollector - INFO -   📊 观察进度: 1300/2425，稳定 0 个
+2026-09-07 11:42:39,264 - IPTVCollector - INFO -   📊 观察进度: 1400/2425，稳定 0 个
+2026-09-07 11:42:42,604 - IPTVCollector - INFO -   📊 观察进度: 1500/2425，稳定 0 个
+2026-09-07 11:42:45,906 - IPTVCollector - INFO -   📊 观察进度: 1600/2425，稳定 0 个
+2026-09-07 11:42:49,252 - IPTVCollector - INFO -   📊 观察进度: 1700/2425，稳定 0 个
+2026-09-07 11:42:52,567 - IPTVCollector - INFO -   📊 观察进度: 1800/2425，稳定 0 个
+2026-09-07 11:42:55,870 - IPTVCollector - INFO -   📊 观察进度: 1900/2425，稳定 0 个
+2026-09-07 11:42:59,221 - IPTVCollector - INFO -   📊 观察进度: 2000/2425，稳定 0 个
+2026-09-07 11:43:02,529 - IPTVCollector - INFO -   📊 观察进度: 2100/2425，稳定 0 个
+2026-09-07 11:43:05,827 - IPTVCollector - INFO -   📊 观察进度: 2200/2425，稳定 0 个
+2026-09-07 11:43:09,153 - IPTVCollector - INFO -   📊 观察进度: 2300/2425，稳定 0 个
+2026-09-07 11:43:12,469 - IPTVCollector - INFO -   📊 观察进度: 2400/2425，稳定 0 个
+2026-09-07 11:43:13,300 - IPTVCollector - INFO - 📊 本批次无新稳定源
+2026-09-07 11:43:13,301 - IPTVCollector - INFO - ✅ 观察阶段完成: 0 个源达到稳定标准
+2026-09-07 11:43:13,301 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:43:13,301 - IPTVCollector - INFO - 阶段3: 提升稳定源
+2026-09-07 11:43:13,301 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:43:13,301 - IPTVCollector - INFO - 📭 没有稳定的候选源需要提升
+2026-09-07 11:43:13,303 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:43:13,303 - IPTVCollector - INFO - 📊 自治模式统计
+2026-09-07 11:43:13,303 - IPTVCollector - INFO - ==================================================
+2026-09-07 11:43:13,304 - IPTVCollector - INFO -   源池总数: 2425
+2026-09-07 11:43:13,305 - IPTVCollector - INFO -   候选池总数: 2425
+2026-09-07 11:43:13,306 - IPTVCollector - INFO -   候选池观察中: 2425
+2026-09-07 11:43:13,306 - IPTVCollector - INFO -   本次新提升: 0
+2026-09-07 11:43:13,306 - IPTVCollector - INFO -   累计提升: 0
+2026-09-07 11:43:13,306 - IPTVCollector - INFO - ============================================================
+2026-09-07 11:43:13,306 - IPTVCollector - INFO - 📊 自治模式完成: 新提升 0 个稳定源
+2026-09-07 11:43:13,307 - IPTVCollector - INFO - ============================================================
+2026-09-07 11:43:13,307 - IPTVCollector - INFO - 🔄 执行传统模式完整采集...
+2026-09-07 11:43:13,307 - IPTVCollector - INFO - ============================================================
+2026-09-07 11:43:13,307 - IPTVCollector - INFO - 🚀 IPTV 智能整理平台启动 (传统模式)
+2026-09-07 11:43:13,307 - IPTVCollector - INFO - 📡 配置：超时=8s, 并发=20, ffmpeg=True
+2026-09-07 11:43:13,307 - IPTVCollector - INFO - 📋 增强过滤: demo=True, alias=True, blacklist=True
+2026-09-07 11:43:13,308 - IPTVCollector - INFO - 📋 从 demo.txt 解析到 1533 个有序频道
+2026-09-07 11:43:13,308 - IPTVCollector - INFO - 📋 Demo 顺序: 1533 个频道
+2026-09-07 11:43:13,309 - IPTVCollector - INFO - ⚡ 启用增量更新模式（缓存有效）
+2026-09-07 11:43:13,309 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/cn.m3u
+2026-09-07 11:43:13,310 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/cn.m3u
+2026-09-07 11:43:13,372 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.txt
+2026-09-07 11:43:13,373 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.txt
+2026-09-07 11:43:13,434 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/zzgpy1/iptv-api/master/output/result.txt
+2026-09-07 11:43:13,435 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/zzgpy1/iptv-api/master/output/result.txt
+2026-09-07 11:43:13,499 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/dogwalkerg/IPTV-collect-tv-txt/main/live.txt
+2026-09-07 11:43:13,502 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/dogwalkerg/IPTV-collect-tv-txt/main/live.txt
+2026-09-07 11:43:13,617 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/zzgpy1/Collect-IPTV/main/best_sorted.m3u
+2026-09-07 11:43:13,617 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/zzgpy1/Collect-IPTV/main/best_sorted.m3u
+2026-09-07 11:43:13,682 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u
+2026-09-07 11:43:13,682 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u
+2026-09-07 11:43:13,741 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u
+2026-09-07 11:43:13,741 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u
+2026-09-07 11:43:13,801 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
+2026-09-07 11:43:13,802 - IPTVCollector - INFO - 🔄 拉取: https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
+2026-09-07 11:43:13,864 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://tv.19860519.xyz/abc123
+2026-09-07 11:43:13,865 - IPTVCollector - INFO - 🔄 拉取: https://tv.19860519.xyz/abc123
+2026-09-07 11:43:14,082 - IPTVCollector - WARNING -   重试 https://tv.19860519.xyz/abc123 (1/3)，等待 1s
+2026-09-07 11:43:15,142 - IPTVCollector - WARNING -   重试 https://tv.19860519.xyz/abc123 (2/3)，等待 2s
+2026-09-07 11:43:17,240 - IPTVCollector - WARNING - ⚠️ 拉取失败 https://tv.19860519.xyz/abc123: 拉取失败
+2026-09-07 11:43:17,242 - IPTVCollector - INFO - 🔄 缓存未命中，拉取: https://iptv-org.github.io/iptv/countries/jp.m3u
+2026-09-07 11:43:17,243 - IPTVCollector - INFO - 🔄 拉取: https://iptv-org.github.io/iptv/countries/jp.m3u
+2026-09-07 11:43:17,357 - IPTVCollector - INFO - 📊 原始频道数（去重后）: 1387
+2026-09-07 11:43:17,357 - IPTVCollector - INFO - 🔍 开始 HTTP 测速...
+2026-09-07 11:43:32,765 - IPTVCollector - INFO - 📊 通过HTTP测速的频道数: 114
+2026-09-07 11:43:32,765 - IPTVCollector - INFO - 🎬 开始 ffmpeg 深度验证...
+2026-09-07 11:43:33,027 - IPTVCollector - INFO - 🔍 ffmpeg 深度验证: 8 个需验证，90 个来自缓存，0 个仅HTTP通过
+2026-09-07 11:43:33,027 - IPTVCollector - INFO -   🎬 开始 ffprobe 验证 8 个频道...
+2026-09-07 11:43:45,611 - IPTVCollector - INFO -   🎬 验证进度: 8/8 (100%) - 通过: 4 - 速度: 0.6频道/秒
+2026-09-07 11:43:45,611 - IPTVCollector - INFO - ✅ ffmpeg 验证完成: 通过 94/114 个频道
+2026-09-07 11:43:45,611 - IPTVCollector - INFO - 📊 通过ffmpeg验证的频道数: 94
+2026-09-07 11:43:45,700 - IPTVCollector - INFO - 📌 已使用 20 个固定优质源（含自动择优）
+2026-09-07 11:43:45,700 - IPTVCollector - INFO - 📊 合并完成: 共 94 个频道，其中央视 18 个
+2026-09-07 11:43:45,700 - IPTVCollector - INFO - 📊 合并后的频道数: 94
+2026-09-07 11:43:45,701 - IPTVCollector - INFO - 📊 黑名单过滤后: 93 (减少 1)
+2026-09-07 11:43:45,703 - IPTVCollector - INFO - 📋 从 demo.txt 解析到 1533 个有序频道
+2026-09-07 11:43:51,173 - IPTVCollector - INFO - 🌏 自动归类: 浙江教科影院 -> ☘️浙江频道
+2026-09-07 11:43:51,173 - IPTVCollector - INFO - 🌏 自动归类: 浙江民生休闲 -> ☘️浙江频道
+2026-09-07 11:43:51,174 - IPTVCollector - INFO - 📊 自动归类统计: {'浙江': 2}
+2026-09-07 11:43:51,174 - IPTVCollector - INFO - 🎯 Demo 筛选：原始 93 -> 匹配 66，未匹配 27
+2026-09-07 11:43:51,175 - IPTVCollector - INFO - 📊 Demo筛选后: 66 (减少 27)
+2026-09-07 11:43:51,175 - IPTVCollector - INFO - 📄 未匹配频道列表已保存: /home/runner/work/ITV/ITV/output/shai.txt
+2026-09-07 11:43:51,175 - IPTVCollector - INFO - 
+🎉 最终有效频道分类统计：
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   📺央视频道: 23 个频道
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   📡卫视频道: 7 个频道
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   ☘️北京频道: 1 个频道
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   ☘️上海频道: 1 个频道
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   ☘️重庆频道: 1 个频道
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   ☘️广东频道: 1 个频道
+2026-09-07 11:43:51,175 - IPTVCollector - INFO -   ☘️浙江频道: 11 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   ☘️安徽频道: 1 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   ☘️广西频道: 1 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   ☘️四川频道: 1 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   ☘️新疆频道: 3 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   ☘️吉林频道: 1 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   ☘️黑龙江频道: 6 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   🌊港·澳·台: 7 个频道
+2026-09-07 11:43:51,176 - IPTVCollector - INFO -   日本: 1 个频道
+2026-09-07 11:43:51,177 - IPTVCollector - INFO - ✅ M3U 文件已生成: /home/runner/work/ITV/ITV/output/tv.m3u
+2026-09-07 11:43:51,177 - IPTVCollector - INFO - ✅ TXT 文件已生成: /home/runner/work/ITV/ITV/output/tv.txt
+2026-09-07 11:43:51,178 - IPTVCollector - INFO - ✅ 多源 M3U 文件已生成: /home/runner/work/ITV/ITV/output/tv_multi.m3u
+2026-09-07 11:43:51,179 - IPTVCollector - INFO - ✅ JSON API 已生成: /home/runner/work/ITV/ITV/output/channels.json
+2026-09-07 11:43:51,179 - IPTVCollector - INFO - ✅ 所有增强版输出完成
+2026-09-07 11:43:51,179 - IPTVCollector - INFO - 🧠 开始智能补充采集（从 abc123 源）...
+2026-09-07 11:43:51,281 - IPTVCollector - WARNING - ⚠️ abc123 源返回 HTTP 403
+2026-09-07 11:43:51,282 - IPTVCollector - WARNING - ⚠️ 未获取到任何智能补充分类内容
+2026-09-07 11:43:51,282 - IPTVCollector - INFO - 🎉 完成！有效频道总数: 66
