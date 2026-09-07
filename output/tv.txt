@@ -2,7 +2,7 @@
 CCTV-1,http://69.30.245.50/live/cctv1.m3u8
 CCTV-2,http://74.91.26.218:82/live/cctv2hd.m3u8
 CCTV-3,http://74.91.26.218:82/live/cctv3hd.m3u8
-CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1788735600-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-80357fc6372d66d8d5fb1add10822437&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+CCTV-4,http://69.30.245.50/live/cctv4.m3u8
 CCTV-5,http://69.30.245.50/live/cctv5.m3u8
 CCTV-5+,http://45.192.97.170:8880/play/6.m3u8
 CCTV-6,http://69.30.245.50/live/cctv6.m3u8
