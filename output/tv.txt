@@ -1,7 +1,7 @@
 📺央视频道,#genre#
 CCTV-1,http://69.30.245.50/live/cctv1.m3u8
 CCTV-2,http://74.91.26.218:82/live/cctv2hd.m3u8
-CCTV-3,http://74.91.26.218:82/live/cctv3hd.m3u8
+CCTV-3,http://112.30.73.119:229/tsfile/live/0003_2.m3u8?key=txiptv&playlive=0&authid=0
 CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1788933600-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-ed4902aa33328c9c931013a3073cdb33&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
 CCTV-5,http://112.30.73.119:9901/tsfile/live/0005_2.m3u8?key=txiptv&playlive=0&authid=0
 CCTV-5+,http://45.192.97.170:8880/play/6.m3u8
@@ -28,7 +28,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 📡卫视频道,#genre#
 浙江卫视,http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8
 吉林卫视,http://221.7.175.154:8445/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0
-三沙卫视,http://nn.7x9d.cn/地方台8563/海南.php?id=ssws
 新疆卫视,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd
 福建海峡卫视,http://38.64.72.148/hls/modn/list/4009/playlist.m3u8
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
