@@ -19,7 +19,7 @@ CCTV-16,http://183.11.239.36:808/hls/169/index.m3u8
 CCTV-17,http://74.91.26.218:82/live/cctv17hd.m3u8
 CCTV4欧洲,http://45.192.97.170:8880/play/18.m3u8
 CCTV4美洲,http://45.192.97.170:8880/play/19.m3u8
-CGTN,https://english-livebkali.cgtn.com/live/encgtn.m3u8
+CGTN,https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8
 CGTN纪录,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 CGTN西语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
 CGTN阿语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
@@ -65,10 +65,6 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 象山综合,http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-800189c57a5a44d3b823b60cf84f6756-0-a6f6828a62d5c167cff5e68735fa0d39
 广西国际,https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f490690f6a36a16e09c79.m3u8
 ☘️海南频道,#genre#
-海南自贸,http://nn.7x9d.cn/地方台8563/海南.php?id=jjpd
-海南文旅,http://nn.7x9d.cn/地方台8563/海南.php?id=wlpd
-海南少儿,http://nn.7x9d.cn/地方台8563/海南.php?id=sepd
-海南公共,http://nn.7x9d.cn/地方台8563/海南.php?id=ggpd
 ☘️四川频道,#genre#
 ☘️贵州频道,#genre#
 ☘️云南频道,#genre#
@@ -79,6 +75,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 ☘️新疆频道,#genre#
 伊犁经济法制,http://110.153.180.106:55555/out_4/index.m3u8
+奎屯汉语,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd
 新疆卫视,http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd
 玛纳斯,http://218.84.127.245:1026/hls/main1/playlist.m3u8?zxinjd
 ☘️内蒙古频道,#genre#
