@@ -1,20 +1,20 @@
 {
-  "total_channels": 56,
-  "timestamp": "2026-09-19T15:28:44.784263",
+  "total_channels": 55,
+  "timestamp": "2026-09-19T20:08:36.814522",
   "category_stats": {
     "📺央视频道": 23,
-    "📡卫视频道": 6,
+    "📡卫视频道": 7,
     "☘️北京频道": 1,
     "☘️上海频道": 1,
     "☘️重庆频道": 1,
-    "☘️广东频道": 2,
-    "☘️浙江频道": 10,
-    "☘️新疆频道": 2,
+    "☘️广东频道": 1,
+    "☘️浙江频道": 9,
+    "☘️新疆频道": 3,
     "☘️黑龙江频道": 5,
-    "🌊港·澳·台": 4,
+    "🌊港·澳·台": 3,
     "日本": 1
   },
-  "unmatched_count": 27,
+  "unmatched_count": 28,
   "features": {
     "epg_injection_enabled": false,
     "incremental_mode": true
