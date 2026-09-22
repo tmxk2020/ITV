@@ -2,7 +2,7 @@
 CCTV-1,http://69.30.245.50/live/cctv1.m3u8
 CCTV-2,http://74.91.26.218:82/live/cctv2hd.m3u8
 CCTV-3,http://74.91.26.218:82/live/cctv3hd.m3u8
-CCTV-4,https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1790064000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-c4d8711049a6473e6beee8c6eb131bf6&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+CCTV-4,http://69.30.245.50/live/cctv4.m3u8
 CCTV-5,http://69.30.245.50/live/cctv5.m3u8
 CCTV-5+,http://45.192.97.170:8880/play/6.m3u8
 CCTV-6,http://69.30.245.50/live/cctv6.m3u8
@@ -25,6 +25,7 @@ CGTN阿语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LST
 CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 📡卫视频道,#genre#
 浙江卫视,https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+安徽卫视,http://gmxw.7766.org:808/hls/40/index.m3u8
 河北卫视,http://event.pull.hebtv.com/jishi/weishi_tingyun.m3u8
 大立电视台,http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 翡翠台,http://r.jdshipin.com/n90gt
@@ -49,6 +50,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 象山综合,http://play-sh13.quklive.com/live/1702360350551252.m3u8?auth_key=2037107484-800189c57a5a44d3b823b60cf84f6756-0-a6f6828a62d5c167cff5e68735fa0d39
 ☘️江苏频道,#genre#
 ☘️安徽频道,#genre#
+七台河新闻综合,http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8
 ☘️福建频道,#genre#
 ☘️江西频道,#genre#
 ☘️山东频道,#genre#
@@ -77,6 +79,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 ☘️辽宁频道,#genre#
 ☘️吉林频道,#genre#
 ☘️黑龙江频道,#genre#
+七台河新闻综合,http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8
 哈尔滨娱乐,http://stream.hrbtv.net/ylpd/sd/live.m3u8?zheild
 哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8?zheild
 哈尔滨生活,http://stream.hrbtv.net/shpd/sd/live.m3u8?zheild
