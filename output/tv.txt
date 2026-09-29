@@ -19,7 +19,7 @@ CCTV-16,http://183.11.239.36:808/hls/169/index.m3u8
 CCTV-17,http://74.91.26.218:82/live/cctv17hd.m3u8
 CCTV4欧洲,http://45.192.97.170:8880/play/18.m3u8
 CCTV4美洲,http://45.192.97.170:8880/play/19.m3u8
-CGTN,https://hlspackager.akamaized.net/live/DB/CGTN_ENGLISH/HLS/CGTN_ENGLISH.m3u8
+CGTN,https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8
 CGTN西语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
 CGTN阿语,http://espanol-liveali.cgtn.com/hls/LSveOGBaBw41Ea7ukkVAUdKQ220802LSTexu6xAuFH8VZNBLE1ZNEa220802cd.m3u8
 CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
@@ -31,7 +31,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 ☘️北京频道,#genre#
 耀才财经,https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 ☘️上海频道,#genre#
-荆门新闻综合,https://stream.jmtv.com.cn/xwzh/playlist.m3u8?_upt=3e28e7271664278691
+哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8?zheild
 ☘️天津频道,#genre#
 ☘️重庆频道,#genre#
 铜梁综合,http://183.64.174.171:40123/ch1.m3u8?zzhongqd
