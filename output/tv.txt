@@ -9,7 +9,7 @@ CCTV-6,http://69.30.245.50/live/cctv6.m3u8
 CCTV-7,http://74.91.26.218:82/live/cctv7hd.m3u8
 CCTV-8,http://74.91.26.218:82/live/cctv8hd.m3u8
 CCTV-9,http://69.30.245.50/live/cctv9.m3u8
-CCTV-10,http://69.30.245.50/live/cctv10.m3u8
+CCTV-10,http://74.91.26.218:82/live/cctv10hd.m3u8
 CCTV-11,http://45.192.97.170:8880/play/12.m3u8
 CCTV-12,http://74.91.26.218:82/live/cctv12hd.m3u8
 CCTV-13,http://45.192.97.170:8880/play/14.m3u8
@@ -73,6 +73,7 @@ CGTN英语,https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
 ☘️辽宁频道,#genre#
 ☘️吉林频道,#genre#
 ☘️黑龙江频道,#genre#
+哈尔滨娱乐,http://stream.hrbtv.net/ylpd/sd/live.m3u8?zheild
 哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8?zheild
 哈尔滨生活,http://stream.hrbtv.net/shpd/sd/live.m3u8?zheild
 哈尔滨资讯,http://stream.hrbtv.net/zxpd/sd/live.m3u8
